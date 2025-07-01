@@ -32,27 +32,35 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 
 export default {
   props: {
     randomFeatures: {
       type: Array,
-      default: null
-    }
+      default: null,
+    },
   },
   setup(props) {
-    // Affiche 3 éléments sur mobile
+    const currentWindowWidth = ref(0) 
+
+    onMounted(() => {
+      currentWindowWidth.value = window.innerWidth
+      window.addEventListener('resize', () => {
+        currentWindowWidth.value = window.innerWidth
+      })
+    })
+
     const displayedFeatures = computed(() => {
       if (!props.randomFeatures) return []
-      return window.innerWidth < 640
+      return currentWindowWidth.value < 640
         ? props.randomFeatures.slice(0, 3)
         : props.randomFeatures
     })
 
     return {
-      displayedFeatures
+      displayedFeatures,
     }
-  }
+  },
 }
 </script>
