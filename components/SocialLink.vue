@@ -78,6 +78,7 @@ export default {
         case 'Twitter':
           return IconBrandTwitter;
         case 'Github':
+         return IconBrandGithub;
         case 'Youtube':
           return IconBrandYoutube;
         case 'TikTok':
