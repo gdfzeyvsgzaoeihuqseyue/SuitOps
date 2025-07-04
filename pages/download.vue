@@ -69,11 +69,12 @@
               </div>
             </div>
             <div class="mt-7 sm:mt-9">
-              <a :href="selectedOS.downloadLink" @click="handleDownloadClick(selectedOS.name)"
+              <button @click="handleDownloadClick(selectedOS.name)"
                 class="block w-full bg-primary text-WtB text-center py-4 sm:py-5 rounded-lg hover:bg-secondary transition-colors text-base sm:text-lg">
                 <IconDownload class="inline-block w-5 h-5 sm:w-6 sm:h-6 mr-2" />
                 {{ t('downloadPage.downloadFor', { osName: selectedOS.name }) }}
-              </a>
+              </button>
+
               <p class="text-xs sm:text-sm text-center mt-3 sm:mt-4">
                 {{ t('downloadPage.termsAcceptance') }}
                 <NuxtLink :to="localePath('/terms')" class="text-primary hover:underline">{{
@@ -233,17 +234,34 @@
 
   <!-- Bouton fixe de téléchargement -->
   <div v-if="showFixedDownloadButton && selectedOS?.available" class="fixed bottom-4 right-4 z-50">
-    <a :href="selectedOS.downloadLink" @click="handleDownloadClick(selectedOS.name)"
+    <button @click="handleDownloadClick(selectedOS.name)"
       class="flex items-center bg-primary text-WtB px-5 py-3.5 rounded-lg shadow-lg hover:bg-secondary transition-colors text-sm sm:text-base">
       <IconDownload class="inline-block w-4 h-4 sm:w-5 sm:h-5 mr-2" />
       {{ t('downloadPage.downloadFor', { osName: selectedOS.name }) }}
-    </a>
+    </button>
+  </div>
+
+  <!-- Message -->
+  <div v-if="showDownloadMessage"
+    class="fixed bottom-4 right-4 z-50 bg-ash border border-primary shadow-lg px-4 py-3 rounded-lg">
+    <div class="flex justify-between items-start">
+      <p class="text-sm sm:text-base mr-4">{{ downloadMessage }}</p>
+      <button @click="showDownloadMessage = false" class="absolute top-3 right-3 p-1 hover:bg-WtBAct rounded-full">
+        <IconX class="transform transition duration-300 ease-in-out hover:rotate-90 hover:text-danger" />
+      </button>
+    </div>
+    <div v-if="manualLinkVisible" class="mt-2">
+      <a v-if="selectedOS?.downloadLink" :href="selectedOS.downloadLink" target="_blank"
+        class="text-sm sm:text-base underline hover:text-primary">
+        {{ t('downloadPage.manualDownloadLink') }}
+      </a>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
-import { IconDownload, IconDeviceDesktop, IconWeight, IconLicense, IconCpu, IconDeviceDesktopAnalytics, IconAlertTriangle, IconRocket, IconWifi, IconDeviceLaptop, IconChevronDown, IconMoodCry } from '@tabler/icons-vue'
+import { IconDownload, IconDeviceDesktop, IconWeight, IconLicense, IconCpu, IconDeviceDesktopAnalytics, IconAlertTriangle, IconRocket, IconWifi, IconDeviceLaptop, IconChevronDown, IconMoodCry, IconX } from '@tabler/icons-vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { useFaqs } from '~/composables/useFaqs'
 import Loader from '~/components/Load/LFaqPage.vue'
@@ -252,7 +270,6 @@ import { PGSServices } from '~/services/PGSServices.js'
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
-
 
 // Interface OSOption
 interface OSOption {
@@ -267,10 +284,10 @@ interface OSOption {
   downloadCount: number
 }
 
-const downloadStatsLoading = ref(true)
-const downloadStatsError = ref(false)
-
 const selectedOS = ref<OSOption | null>(null)
+const downloadMessage = ref('')
+const manualLinkVisible = ref(false)
+const showDownloadMessage = ref(false)
 
 // Icônes par défaut pour les détails
 const defaultDetailsIcons = [IconDeviceDesktop, IconWeight, IconLicense]
@@ -282,7 +299,7 @@ const systemRequirementsConfig = [
   { icon: IconDeviceDesktopAnalytics, title: 'Mémoire', translationKey: 'memory' }
 ]
 
-// Initialisez downloadCount à 0. Ces données seront mises à jour par l'API au chargement.
+// Détails OsOptions.
 const osOptions = ref<OSOption[]>([
   {
     name: 'Windows',
@@ -290,7 +307,7 @@ const osOptions = ref<OSOption[]>([
     available: true,
     version: '0.1.0.0',
     status: t('downloadPage.windowsState'),
-    downloadLink: '#',
+    downloadLink: 'https://github.com/ProGestionSoft/SuitOps_Release/releases/download/v1.0.0/SuitOpsSetup.exe',
     details: [
       'Windows 8/10/11 (32-bit / 64-bit)',
       '59 MB',
@@ -353,12 +370,12 @@ const handleOSSelection = (os: OSOption) => {
   selectedOS.value = selectedOS.value?.name === os.name ? null : os
 }
 
-// Fonction pour formater le nombre de téléchargements
+// Formater le nombre de téléchargements
 const formatDownloadCount = (count: number): string => {
   return new Intl.NumberFormat(locale.value).format(count);
 };
 
-// Initialisation de l'OS sélectionné par défaut et récupération des données
+// Initialisation de l'OS par défaut
 onMounted(async () => {
   await fetchOsDownloadCounts();
   const defaultOS = osOptions.value.find(os => os.name === 'Windows');
@@ -370,7 +387,7 @@ onMounted(async () => {
 });
 
 
-// Mise à jour des meta données : titre par défaut si aucun OS n'est sélectionné
+// SEO
 watch(
   selectedOS,
   (newOS) => {
@@ -387,7 +404,7 @@ watch(
   { immediate: true }
 )
 
-// Gestion du bouton fixe de téléchargement
+// Bouton fixe de téléchargement
 const downloadCard = ref<HTMLElement | null>(null)
 const showFixedDownloadButton = ref(false)
 let observer: IntersectionObserver | null = null
@@ -422,7 +439,7 @@ onBeforeUnmount(() => {
   }
 })
 
-// Fonction pour récupérer les statistiques de téléchargement des OS
+// Statistiques de téléchargement des OS
 const fetchOsDownloadCounts = async () => {
   try {
     const response = await PGSServices.getAllOsDownloads() as any;
@@ -435,26 +452,44 @@ const fetchOsDownloadCounts = async () => {
       });
     }
   } catch (error) {
-    console.error("Erreur lors de la récupération des stats de téléchargement :", error);
-    // Gérer l'erreur, par exemple, afficher un message à l'utilisateur
+    console.error(t('downloadPage.fetchError'), error);
   }
 };
 
-
-// Fonction pour gérer le clic sur le bouton de téléchargement
+// Clic sur le bouton de téléchargement
 const handleDownloadClick = async (osName: string) => {
   try {
     await PGSServices.incrementOsDownload(osName);
     await fetchOsDownloadCounts();
   } catch (error) {
-    console.error(`Erreur lors de l'incrémentation du téléchargement pour ${osName}:`, error);
+    console.error(t('downloadPage.incrementError', { osName }), error);
   }
-  // Optionnel : Si downloadLink pointe vers un '#' pour l'exemple,
-  // vous pouvez rediriger l'utilisateur ici vers le vrai fichier
-  // if (selectedOS.value?.downloadLink && selectedOS.value.downloadLink !== '#') {
-  //   window.location.href = selectedOS.value.downloadLink;
-  // }
-};
+
+  if (selectedOS.value?.downloadLink && selectedOS.value.downloadLink !== '#') {
+    let count = 5;
+    showDownloadMessage.value = true;
+    downloadMessage.value = t('downloadPage.downloadStarting', { count });
+    manualLinkVisible.value = false;
+
+    const countdown = setInterval(() => {
+      count--;
+      if (count > 0) {
+        downloadMessage.value = t('downloadPage.downloadStarting', { count });
+      } else {
+        clearInterval(countdown);
+        downloadMessage.value = t('downloadPage.downloadStarted');
+        setTimeout(() => {
+          manualLinkVisible.value = true;
+        }, 5000);
+      }
+    }, 1000);
+
+    // Lancer le téléchargement au bout de 5 secondes
+    setTimeout(() => {
+      window.location.href = selectedOS.value!.downloadLink;
+    }, 5000);
+  }
+}
 
 
 const pourquoiBureautique = [

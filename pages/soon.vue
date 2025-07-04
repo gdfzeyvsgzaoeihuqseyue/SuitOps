@@ -13,14 +13,14 @@
         <nav>
           <ul class="flex items-center space-x-6 text-sm font-medium text-gray-600">
             <li>
-              <NuxtLink href="#features" class="hover:text-primary transition-colors smooth-scroll">Fonctionnalités
+              <NuxtLink href="#features" class="hover:text-blue-600 transition-colors smooth-scroll">Fonctionnalités
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink href="#beta" class="hover:text-primary transition-colors smooth-scroll">Bêta</NuxtLink>
+              <NuxtLink href="#beta" class="hover:text-blue-600 transition-colors smooth-scroll">Bêta</NuxtLink>
             </li>
             <li>
-              <NuxtLink href="#about" class="hover:text-primary transition-colors smooth-scroll">À propos</NuxtLink>
+              <NuxtLink href="#about" class="hover:text-blue-600 transition-colors smooth-scroll">À propos</NuxtLink>
             </li>
           </ul>
         </nav>
@@ -29,11 +29,11 @@
 
     <!-- Hero -->
     <section class="hero-section text-center py-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary via-white to-secondary opacity-90 z-0"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-white to-blue-800 opacity-90 z-0"></div>
 
       <div class="container mx-auto px-4 relative z-10">
         <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
-          <span class="text-secondary">SuitOps</span> arrive bientôt
+          <span class="text-blue-800">SuitOps</span> arrive bientôt
         </h1>
         <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10">
           Une nouvelle ère pour la gestion des PME africaines. <br class="hidden sm:block" />
@@ -46,7 +46,7 @@
           <div class="flex justify-center gap-4 font-mono">
             <div v-for="(unit, index) in countdown" :key="index"
               class="bg-white border border-gray-200 rounded-lg p-4 w-24 text-center shadow-sm">
-              <div class="text-2xl font-bold text-secondary">{{ unit.value }}</div>
+              <div class="text-2xl font-bold text-blue-800">{{ unit.value }}</div>
               <div class="text-xs text-gray-500">{{ unit.label }}</div>
             </div>
           </div>
@@ -55,7 +55,7 @@
         <!-- CTA -->
         <div>
           <NuxtLink href="#beta"
-            class="inline-flex items-center px-6 py-3 bg-primary hover:bg-secondary text-white font-semibold rounded-full shadow-md transition-all duration-300 smooth-scroll">
+            class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-full shadow-md transition-all duration-300 smooth-scroll">
             Rejoindre la bêta
             <IconArrowRight class="h-5 w-5 ml-2" />
           </NuxtLink>
@@ -69,14 +69,14 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="(feature, index) in features" :key="index"
           class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col items-center h-full transition-all duration-300 hover:scale-105 hover:shadow-xl">
-          <div class="text-primary mb-4">
+          <div class="text-blue-600 mb-4">
             <component :is="feature.icon" class="w-12 h-12" />
           </div>
           <h3 class="text-xl font-bold mb-2">{{ feature.title }}</h3>
           <p class="text-gray-700 text-center mb-4">{{ feature.description }}</p>
           <ul class="text-gray-700 space-y-2 text-left w-full">
             <li v-for="(point, i) in feature.points" :key="i" class="flex items-start">
-              <IconCheck class="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
+              <IconCheck class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" />
               <span>{{ point }}</span>
             </li>
           </ul>
@@ -107,14 +107,14 @@
                 <label for="firstName" class="block text-sm font-medium mb-1">Prénoms <span
                     class="text-red-600">*</span></label>
                 <input type="text" id="firstName" v-model="form.firstName"
-                  class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                   required>
               </div>
               <div>
                 <label for="lastName" class="block text-sm font-medium mb-1">Nom <span
                     class="text-red-600">*</span></label>
                 <input type="text" id="lastName" v-model="form.lastName"
-                  class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                   required>
               </div>
             </div>
@@ -123,7 +123,7 @@
               <label for="email" class="block text-sm font-medium mb-1">Email <span
                   class="text-red-600">*</span></label>
               <input type="email" id="email" v-model="form.email"
-                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                 required>
               <p v-if="emailError" class="text-red-600 text-sm mt-1">{{ emailError }}</p>
             </div>
@@ -131,14 +131,14 @@
             <div>
               <label for="company" class="block text-sm font-medium mb-1">Entreprise (optionnel)</label>
               <input type="text" id="company" v-model="form.company"
-                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all">
+                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
             </div>
 
             <div>
               <label class="block text-sm font-medium mb-1">Comment avez-vous entendu parler de nous ? <span
                   class="text-red-600">*</span></label>
               <select v-model="form.source"
-                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                 required>
                 <option value="social">Réseaux sociaux</option>
                 <option value="search">Moteur de recherche</option>
@@ -149,7 +149,7 @@
 
             <div class="flex items-start">
               <input type="checkbox" id="newsletter" v-model="form.newsletter"
-                class="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary rounded-full">
+                class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 rounded-full">
               <label for="newsletter" class="ml-2 block text-sm text-gray-700">
                 Je souhaite recevoir des mises à jour sur SuitOps et les offres spéciales
               </label>
@@ -159,7 +159,7 @@
               <button type="submit"
                 class="w-full font-bold py-3 px-4 rounded-lg transition-all flex items-center justify-center transform hover:translate-y-[-2px]"
                 :disabled="isSubmitting || !isFormValid" :class="(isSubmitting || !isFormValid) 
-                ? 'bg-gray-300 cursor-not-allowed text-white' : 'bg-primary hover:bg-secondary text-white'">
+                ? 'bg-gray-300 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-800 text-white'">
                 <span v-if="isSubmitting" class="flex items-center">
                   <IconLoader class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
                   Traitement en cours...
@@ -204,30 +204,30 @@
           </p>
           <ul class="text-gray-700 space-y-2 mb-6">
             <li class="flex items-start">
-              <IconCheck class="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
+              <IconCheck class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" />
               <span>Optimiser votre temps et vos ressources</span>
             </li>
             <li class="flex items-start">
-              <IconCheck class="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
+              <IconCheck class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" />
               <span>Simplifier la collaboration entre équipes</span>
             </li>
             <li class="flex items-start">
-              <IconCheck class="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
+              <IconCheck class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" />
               <span>Prendre des décisions basées sur des données concrètes</span>
             </li>
           </ul>
           <div class="flex space-x-4">
             <a href="https://twitter.com/ProGestionSoft" target="_blank"
               class="group bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full p-3 transition-colors">
-              <IconBrandTwitter class="h-5 w-5 group-hover:text-primary" />
+              <IconBrandTwitter class="h-5 w-5 group-hover:text-blue-600" />
             </a>
             <a href="https://facebook.com/ProGestionSoft" target="_blank"
               class="group bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full p-3 transition-colors">
-              <IconBrandFacebook class="h-5 w-5 group-hover:text-primary" />
+              <IconBrandFacebook class="h-5 w-5 group-hover:text-blue-600" />
             </a>
             <a href="https://linkedIn.com/company/ProGestionSoft" target="_blank"
               class="group bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full p-3 transition-colors">
-              <IconBrandLinkedin class="h-5 w-5 group-hover:text-primary" />
+              <IconBrandLinkedin class="h-5 w-5 group-hover:text-blue-600" />
             </a>
           </div>
         </div>
