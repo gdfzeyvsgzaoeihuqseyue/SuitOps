@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { IconBrandLinkedin, IconBrandFacebook, IconBrandTwitter, IconBrandGithub, IconBrandYoutube, IconBrandTiktok } from '@tabler/icons-vue'
+import { IconBrandLinkedin, IconBrandFacebook, IconBrandX, IconBrandGithub, IconBrandYoutube, IconBrandTiktok } from '@tabler/icons-vue'
 import { SuitOpsServices } from '~/services/SuitOpsServices.js'
 import Loader from '~/components/Load/LSocialLink.vue'
 import { useI18n } from 'vue-i18n'
@@ -76,7 +76,7 @@ export default {
         case 'Facebook':
           return IconBrandFacebook;
         case 'Twitter':
-          return IconBrandTwitter;
+          return IconBrandX;
         case 'Github':
          return IconBrandGithub;
         case 'Youtube':

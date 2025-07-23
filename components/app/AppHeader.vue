@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <header class="shadow-sm top-0 left-0 fixed w-full bg-WtB backdrop-blur-sm z-50">
+    <header v-if="!isIframeMode" class="shadow-sm top-0 left-0 fixed w-full bg-WtB backdrop-blur-sm z-50">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
         <div class="flex justify-between h-16">
           <!-- Desktop Navigation -->
@@ -189,12 +189,14 @@
 <script setup>
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { IconChevronDown, IconMenuDeep, IconX, IconPhone, IconMail, IconForms } from '@tabler/icons-vue'
+import { IconChevronDown, IconMenuDeep, IconX } from '@tabler/icons-vue'
 import { useI18n } from 'vue-i18n'
+import { useIframeMode } from '~/composables/useIframeMode.js'
 
 const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()
+const { isIframeMode } = useIframeMode()
 
 // État réactif
 const mobileMenuRef = ref(null)

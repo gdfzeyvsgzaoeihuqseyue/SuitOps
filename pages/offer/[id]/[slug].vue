@@ -1,13 +1,13 @@
 <template>
-  <main class="mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mt-4 md:mt-8">
+  <main :class="{ 'mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mt-4 md:mt-8': !isIframeMode, 'embed-container': isIframeMode }">
     <!-- Breadcrumb -->
-    <useBreadcrumb :items="breadcrumbItems" class="no-print" />
+    <useBreadcrumb :items="breadcrumbItems" v-if="!isIframeMode" class="no-print" />
 
     <!-- État de chargement -->
     <Loader v-if="loading" />
 
     <!-- Gestion des erreurs -->
-    <div v-else-if="pageError" class="text-center p-6 md:p-8">
+    <div v-else-if="pageError && !isIframeMode" class="text-center p-6 md:p-8">
       <div class="mb-4">
         <IconMoodCry class="w-10 h-10 md:w-12 md:h-12 mx-auto" />
         <p class="text-danger mt-2">{{ pageError }}</p>
@@ -207,9 +207,9 @@
           </div>
 
           <!-- Carte Actions -->
-          <div class="bg-ash rounded-lg shadow-sm p-4 md:p-6 space-y-3 md:space-y-4 no-print">
+          <div v-if="!isIframeMode" class="bg-ash rounded-lg shadow-sm p-4 md:p-6 space-y-3 md:space-y-4 no-print">
             <h3 class="text-base sm:text-lg font-semibold">{{ $t('offerID.actionsCard.actionsTitle') }}</h3>
-            <div class="flex justify-around gap-2 mt-4">
+            <div class="flex justify-around gap-2 mt-4 grid grid-cols-3">
               <button @click="generatePDF"
                 class="flex items-center justify-center py-2 px-3 sm:px-4 bg-transparent text-textClr rounded-full hover:bg-textClr hover:text-WtB text-sm sm:text-base">
                 <IconPrinter class="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
@@ -218,7 +218,12 @@
               <button @click="shareJob"
                 class="flex items-center justify-center py-2 px-3 sm:px-4 bg-transparent text-primary rounded-full hover:bg-primary hover:text-WtB text-sm sm:text-base">
                 <IconShare class="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                {{ $t('offerID.actionsCard.shareButton') }}
+                {{ $t('common.shareButton') }}
+              </button>
+              <button @click="copyIframe"
+                class="flex items-center justify-center py-2 px-3 sm:px-4 bg-transparent text-secondary rounded-full hover:bg-secondary hover:text-WtB text-sm sm:text-base">
+                <IconCode class="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
+                {{ $t('common.iframeButton') }}
               </button>
             </div>
           </div>
@@ -331,6 +336,14 @@
         </div>
       </div>
     </div>
+
+    <!-- Notification -->
+    <div v-if="showNotification"
+      class="fixed bottom-4 right-4 z-50 bg-BtW text-WtB px-4 py-2 rounded shadow-lg transition-all">
+      {{ notificationMessage }}
+    </div>
+
+    <IframeFooter v-if="isIframeMode" :original-path="`offer/${route.params.id}/${route.params.slug}`" />
   </main>
 </template>
 
@@ -340,15 +353,14 @@ import { useRuntimeConfig } from 'nuxt/app'
 import { useRoute } from 'vue-router'
 import { SuitOpsServices } from '~/services/SuitOpsServices.js'
 import { PGSServices } from '~/services/PGSServices.js'
-import { IconX, IconMoodCry, IconBriefcase, IconLocation, IconUsers, IconUserScan, IconCalendar, IconCalendarX, IconBuilding, IconHelpOctagon, IconProgressHelp, IconMail, IconPhone, IconSend, IconSend2, IconInfoTriangle, IconAlertCircle, IconStar, IconLoader, IconPrinter, IconShare, IconBubbleText } from '@tabler/icons-vue'
+import { IconX, IconMoodCry, IconBriefcase, IconLocation, IconUsers, IconUserScan, IconCalendar, IconCalendarX, IconBuilding, IconHelpOctagon, IconProgressHelp, IconMail, IconPhone, IconSend, IconSend2, IconInfoTriangle, IconAlertCircle, IconStar, IconLoader, IconPrinter, IconShare, IconBubbleText, IconCode } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LOfferId.vue'
 import { useI18n } from 'vue-i18n'
+import { useIframeMode } from '~/composables/useIframeMode.js'
 
 const { t, locale } = useI18n()
-
 const config = useRuntimeConfig()
 const suitOpsBaseAPI = config.public.suitOpsBaseAPI
-
 const route = useRoute()
 const job = ref(null)
 const loading = ref(true)
@@ -360,13 +372,14 @@ const emailModal = ref(false)
 const candidateEmail = ref('')
 const eligibilityError = ref('')
 const eligibilityLoading = ref(false)
-
 const showReportModal = ref(false)
 const reportReason = ref('')
 const reportCertified = ref(false)
 const reportLoading = ref(false)
 const reportError = ref(null)
 const reportSuccess = ref(null)
+const notificationMessage = ref('')
+const showNotification = ref(false)
 
 // fil d’Ariane
 const breadcrumbItems = computed(() => [
@@ -389,9 +402,7 @@ const handleImageError = (event) => {
 //Fonction pour nettoyer le contenu HTML
 const cleanHtmlContent = (htmlString) => {
   if (!htmlString) return '';
-  // Supprime les balises <p> vides ou contenant uniquement des espaces
   let cleaned = htmlString.replace(/<p>\s*<\/p>/g, '');
-  // Supprime toutes les balises HTML restantes et les espaces blancs
   cleaned = cleaned.replace(/<[^>]*>/g, '').trim();
   return cleaned;
 };
@@ -658,10 +669,22 @@ const generatePDF = () => {
     setTimeout(() => {
       document.head.removeChild(style)
     }, 1000)
-    
+
     emailModal.value = wasEmailModalOpen
     showReportModal.value = wasReportModalOpen
   }, 100)
+}
+
+// Notification
+const triggerNotification = (message) => {
+  notificationMessage.value = message
+  showNotification.value = true
+
+  // Masquer la notification après 3 secondes
+  setTimeout(() => {
+    showNotification.value = false
+    notificationMessage.value = ''
+  }, 3000)
 }
 
 // fonction de partage
@@ -675,12 +698,32 @@ const shareJob = async () => {
   } catch (err) {
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(window.location.href)
-      alert(t('offerID.shareSuccess'))
+      triggerNotification(t('common.linkCopied'))
     } else {
       console.error('Le partage a échoué', err)
+      triggerNotification(t('common.copyError'))
     }
   }
 }
+
+// Gestion de l'Iframe
+const { isIframeMode, generateIframeCode } = useIframeMode('offerID.offerTitle', 'Offre d\'emploi SuitOps');
+
+// Fonction pour copier le code de l'iframe
+const copyIframe = async () => {
+  const iframeCode = generateIframeCode(
+    job.value?.post,
+    route.path
+  );
+
+  try {
+    await navigator.clipboard.writeText(iframeCode);
+    triggerNotification(t('common.iframeCopied'));
+  } catch (err) {
+    console.error('Erreur lors de la copie du code iframe de l\'offre :', err);
+    triggerNotification(t('common.iframeCopyError'));
+  }
+};
 </script>
 
 <style>
@@ -720,5 +763,21 @@ const shareJob = async () => {
 .dark .prose :deep(strong) {
   color: inherit !important;
   font-weight: bold;
+}
+
+/* Conteneur principal de la page en mode iframe */
+.embed-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  padding: 0;
+  margin: 0;
+}
+
+/* Le contenu principal à l'intérieur de l'iframe */
+.embed-container > div:first-of-type { 
+  flex-grow: 1; 
+  overflow-y: auto; 
+  padding-bottom: 70px !important; 
 }
 </style>

@@ -37,7 +37,7 @@
     <div v-else-if="company" class="bg-ash rounded-lg shadow-lg p-6 md:p-8">
       <!-- En-tête -->
       <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start mb-6 md:mb-8">
-        <img :src="company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${company.name}`"
+        <img :src="company?.logo.url || `https://api.dicebear.com/7.x/initials/svg?seed=${company.name}`"
           :alt="t('companyPage.logoAlt', { companyName: company.name })"
           class="w-24 h-24 sm:w-32 sm:h-32 object-contain rounded-lg border" loading="lazy" @error="handleImageError" />
         <div class="text-center md:text-left">

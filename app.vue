@@ -2,6 +2,7 @@
   <div class="min-h-screen bg-WtB text-textClr font-body">
   <NuxtLayout>
     <NuxtPage />
+    <BetaPasswordModal />
   </NuxtLayout>
   </div>
 </template>

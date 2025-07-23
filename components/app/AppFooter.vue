@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <footer class="py-6 sm:py-8 mt-8 bg-WtBAct mt-auto border-t">
+    <footer v-if="!isIframeMode" class="py-6 sm:py-8 mt-8 bg-WtBAct mt-auto border-t">
       <div class="container mx-auto px-4 sm:px-6">
         <div class="flex flex-col lg:flex-row justify-between items-start">
           <!-- Gauche : Info -->
@@ -59,9 +59,11 @@
 <script setup lang="ts">
 import { NuxtLink } from '#components'
 import { useI18n } from 'vue-i18n'
+import { useIframeMode } from '~/composables/useIframeMode.js'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const { isIframeMode } = useIframeMode()
 
 // Sections de navigation 
 const navSections: any[] = [

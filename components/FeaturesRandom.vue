@@ -1,6 +1,6 @@
 <template>
   <div v-if="randomFeatures" class="container mx-auto px-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2        gap-6 sm:gap-8 mb-12 sm:mb-16 justify-items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 justify-items-center">
       <div v-for="(feature, index) in displayedFeatures" :key="index"
         class="relative p-5 sm:p-6 rounded-xl shadow-lg group hover:scale-[1.03] sm:hover:scale-105 transition-transform duration-300 border border-textClr hover:border-primary w-full"
         :class="feature.bgClass" v-motion :initial="{ opacity: 0, y: 50 }"

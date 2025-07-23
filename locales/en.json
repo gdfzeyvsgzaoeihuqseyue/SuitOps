@@ -167,6 +167,12 @@
     "refreshButton": "Refresh",
     "cancelButton": "Cancel",
     "backButton": "Back",
+    "shareButton": "Share",
+    "iframeButton": "Iframe",
+    "linkCopied": "Link copied to clipboard!",
+    "copyLinkError": "Could not copy link.",
+    "iframeCopied": "Iframe code copied in the clipboard!",
+    "iframecopyerror": "Ladge of copy of the Iframe code.",
     "firstnameLabel": "First Name",
     "lastnameLabel": "Last Name",
     "fullnameLabel": "Full Name",
@@ -410,8 +416,7 @@
     },
     "actionsCard": {
       "actionsTitle": "Actions",
-      "printButton": "Print",
-      "shareButton": "Share"
+      "printButton": "Print"
     },
     "emailModal": {
       "title": "Email verification",
@@ -525,14 +530,11 @@
     "itemLabel": "posts"
   },
   "blogID": {
-    "share": "Share",
     "by": "By",
     "publishedOn": "Published on",
     "thisArticle": "This article",
     "readingTime": "Reading time",
-    "min": "min",
-    "linkCopied": "Link copied to clipboard!",
-    "copyError": "Could not copy link."
+    "min": "min"
   },
   "legalsPage": {
     "lastUpdate": "Last updated:",

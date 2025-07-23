@@ -15,7 +15,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       suitOpsBaseAPI: process.env.SUITOPS_API_URL,
-      pgsBaseAPI: process.env.PGS_API_URL
+      pgsBaseAPI: process.env.PGS_API_URL,
+      betaRegisterPass: process.env.BETA_REGISTER_PASS,
+      betaMode: process.env.NUXT_BETA_MODE === 'true'
     }
   },
 

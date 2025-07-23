@@ -34,4 +34,8 @@ export const PGSServices = {
   incrementOsDownload: (osName) => fetchData(`/suitOps/OsDownload/${osName}`, 'POST'),
   getAllOsDownloads: () => fetchData('/suitOps/OsDownload', 'GET'),
   getOsDownload: (osName) => fetchData(`/suitOps/OsDownload/${osName}`, 'GET'),
+
+  // Beta Registrations (NOUVELLES MÉTHODES AJOUTÉES ICI)
+  getAllBetaRegistrations: (page = 1, limit = 10) => fetchData(`/suitOps/betaRegistration?page=${page}&limit=${limit}`),
+  getBetaRegistrationById: (id) => fetchData(`/suitOps/betaRegistration/${id}`),
 };
