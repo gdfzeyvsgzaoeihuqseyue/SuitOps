@@ -17,7 +17,8 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink href="#beta" class="hover:text-blue-600 transition-colors smooth-scroll">Bêta</NuxtLink>
+              <NuxtLink href="/beta/soon/#register" class="hover:text-blue-600 transition-colors smooth-scroll">
+                S'inscrire</NuxtLink>
             </li>
             <li>
               <NuxtLink href="#about" class="hover:text-blue-600 transition-colors smooth-scroll">À propos</NuxtLink>
@@ -85,7 +86,7 @@
     </section>
 
     <!-- Inscription -->
-    <section id="beta" class="container mx-auto px-4 py-16">
+    <section id="register" class="container mx-auto px-4 py-16">
       <div class="bg-white border border-gray-200 rounded-xl p-8 max-w-2xl mx-auto shadow-lg">
         <h2 class="text-3xl font-bold mb-6 text-center">Rejoignez notre bêta privée</h2>
         <p class="text-gray-700 mb-8 text-center">Soyez parmi les premiers à tester SuitOps et bénéficiez d'avantages
@@ -158,8 +159,8 @@
             <div>
               <button type="submit"
                 class="w-full font-bold py-3 px-4 rounded-lg transition-all flex items-center justify-center transform hover:translate-y-[-2px]"
-                :disabled="isSubmitting || !isFormValid" :class="(isSubmitting || !isFormValid) 
-                ? 'bg-gray-300 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-800 text-white'">
+                :disabled="isSubmitting || !isFormValid" :class="(isSubmitting || !isFormValid)
+                  ? 'bg-gray-300 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-800 text-white'">
                 <span v-if="isSubmitting" class="flex items-center">
                   <IconLoader class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
                   Traitement en cours...
@@ -252,7 +253,12 @@
       <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-center">
           <span class="ml-2 text-lg font-bold">SuitOps</span>
-          <p class="text-sm text-gray-400 mt-2">{{ new Date().getFullYear() }} SuitOps. Tous droits réservés.</p>
+          <NuxtLink to="/beta/learn" class="text-sm hover:text-gray-300 hover:underline">
+            Instructions
+          </NuxtLink>
+          <p class="text-sm text-gray-400 mt-2">
+            {{ new Date().getFullYear() }} SuitOps. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>
@@ -474,7 +480,7 @@ const setupSmoothScroll = () => {
 
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 100, 
+          top: targetElement.offsetTop - 100,
           behavior: 'smooth'
         });
       }

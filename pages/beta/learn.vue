@@ -1,5 +1,31 @@
 <template>
-  <main class="min-h-screen bg-gray-50 text-gray-800 p-6 sm:p-10 mt-12 text-lg leading-relaxed">
+  <header class="bg-white border-b border-gray-200 shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Logos -->
+      <div class="flex items-center space-x-4">
+        <img src="/img/logoDeskCol.png" alt="SuitOps" class="h-10 w-auto hidden sm:block" />
+        <img src="/img/logoMobCol.png" alt="SuitOps" class="h-10 w-auto sm:hidden" />
+      </div>
+
+      <!-- Navigation -->
+      <nav>
+        <ul class="flex items-center space-x-6 text-sm font-medium text-gray-600">
+          <li>
+            <NuxtLink href="/beta/soon/#features" class="hover:text-blue-600 transition-colors smooth-scroll">Fonctionnalités
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink href="/beta/soon/#register" class="hover:text-blue-600 transition-colors smooth-scroll">S'inscrire</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink href="/beta/soon/#about" class="hover:text-blue-600 transition-colors smooth-scroll">À propos</NuxtLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="min-h-screen bg-gray-50 text-gray-800 p-6 sm:p-10 text-lg leading-relaxed">
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6 sm:p-8">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-blue-600">
         Instructions pour participer <br>à la bêta SuitOps 1.0.0
@@ -61,8 +87,7 @@
           Soyez le plus précis possible. Incluez si possible les étapes pour reproduire le problème, ce que vous
           attendiez et ce qui s'est réellement passé.
         </p>
-        <a href="mailto:progestionsoft@gmail.com"
-          class="text-blue-600 transition-all duration-200 hover:underline"
+        <a href="mailto:progestionsoft@gmail.com" class="text-blue-600 transition-all duration-200 hover:underline"
           target="_blank" rel="noopener noreferrer">Cliquez ici pour signaler un bug
         </a>
       </section>
@@ -81,14 +106,13 @@
 
         <div class="flex items center">
           <p class="mr-2">Laissez un </p>
-          <a href="https://wa.me/22952535380"
-            class="text-blue-600 transition-all duration-200 hover:underline"
+          <a href="https://wa.me/22952535380" class="text-blue-600 transition-all duration-200 hover:underline"
             target="_blank" rel="noopener noreferrer">avis privé
           </a>
           <p class="mx-2">ou un</p>
           <a href="https://chat.whatsapp.com/DQTw6LfDkH8CyM7XE9AVRd?mode=ac_t"
-            class="text-blue-600 transition-all duration-200 hover:underline "
-            target="_blank" rel="noopener noreferrer">avis public
+            class="text-blue-600 transition-all duration-200 hover:underline " target="_blank"
+            rel="noopener noreferrer">avis public
           </a>
         </div>
       </section>
@@ -98,8 +122,22 @@
       </p>
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8 text-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <span class="ml-2 text-lg font-bold">SuitOps</span>
+        <p class="text-sm text-gray-400 mt-2">{{ new Date().getFullYear() }} SuitOps. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <script setup>
 import { IconLogin2, IconWallet, IconBug, IconEmpathize } from '@tabler/icons-vue';
+
+definePageMeta({
+  layout: false
+});
 </script>
