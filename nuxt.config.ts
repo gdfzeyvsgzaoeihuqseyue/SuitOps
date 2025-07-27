@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   modules: [
+    ['nuxt-gtag', {
+      id: process.env.GTAG_ID || 'G-PZGPXME136', 
+      enabled: process.env.NODE_ENV === 'production'
+    }],
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@nuxtjs/i18n',
@@ -16,8 +20,8 @@ export default defineNuxtConfig({
     public: {
       suitOpsBaseAPI: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,
-      betaRegisterPass: process.env.BETA_REGISTER_PASS,
-      betaMode: process.env.NUXT_BETA_MODE === 'true'
+      betaMode: process.env.NUXT_BETA_MODE === 'true',
+      betaRegisterPass: process.env.BETA_REGISTER_PASS
     }
   },
 
@@ -70,7 +74,7 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
-          hid: 'description',
+          key: 'description',
           name: 'description',
           content: 'Plateforme complète de gestion d\'entreprise.'
         },
