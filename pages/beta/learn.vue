@@ -34,68 +34,89 @@
       <!-- Inscription -->
       <section class="mb-10">
         <div class="border-t border-gray-200 pt-6"></div>
-        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center ">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center">
           <IconLogin2 class="mr-3" />
           Inscription
         </h2>
         <p>
-          Vous n'avez pas encore une entreprise légalement constituée, ou vous êtes une association, une
-          micro-entreprise, ou un particulier ? Pas de souci ! Vous pouvez tout à fait vous inscrire. Nous avons
-          simplifié le processus pour que chacun puisse nous rejoindre facilement.
+          Pour vous inscrire, nous demandons les informations suivantes : 
+          <strong class="text-blue-600">numéro de registre de commerce</strong> (RCCM ou équivalent selon votre pays), 
+          <strong class="text-blue-600">IFU (Identifiant Fiscal Unique)</strong>, 
+          et <strong class="text-blue-600">statut juridique</strong> (ex. EI, SARL, SA).
           <br><br>
-          Vous n’avez pas encore une entreprise légalement constituée ? Pas de souci ! La bêta de SuitOps est ouverte
-          aux entrepreneurs en devenir, startups en création, ou simplement curieux souhaitant découvrir notre solution.
-          Inscrivez-vous librement et commencez à explorer les fonctionnalités, sans contrainte administrative pour le
-          moment.
+          Comme il s’agit d’une version bêta, nous n’exigeons pas de documents officiels. 
+          Si vous n’avez pas ces informations, vous pouvez saisir :
+        </p>
+        <ul class="list-disc list-inside my-4 space-y-1">
+          <li><strong>00000</strong> pour l’IFU</li>
+          <li><strong>NON DISPONIBLE</strong> pour le RCCM</li>
+          <li><strong>EI</strong> pour le statut juridique</li>
+        </ul>
+        <p>
+          Nous voulons faciliter la participation de tous, y compris les entrepreneurs en devenir, les associations, 
+          ou toute personne souhaitant découvrir notre solution.
         </p>
       </section>
 
       <!-- Souscription -->
       <section class="mb-10">
         <div class="border-t border-gray-200 pt-6"></div>
-        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center ">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center">
           <IconWallet class="mr-3" />
           Souscription
         </h2>
         <p class="mb-4">
-          Pas besoin d'argent réel pour le moment ! Nous utilisons un environnement de <strong
-            class="text-blue-600">sandbox</strong> pour que vous puissiez tester toutes les
-          fonctionnalités sans dépenser un centime.
+          Nous utilisons actuellement le <strong class="text-blue-600">mode sandbox de Kkiapay</strong> 
+          pour simuler les paiements. Cela vous permet de tester toutes les fonctionnalités sans dépenser d’argent réel.
         </p>
         <ol class="list-decimal list-inside space-y-2">
           <li>Rendez-vous sur la page d'abonnement.</li>
           <li>Choisissez l'offre qui vous intéresse.</li>
-          <li>Au moment du paiement, sélectionnez l'option "Sandbox" ou "Mode Test".</li>
-          <li>Suivez les indications pour finaliser votre abonnement fictif.</li>
+          <li>
+            Utilisez un numéro ou une carte de test. 
+            <span class="text-blue-600">Au Bénin, par exemple, vous pouvez utiliser le numéro <strong>0161000000</strong>.</span>
+          </li>
+          <li>
+            Pour d'autres pays ou des cartes de crédit de test, 
+            consultez la documentation Kkiapay : 
+            <a href="https://docs.kkiapay.me/v1/compte/kkiapay-sandbox-guide-de-test#informations-associees"
+              target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+              Guide Kkiapay Sandbox
+            </a>.
+          </li>
         </ol>
-        <p class="mt-4 text-sm text-gray-500 italic">Ceci vous permet de tester toutes les fonctionnalités
-          payantes sans risque.</p>
+        <p class="mt-4 text-sm text-gray-500 italic">
+          Ceci vous permet de tester les fonctionnalités payantes sans risque.
+        </p>
       </section>
 
       <!-- Bug -->
       <section class="mb-10">
         <div class="border-t border-gray-200 pt-6"></div>
-        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center ">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center">
           <IconBug class="mr-3" />
           Bug
         </h2>
         <p class="mb-4">
-          Nous nous efforçons de vous offrir la meilleure expérience possible. Si vous rencontrez un <strong
-            class="text-red-600">bug</strong> ou un comportement inattendu, veuillez nous en informer.
+          Nous nous efforçons de vous offrir la meilleure expérience possible. 
+          Si vous rencontrez un <strong class="text-red-600">bug</strong> ou un comportement inattendu, 
+          veuillez nous en informer.
         </p>
         <p class="mb-4">
-          Soyez le plus précis possible. Incluez si possible les étapes pour reproduire le problème, ce que vous
-          attendiez et ce qui s'est réellement passé.
+          Soyez le plus précis possible. Incluez les étapes pour reproduire le problème, 
+          ce que vous attendiez et ce qui s'est réellement passé.
         </p>
-        <a href="mailto:progestionsoft@gmail.com" class="text-blue-600 transition-all duration-200 hover:underline"
-          target="_blank" rel="noopener noreferrer">Cliquez ici pour signaler un bug
+        <a href="mailto:progestionsoft@gmail.com" 
+           class="text-blue-600 transition-all duration-200 hover:underline"
+           target="_blank" rel="noopener noreferrer">
+           Cliquez ici pour signaler un bug
         </a>
       </section>
 
       <!-- Votre avis -->
       <section>
         <div class="border-t border-gray-200 pt-6"></div>
-        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center ">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 flex items-center">
           <IconEmpathize class="mr-3" />
           Votre avis
         </h2>
@@ -104,15 +125,18 @@
           l'écoute.
         </p>
 
-        <div class="flex items center">
-          <p class="mr-2">Laissez un </p>
-          <a href="https://wa.me/22952535380" class="text-blue-600 transition-all duration-200 hover:underline"
-            target="_blank" rel="noopener noreferrer">avis privé
+        <div class="flex flex-wrap items-center text-center sm:text-left">
+          <p class="mr-2">Laissez un</p>
+          <a href="https://wa.me/22952535380"
+             class="text-blue-600 transition-all duration-200 hover:underline mr-2"
+             target="_blank" rel="noopener noreferrer">
+             avis privé
           </a>
-          <p class="mx-2">ou un</p>
+          <p class="mr-2">ou un</p>
           <a href="https://chat.whatsapp.com/DQTw6LfDkH8CyM7XE9AVRd?mode=ac_t"
-            class="text-blue-600 transition-all duration-200 hover:underline " target="_blank"
-            rel="noopener noreferrer">avis public
+             class="text-blue-600 transition-all duration-200 hover:underline"
+             target="_blank" rel="noopener noreferrer">
+             avis public
           </a>
         </div>
       </section>
