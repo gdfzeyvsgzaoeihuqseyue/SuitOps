@@ -31,7 +31,7 @@
   <main class="min-h-screen bg-gray-50 text-gray-800 p-6 sm:p-10 text-lg leading-relaxed">
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6 sm:p-8">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-blue-600">
-        Instructions pour participer <br>à la bêta SuitOps 1.0.0
+        Instructions pour participer <span class="hidden sm:inline"><br></span>à la bêta SuitOps 1.0.0
       </h1>
 
       <!-- Inscription -->
