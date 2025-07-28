@@ -89,11 +89,14 @@
     <section id="register" class="container mx-auto px-4 py-16">
       <div class="bg-white border border-gray-200 rounded-xl p-8 max-w-2xl mx-auto shadow-lg">
         <h2 class="text-3xl font-bold mb-6 text-center">Rejoignez notre bêta privée</h2>
-        <p class="text-gray-700 mb-8 text-center">Soyez parmi les premiers à tester SuitOps et bénéficiez d'avantages
-          exclusifs</p>
+        <p class="text-gray-700 mb-8 text-center">
+          Soyez parmi les premiers à tester SuitOps et bénéficiez d'avantages exclusifs
+        </p>
 
-        <div v-if="notification.show"
-          :class="`p-4 mb-6 rounded-lg flex items-center ${notification.type === 'success' ? 'bg-green-500/20 text-green-700' : 'bg-red-500/20 text-red-700'}`">
+        <!-- Notification -->
+        <div v-if="notification.show" :class="`p-4 mb-6 rounded-lg flex items-center ${notification.type === 'success'
+          ? 'bg-green-500/20 text-green-700' : 'bg-red-500/20 text-red-700'
+          }`">
           <component :is="notification.type === 'success' ? IconCheck : IconAlertCircle" class="h-5 w-5 mr-2" />
           <span>{{ notification.message }}</span>
           <button @click="notification.show = false" class="ml-auto">
@@ -101,43 +104,48 @@
           </button>
         </div>
 
+        <!-- Formulaire -->
         <div v-if="!formSubmitted">
           <form @submit.prevent="submitForm" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label for="firstName" class="block text-sm font-medium mb-1">Prénoms <span
-                    class="text-red-600">*</span></label>
+                <label for="firstName" class="block text-sm font-medium mb-1">
+                  Prénoms <span class="text-red-600">*</span>
+                </label>
                 <input type="text" id="firstName" v-model="form.firstName"
                   class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
-                  required>
+                  required />
               </div>
               <div>
-                <label for="lastName" class="block text-sm font-medium mb-1">Nom <span
-                    class="text-red-600">*</span></label>
+                <label for="lastName" class="block text-sm font-medium mb-1">
+                  Nom <span class="text-red-600">*</span>
+                </label>
                 <input type="text" id="lastName" v-model="form.lastName"
                   class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
-                  required>
+                  required />
               </div>
             </div>
 
             <div>
-              <label for="email" class="block text-sm font-medium mb-1">Email <span
-                  class="text-red-600">*</span></label>
+              <label for="email" class="block text-sm font-medium mb-1">
+                Email <span class="text-red-600">*</span>
+              </label>
               <input type="email" id="email" v-model="form.email"
                 class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
-                required>
+                required />
               <p v-if="emailError" class="text-red-600 text-sm mt-1">{{ emailError }}</p>
             </div>
 
             <div>
               <label for="company" class="block text-sm font-medium mb-1">Entreprise (optionnel)</label>
               <input type="text" id="company" v-model="form.company"
-                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+                class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all" />
             </div>
 
             <div>
-              <label class="block text-sm font-medium mb-1">Comment avez-vous entendu parler de nous ? <span
-                  class="text-red-600">*</span></label>
+              <label class="block text-sm font-medium mb-1">
+                Comment avez-vous entendu parler de nous ? <span class="text-red-600">*</span>
+              </label>
               <select v-model="form.source"
                 class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                 required>
@@ -150,7 +158,7 @@
 
             <div class="flex items-start">
               <input type="checkbox" id="newsletter" v-model="form.newsletter"
-                class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 rounded-full">
+                class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 rounded-full" />
               <label for="newsletter" class="ml-2 block text-sm text-gray-700">
                 Je souhaite recevoir des mises à jour sur SuitOps et les offres spéciales
               </label>
@@ -160,7 +168,8 @@
               <button type="submit"
                 class="w-full font-bold py-3 px-4 rounded-lg transition-all flex items-center justify-center transform hover:translate-y-[-2px]"
                 :disabled="isSubmitting || !isFormValid" :class="(isSubmitting || !isFormValid)
-                  ? 'bg-gray-300 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-800 text-white'">
+                  ? 'bg-gray-300 cursor-not-allowed text-white'
+                  : 'bg-blue-600 hover:bg-blue-800 text-white'">
                 <span v-if="isSubmitting" class="flex items-center">
                   <IconLoader class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
                   Traitement en cours...
@@ -171,15 +180,16 @@
           </form>
         </div>
 
+        <!-- Message de confirmation -->
         <div v-else class="text-center py-8">
           <div class="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mb-6">
             <IconCheck class="h-8 w-8 text-white" />
           </div>
-          <h3 class="text-2xl font-bold mb-2">Merci de vous être inscrit!</h3>
+          <h3 class="text-2xl font-bold mb-2">Merci {{ form.firstName }} de vous être inscrit(e) !</h3>
           <p class="text-gray-700 mb-6">
-            Votre demande d'accès à la bêta a été enregistrée avec succès. Nous vous contacterons à l'adresse <span
-              class="font-bold"> {{
-                form.email }} </span> dès que votre accès sera disponible.
+            Votre inscription à la bêta a été enregistrée. Vous recevrez les instructions nécessaires par e-mail à <span
+              class="font-bold">{{ form.email }}</span>. <br>
+            Consultez <NuxtLink to="/beta/learn" class="text-blue-600 hover:underline">plus de détails ici</NuxtLink>.
           </p>
           <button @click="resetForm" class="text-blue-600 hover:text-blue-700 flex items-center mx-auto">
             <IconRefresh class="h-4 w-4 mr-1" />
