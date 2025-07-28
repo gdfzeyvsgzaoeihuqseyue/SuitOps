@@ -57,12 +57,19 @@
     "unavailableTooltip": "{name} is unavailable for now"
   },
   "errorPage": {
-    "title": " 😪 Oops!",
-    "message": "Sorry, the page you are looking for does not exist or has been moved.",
-    "homeButton": "Return to home",
-    "backButton": "Previous page",
-    "supportText": "If you think this is an error, please contact our",
-    "supportLink": "technical support."
+    "title": "Error 404",
+    "subtitle": "Oops! Page not found",
+    "message": "Sorry, the page you are looking for seems to be lost in cyberspace. It may have been moved, deleted, or the address is incorrect.",
+    "homeButton": "Go to Home",
+    "backButton": "Go Back",
+    "suggestionsTitle": "What to do now?",
+    "visit": "Visit our",
+    "homeLink": "home page",
+    "checkUrl": "Check the URL for any typing errors.",
+    "contactLink": "Contact us",
+    "contactSuffix": "if the problem persists.",
+    "faqLink": "Check our FAQ",
+    "faqSuffix": "for frequently asked questions."
   },
   "modules": {
     "badgeManage": "Management",

@@ -57,12 +57,19 @@
     "unavailableTooltip": "{name} est indisponible pour le moment"
   },
   "errorPage": {
-    "title": "😪 Ayiii !",
-    "message": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
-    "homeButton": "Retourner à l'accueil",
-    "backButton": "Page précédente",
-    "supportText": "Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre",
-    "supportLink": "support technique."
+    "title": "Erreur 404",
+    "subtitle": "Oups ! Page introuvable",
+    "message": "Désolé, la page que vous recherchez semble s'être perdue dans l'espace numérique. Il est possible qu'elle ait été déplacée, supprimée, ou que l'adresse soit incorrecte.",
+    "homeButton": "Aller à l'accueil",
+    "backButton": "Retour",
+    "suggestionsTitle": "Que faire maintenant ?",
+    "visit": "Visiter notre",
+    "homeLink": "page d'accueil",
+    "checkUrl": "Vérifier l'URL pour toute erreur de frappe.",
+    "contactLink": "Nous contacter",
+    "contactSuffix": "si le problème persiste.",
+    "faqLink": "Consulter notre FAQ",
+    "faqSuffix": "pour les questions fréquentes."
   },
   "modules": {
     "badgeManage": "Gestion",
