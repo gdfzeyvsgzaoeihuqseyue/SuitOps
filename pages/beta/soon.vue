@@ -55,7 +55,7 @@
 
         <!-- CTA -->
         <div>
-          <NuxtLink href="#beta"
+          <NuxtLink href="/beta/soon/#register"
             class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-full shadow-md transition-all duration-300 smooth-scroll">
             Rejoindre la bêta
             <IconArrowRight class="h-5 w-5 ml-2" />
