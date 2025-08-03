@@ -138,7 +138,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconArrowLeft, IconCalendar, IconBuildingSkyscraper, IconEditOff } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LForumCat.vue'
 

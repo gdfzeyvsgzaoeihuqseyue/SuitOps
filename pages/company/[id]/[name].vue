@@ -297,8 +297,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, watchEffect } from 'vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices'
-import { PGSServices } from '~/services/PGSServices'
+import { SuitOpsServices } from '~/stores/SuitOpsServices'
+import { PGSServices } from '~/stores/PGSServices'
 import { useRoute, useRouter } from 'vue-router'
 import { IconArrowLeft, IconAddressBook, IconGavel, IconBriefcase, IconMail, IconAlertTriangle, IconX, IconUser, IconPhone, IconBubbleText, IconLoader, IconAlertCircle } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LCompany.vue'

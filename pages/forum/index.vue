@@ -178,7 +178,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconAppsOff, IconEditOff } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LForum.vue'
 

@@ -110,7 +110,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconArrowLeft, IconCalendar, IconCategory2, IconEditOff } from '@tabler/icons-vue'
 
 const router = useRouter()

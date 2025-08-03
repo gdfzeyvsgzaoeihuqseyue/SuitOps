@@ -97,7 +97,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconShare, IconMessageStar, IconCode } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LBlogId.vue'
 import { useI18n } from 'vue-i18n'

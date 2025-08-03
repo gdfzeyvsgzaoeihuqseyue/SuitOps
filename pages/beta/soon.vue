@@ -277,7 +277,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
-import { PGSServices } from '~/services/PGSServices'
+import { PGSServices } from '~/stores/PGSServices'
 import { IconCheck, IconArrowRight, IconLoader, IconRefresh, IconBrandTwitter, IconBrandFacebook, IconBrandLinkedin, IconAlertCircle, IconChartPie, IconUsers, IconCalendar, IconClockBolt, IconFiles, IconBriefcase, IconX } from '@tabler/icons-vue';
 
 

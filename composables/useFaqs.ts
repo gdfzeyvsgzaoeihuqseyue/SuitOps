@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 
 export const useFaqs = () => {
   const topics = ref<any[]>([])

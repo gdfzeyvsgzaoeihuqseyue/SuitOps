@@ -46,7 +46,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LAbout.vue'
 import { useI18n } from 'vue-i18n'

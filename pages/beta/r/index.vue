@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { PGSServices } from '~/services/PGSServices.js'
+import { PGSServices } from '~/stores/PGSServices.js'
 import { ref, computed, onMounted } from 'vue'
 
 const registrations = ref([])

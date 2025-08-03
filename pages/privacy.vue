@@ -92,7 +92,7 @@
 
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconChevronDown, IconChevronUp } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LLegalPage.vue'
 import { useI18n } from 'vue-i18n'

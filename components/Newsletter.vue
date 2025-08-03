@@ -126,7 +126,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { SuitOpsServices } from '@/services/SuitOpsServices'
+import { SuitOpsServices } from '@/stores/SuitOpsServices'
 import { IconSend, IconBellMinusFilled, IconLoader, IconX, IconUserCircle, IconUserSquareRounded, IconMail } from '@tabler/icons-vue'
 import { useI18n } from 'vue-i18n'
 

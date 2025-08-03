@@ -71,7 +71,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { IconMoodCry, IconChevronLeft, IconChevronRight } from '@tabler/icons-vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import Loader from '~/components/Load/LTestimonies.vue'
 import { useI18n } from 'vue-i18n'
 

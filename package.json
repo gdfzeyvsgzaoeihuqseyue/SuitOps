@@ -13,6 +13,8 @@
     "@headlessui/vue": "^1.7.19",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "^10.0.3",
+    "@nuxtjs/robots": "^5.4.0",
+    "@nuxtjs/sitemap": "^7.4.3",
     "@tabler/icons-vue": "^3.31.0",
     "@vueuse/core": "^10.9.0",
     "@vueuse/motion": "^2.1.0",

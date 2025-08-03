@@ -240,7 +240,7 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
 import { IconMoodCry, IconCheck, IconX, IconSquareRoundedCheck, IconSquareRoundedX } from '@tabler/icons-vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import Loader from '~/components/Load/LPricings.vue'
 import { useI18n } from 'vue-i18n'
 

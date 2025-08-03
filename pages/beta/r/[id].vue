@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { PGSServices } from '~/services/PGSServices.js'
+import { PGSServices } from '~/stores/PGSServices.js'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 

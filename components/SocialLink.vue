@@ -20,7 +20,7 @@
 
 <script>
 import { IconBrandLinkedin, IconBrandFacebook, IconBrandX, IconBrandGithub, IconBrandYoutube, IconBrandTiktok } from '@tabler/icons-vue'
-import { SuitOpsServices } from '~/services/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import Loader from '~/components/Load/LSocialLink.vue'
 import { useI18n } from 'vue-i18n'
 
