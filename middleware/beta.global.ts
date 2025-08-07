@@ -10,6 +10,7 @@ export default defineNuxtRouteMiddleware((to) => {
     /^\/privacy$/,
     /^\/terms$/,
     /^\/legal$/,
+    /^\/preferences$/,
   ];
 
   const isPublic = publicPaths.some((pattern) => pattern.test(to.path));
