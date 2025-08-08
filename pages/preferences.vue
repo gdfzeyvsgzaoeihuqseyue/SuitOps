@@ -1,33 +1,33 @@
 <template>
-  <main class="min-h-screen bg-gray-50 py-12 mt-8">
+  <main class="min-h-screen py-12 mt-8">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <header class="text-center mb-8 relative">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        <h1 class="text-4xl font-bold mb-4">
           Gestion des <span class="text-primary">Préférences</span>
         </h1>
-        <p class="text-lg text-gray-600">
+        <p class="text-lg">
           Mettez à jour vos informations d'inscription à la bêta SuitOps
         </p>
       </header>
 
-      <div class="bg-white rounded-xl shadow-lg p-8 relative">
+      <div class="bg-WtBAct rounded-xl shadow-lg p-8 relative">
         <div v-if="preferencesStore.currentStep.value === 'initial'" class="text-center py-12">
           <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p class="text-gray-600">Vérification en cours...</p>
+          <p>Vérification en cours...</p>
         </div>
 
         <div v-else-if="preferencesStore.currentStep.value === 'email_input'">
           <div class="text-center mb-8">
             <IconMail class="w-16 h-16 text-primary mx-auto mb-4" />
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">Accès aux préférences</h2>
-            <p class="text-gray-600">
+            <h2 class="text-2xl font-bold mb-2">Accès aux préférences</h2>
+            <p>
               Veuillez saisir votre adresse e-mail pour recevoir un code de vérification.
             </p>
           </div>
 
           <form @submit.prevent="handleEmailSubmit" class="space-y-6">
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="email" class="block text-sm font-medium mb-2">
                 Adresse e-mail
               </label>
               <input id="email" v-model="preferencesStore.email.value" type="email" required
@@ -37,7 +37,7 @@
             </div>
 
             <button type="submit" :disabled="preferencesStore.isLoading.value || !preferencesStore.email.value"
-              class="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-secondary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center">
+              class="w-full bg-primary text-WtB py-3 px-6 rounded-lg font-medium hover:bg-secondary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center">
               <IconLoader v-if="preferencesStore.isLoading.value" class="w-5 h-5 mr-2 animate-spin" />
               <IconSend v-else class="w-5 h-5 mr-2" />
               {{ preferencesStore.isLoading.value ? 'Envoi en cours...' : 'Envoyer le code' }}
@@ -54,16 +54,16 @@
             </button>
           </div>
           <div class="text-center">
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">Code de vérification</h2>
+            <h2 class="text-2xl font-bold mb-2">Code de vérification</h2>
             <p class="text-gray-600 mb-2">
               Un code de vérification a été envoyé à :
             </p>
-            <p class="font-medium text-gray-900">{{ preferencesStore.maskedEmail.value }}</p>
+            <p class="font-medium">{{ preferencesStore.maskedEmail.value }}</p>
           </div>
 
           <form @submit.prevent="handleTotpSubmit" class="space-y-6 mt-8">
             <div>
-              <label for="totpCode" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="totpCode" class="block text-sm font-medium mb-2">
                 Code de vérification (6 chiffres)
               </label>
               <input id="totpCode" v-model="preferencesStore.totpCode.value" type="text" maxlength="6" pattern="[0-9]{6}"
@@ -74,13 +74,13 @@
 
             <div class="flex gap-4">
               <button type="button" @click="handleBackToEmail"
-                class="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-gray-300 transition-colors flex items-center justify-center">
+                class="flex-1 bg-gray-200 py-3 px-6 rounded-lg font-medium hover:bg-gray-300 transition-colors flex items-center justify-center">
                 <IconArrowLeft class="w-5 h-5 mr-2" />
                 Retour
               </button>
 
               <button type="submit" :disabled="preferencesStore.isLoading.value || preferencesStore.totpCode.value.length !== 6"
-                class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-secondary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center">
+                class="flex-1 bg-primary text-WtB py-3 px-6 rounded-lg font-medium hover:bg-secondary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center">
                 <IconLoader v-if="preferencesStore.isLoading.value" class="w-5 h-5 mr-2 animate-spin" />
                 <IconCheck v-else class="w-5 h-5 mr-2" />
                 {{ preferencesStore.isLoading.value ? 'Vérification...' : 'Vérifier' }}
@@ -105,16 +105,16 @@
             </button>
           </div>
           <div class="text-center">
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">Vos préférences</h2>
+            <h2 class="text-2xl font-bold mb-2">Vos préférences</h2>
             <p class="text-gray-600 mb-2">
               Compte associé à :
-              <span class="font-medium text-gray-900">{{ preferencesStore.maskedEmail.value }}</span>
+              <span class="font-medium">{{ preferencesStore.maskedEmail.value }}</span>
             </p>
           </div>
 
           <form @submit.prevent="handlePreferencesSubmit" class="space-y-6 mt-8">
             <div>
-              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="firstName" class="block text-sm font-medium mb-2">
                 Prénom
               </label>
               <input id="firstName" v-model="preferencesStore.firstName.value" type="text"
@@ -124,7 +124,7 @@
             </div>
 
             <div>
-              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="lastName" class="block text-sm font-medium mb-2">
                 Nom de famille
               </label>
               <input id="lastName" v-model="preferencesStore.lastName.value" type="text"
