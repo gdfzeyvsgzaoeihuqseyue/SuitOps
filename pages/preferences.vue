@@ -174,13 +174,6 @@
           </form>
         </div>
       </div>
-
-      <div class="text-center mt-8">
-        <NuxtLink to="/" class="text-primary hover:text-secondary font-medium flex items-center justify-center">
-          <IconHome class="w-5 h-5 mr-2" />
-          Retour à l'accueil
-        </NuxtLink>
-      </div>
     </div>
   </main>
 
@@ -241,17 +234,17 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePreferences } from '@/stores/preferences.js';
 import {
-  IconMail, IconShieldCheck, IconSettings, IconSend, IconCheck, IconArrowLeft, IconLoader, IconDeviceFloppy, IconHome, IconAlertCircle, IconInfoCircle, IconX
+  IconMail, IconShieldCheck, IconSettings, IconSend, IconCheck, IconArrowLeft, IconLoader, IconDeviceFloppy, IconAlertCircle, IconInfoCircle, IconX
 } from '@tabler/icons-vue';
 
-// Appelez la fonction pour obtenir le store
+// Store
 const preferencesStore = usePreferences();
 const route = useRoute();
 
 const showInfoModal = ref(false);
 const currentModalContent = ref('');
 
-// Fonctions pour gérer la modale
+// Modale
 const openInfoModal = (type) => {
   currentModalContent.value = type;
   showInfoModal.value = true;
