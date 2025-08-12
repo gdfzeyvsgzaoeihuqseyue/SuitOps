@@ -1,5 +1,6 @@
 <template>
-  <main :class="{ 'mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mt-4 md:mt-8': !isIframeMode, 'embed-container': isIframeMode }">
+  <main
+    :class="{ 'mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mt-4 md:mt-8': !isIframeMode, 'embed-container': isIframeMode }">
     <!-- Breadcrumb -->
     <useBreadcrumb :items="breadcrumbItems" v-if="!isIframeMode" class="no-print" />
 
@@ -67,12 +68,12 @@
               <div class="flex flex-wrap gap-x-4 gap-y-2 mt-2 sm:mt-0 w-full sm:w-auto">
                 <div class="flex items-center">
                   <IconCalendar class="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                  {{ $t('offerID.jobDetails.publishedOn') }} {{ formatDate(job.createdAt) }}
+                  {{ $t('offerID.jobDetails.publishedOn') }} {{ formatDate(job.createdAt, locale) }}
                 </div>
                 <span class="hidden sm:inline">•</span>
                 <div class="flex items-center">
                   <IconCalendarX class="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                  {{ $t('offerID.jobDetails.closesOn') }} {{ formatDate(job.closingDate) }}
+                  {{ $t('offerID.jobDetails.closesOn') }} {{ formatDate(job.closingDate, locale) }}
                 </div>
               </div>
             </div>
@@ -134,7 +135,7 @@
                 @error="handleImageError" />
               <div class="ml-3 sm:ml-4">
                 <NuxtLink :to="localePath(`/company/${job.company.id}/${job.company.name}`)"
-                  class="text-lg sm:text-xl font-semibold hover:text-secondary transition-colors"
+                  class="text-lg sm:text-xl font-semibold hover:text-secondary hover:underline transition-colors"
                   :title="t('offersPage.viewCompanyProfile', { companyName: job.company.name })">
                   {{ job.company.name }}
                 </NuxtLink>
@@ -190,7 +191,7 @@
               </a>
             </div>
             <p class="text-xs sm:text-sm mt-3">
-              {{ $t('offerID.applicationCard.applicationDeadline') }} {{ formatCloseDate(job.closingDate) }}
+              {{ $t('offerID.applicationCard.applicationDeadline') }} {{ formatCloseDate(job.closingDate, locale, t) }}
             </p>
             <div class="flex flex-col sm:flex-row justify-around gap-2 mt-4 no-print">
               <button @click="startApplication"
@@ -357,8 +358,11 @@ import { IconX, IconMoodCry, IconBriefcase, IconLocation, IconUsers, IconUserSca
 import Loader from '~/components/Load/LOfferId.vue'
 import { useI18n } from 'vue-i18n'
 import { useIframeMode } from '~/composables/useIframeMode.js'
+import { formatDate, formatCloseDate } from '@/utils/date.js';
 
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
+
 const config = useRuntimeConfig()
 const suitOpsBaseAPI = config.public.suitOpsBaseAPI
 const route = useRoute()
@@ -460,21 +464,6 @@ const checkEligibility = async () => {
   } finally {
     eligibilityLoading.value = false
   }
-}
-
-const formatDate = (timestamp) => {
-  return new Date(timestamp).toLocaleDateString(locale.value, {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  })
-}
-
-const formatCloseDate = (timestamp) => {
-  if (!timestamp) return 'N/A'
-  const date = new Date(timestamp)
-  return `${date.toLocaleDateString(locale.value,
-    { day: '2-digit', month: 'long', year: 'numeric' })} ${t('common.at')} ${date.toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' })}`
 }
 
 // Calcul du temps restant
@@ -769,15 +758,15 @@ const copyIframe = async () => {
 .embed-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; 
+  height: 100vh;
   padding: 0;
   margin: 0;
 }
 
 /* Le contenu principal à l'intérieur de l'iframe */
-.embed-container > div:first-of-type { 
-  flex-grow: 1; 
-  overflow-y: auto; 
-  padding-bottom: 70px !important; 
+.embed-container>div:first-of-type {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 70px !important;
 }
 </style>

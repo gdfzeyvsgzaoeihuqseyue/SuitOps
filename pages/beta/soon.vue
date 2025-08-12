@@ -461,12 +461,19 @@ const submitForm = async () => {
     showNotification('success', 'Inscription réussie !');
   } catch (error) {
     console.error('Erreur lors de l’inscription :', error);
-    showNotification('error', 'Une erreur est survenue. Veuillez réessayer plus tard.');
+
+    if (error.statusCode === 409) {
+      emailError.value = 'Cet email est déjà inscrit à la bêta.';
+      showNotification('error', 'Cet email est déjà inscrit à la bêta.');
+    } else if (error.statusCode === 400) {
+      showNotification('error', 'Des champs invalides ou manquants. Veuillez vérifier vos informations.');
+    } else {
+      showNotification('error', 'Une erreur est survenue. Veuillez réessayer plus tard.');
+    }
   } finally {
     isSubmitting.value = false;
   }
 };
-
 
 // Restaurer le formulaire après soummission
 const resetForm = () => {

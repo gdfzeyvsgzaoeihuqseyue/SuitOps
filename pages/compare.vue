@@ -118,7 +118,7 @@ const versions = [
       { ok: false, translationKey: 'slowerPerformance' }
     ],
     cta: {
-      href: 'https://web.SuitOps.com',
+      href: externalLinks.web,
       external: true,
       style: 'bg-primary text-WtB hover:bg-secondary'
     }

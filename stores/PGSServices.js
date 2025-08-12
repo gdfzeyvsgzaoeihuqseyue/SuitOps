@@ -2,7 +2,7 @@ import { useFetch, useRuntimeConfig } from 'nuxt/app';
 
 const fetchData = async (endpoint, method = 'GET', data = null) => {
   const config = useRuntimeConfig();
-  const PGS_URL = config.public.pgsBaseAPI;
+  const PGS_URL = config.public.PgsBaseAPI;
 
   const options = {
     method,
@@ -24,16 +24,16 @@ const fetchData = async (endpoint, method = 'GET', data = null) => {
 
 export const PGSServices = {
   // Bêta
-  betaRegistration: (betaData) => fetchData('/suitOps/betaRegistration', 'POST', betaData),
-  getAllBetaRegistrations: (page = 1, limit = 10) => fetchData(`/suitOps/betaRegistration?page=${page}&limit=${limit}`),
-  getBetaRegistrationById: (id) => fetchData(`/suitOps/betaRegistration/${id}`),
+  betaRegistration: (betaData) => fetchData('/suitops/beta/registration', 'POST', betaData),
+  getAllBetaRegistrations: (page = 1, limit = 10) => fetchData(`/suitops/beta/registration?page=${page}&limit=${limit}`),
+  getBetaRegistrationById: (id) => fetchData(`/suitops/beta/registration/${id}`),
 
  // Sgnalement
-  reportCompany: (reportData) => fetchData('/suitOps/reportCompany', 'POST', reportData),
-  reportOffer: (reportData) => fetchData('/suitOps/reportOffer', 'POST', reportData),
+  reportCompany: (reportData) => fetchData('/suitops/company/report', 'POST', reportData),
+  reportOffer: (reportData) => fetchData('/suitops/offer/report', 'POST', reportData),
 
   // Nombre de téléchargements
-  incrementOsDownload: (osName) => fetchData(`/suitOps/OsDownload/${osName}`, 'POST'),
-  getAllOsDownloads: () => fetchData('/suitOps/OsDownload', 'GET'),
-  getOsDownload: (osName) => fetchData(`/suitOps/OsDownload/${osName}`, 'GET'),
+  incrementOsDownload: (osName) => fetchData('/suitops/os/download', 'POST', { os: osName }),
+  getAllOsDownloads: () => fetchData('/suitops/os/download', 'GET'),
+  getOsDownload: (osName) => fetchData(`/suitops/os/download/${osName}`, 'GET'),
 };

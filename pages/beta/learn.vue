@@ -196,7 +196,7 @@
 
         <div class="grid gap-4 sm:grid-cols-2">
           <!--Inscription et test -->
-          <a href="https://web.pgs.ctrlengine.com" target="_blank" rel="noopener noreferrer"
+          <a :href="externalLinks.web" target="_blank" rel="noopener noreferrer"
             class="flex items-center space-x-3 p-4 bg-gray-50 hover:bg-gray-100 rounded-xl shadow-sm border transition">
             <IconExternalLink size="22" class="text-blue-500" />
             <span class="text-blue-600 font-medium">Inscription et test de la plateforme</span>
@@ -224,13 +224,13 @@
           </NuxtLink>
 
           <!-- Plateforme d'offres publiques -->
-          <a href="https://hire-suitops.netlify.app" target="_blank" rel="noopener noreferrer"
+          <a :href="externalLinks.hire" target="_blank" rel="noopener noreferrer"
             class="flex items-center space-x-3 p-4 bg-gray-50 hover:bg-gray-100 rounded-xl shadow-sm border transition">
             <IconExternalLink size="22" class="text-blue-500" />
             <span class="text-blue-600 font-medium">Plateforme d'offres publiques</span>
           </a>
 
-          <!-- Protection des données -->
+          <!-- WhatsApp -->
           <a href="https://chat.whatsapp.com/DQTw6LfDkH8CyM7XE9AVRd?mode=ac_t" target="_blank" rel="noopener noreferrer"
             class="flex items-center space-x-3 p-4 bg-gray-50 hover:bg-gray-100 rounded-xl shadow-sm border transition">
             <IconBrandWhatsapp size="22" class="text-green-500" />
@@ -258,6 +258,7 @@
 
 <script setup>
 import { IconLogin2, IconWallet, IconBug, IconEmpathize, IconDeviceDesktop, IconLink, IconExternalLink, IconFileText, IconFileCertificate, IconBook, IconBrandWhatsapp } from '@tabler/icons-vue';
+import { internalLinks, externalLinks } from '@/utils/links.js';
 
 definePageMeta({
   layout: false

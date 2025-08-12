@@ -36,13 +36,14 @@
     <!-- Contenu principal -->
     <section class="py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8 relative">
       <div class="mb-6 sm:mb-8 md:mb-12 text-center">
-        <p v-if="Content && formattedUpdatedAt" class="text-sm sm:text-base md:text-lg">
+        <p v-if="Content && Content.updatedAt" class="text-sm sm:text-base md:text-lg">
           {{ $t('legalsPage.lastUpdate') }}
-          <span class="font-bold">{{ formattedUpdatedAt }}</span>
+          <span class="font-bold">{{ formatLongDate(Content.updatedAt, locale) }}</span>
         </p>
       </div>
 
-      <div v-if="!loading && tocItems.length" class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 relative">
+      <div v-if="!loading && tocItems.length"
+        class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 relative">
         <!-- Table des matières mobile -->
         <div class="lg:hidden bg-ash rounded-lg shadow-md p-4 sticky top-20 z-10 max-h-[calc(50vh)] overflow-y-auto">
           <div class="flex items-center justify-between">
@@ -96,6 +97,7 @@ import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconChevronDown, IconChevronUp } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LLegalPage.vue'
 import { useI18n } from 'vue-i18n'
+import { formatShotDate } from '@/utils/date.js';
 
 const { t, locale } = useI18n()
 
@@ -148,19 +150,6 @@ const fetchLegal = async () => {
 }
 
 onMounted(fetchLegal)
-
-// Formatage de la date
-const formattedUpdatedAt = computed(() => {
-  if (Content.value && Content.value.updatedAt) {
-    const date = new Date(Number(Content.value.updatedAt))
-    return date.toLocaleDateString(locale.value, {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
-  }
-  return ''
-})
 
 // Génération de la table des matières (TOC) à partir des titres h1, h2 et h3
 const tocItems = ref([])

@@ -117,7 +117,7 @@
               <span class="hidden sm:block">•</span>
               <span class="flex items-center gap-1 sm:gap-2">
                 <IconCalendarFilled class="w-3 h-3 sm:w-4 sm:h-4" />
-                {{ formatDate(post.createdAt) }}
+                {{ formatShotDate(post.createdAt, locale) }}
               </span>
             </div>
 
@@ -155,8 +155,10 @@ import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconUserEdit, IconCalendarFilled, IconArrowRight, IconArticleOff, IconSearch, IconRefresh } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LBlog.vue'
 import { useI18n } from 'vue-i18n'
+import { formatShotDate } from '@/utils/date.js';
 
-const { t, locale } = useI18n()
+const { t, locale } = useI18n();
+const localePath = useLocalePath()
 
 useHead({
   title: t('blogPage.heroTitle')
@@ -202,15 +204,6 @@ const fetchBlogPosts = async () => {
 }
 
 fetchBlogPosts()
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat(locale.value, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  }).format(date)
-}
 
 // Aplication des filtres et tri
 const filteredPosts = computed(() => {

@@ -22,7 +22,6 @@ export default defineNuxtConfig({
     public: {
       suitOpsBaseAPI: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,
-      newPgsBaseAPI: process.env.NEW_PGS_API_URL,
       betaMode: process.env.NUXT_BETA_MODE === 'true',
       betaRegisterPass: process.env.BETA_REGISTER_PASS
     }

@@ -130,9 +130,8 @@
                 {{ job.contract }}
               </span>
               <span class="px-2 py-1 rounded text-xs sm:text-sm" :class="isClosingSoon(job.closingDate)
-                ? 'bg-orange-100 text-orange-800'
-                : 'bg-green-100 text-green-800'">
-                ⏳ {{ formatDate(job.closingDate) }}
+                ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'">
+                ⏳ {{ formatDateTime(job.closingDate, locale, t) }}
               </span>
             </div>
 
@@ -165,8 +164,8 @@
 
     <!-- Section complémentaire -->
     <section class="px-4 my-8 sm:my-12 text-center text-sm sm:text-base">
-      <p>{{ $t('offersPage.dedicatedSiteText') }} <a href="https://hire.ctrlengine.com/"
-          class="text-primary hover:underline">{{ $t('offersPage.dedicatedSiteLink') }}</a>.</p>
+      <p>{{ $t('offersPage.dedicatedSiteText') }} <a :href="externalLinks.hire" class="text-primary hover:underline">{{
+        $t('offersPage.dedicatedSiteLink') }}</a>.</p>
     </section>
   </main>
 </template>
@@ -178,6 +177,8 @@ import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import Loader from '~/components/Load/LOffer.vue'
 import { IconSearch, IconBriefcaseOff, IconArrowRight, IconRefresh } from '@tabler/icons-vue'
 import { useI18n } from 'vue-i18n'
+import { internalLinks, externalLinks } from '@/utils/links.js';
+import { isClosingSoon, formatDateTime } from '@/utils/date.js';
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath()
@@ -301,40 +302,6 @@ const paginatedJobs = computed(() => {
 watch([searchQuery, sortBy, selectedContract, filteredJobs], () => {
   currentPage.value = 1
 })
-
-// Fonctions utilitaires
-const formatDate = (timestamp) => {
-  if (!timestamp) return 'N/A'
-
-  const date = new Date(timestamp)
-  const loc = locale.value
-
-  const options = {
-    fr: {
-      date: { day: '2-digit', month: 'short', year: 'numeric' },
-      time: { hour: '2-digit', minute: '2-digit' }
-    },
-    en: {
-      date: { year: 'numeric', month: 'short', day: '2-digit' },
-      time: { hour: '2-digit', minute: '2-digit' }
-    }
-  }
-
-  const currentOptions = options[loc] || options['en']
-
-  const formattedDate = date.toLocaleDateString(loc, currentOptions.date)
-  const formattedTime = date.toLocaleTimeString(loc, currentOptions.time)
-
-  return `${formattedDate} ${t('common.at')} ${formattedTime}`
-}
-
-const isClosingSoon = (timestamp) => {
-  if (!timestamp) return false
-  const closingDate = new Date(timestamp)
-  const today = new Date()
-  const diffDays = Math.ceil((closingDate - today) / (1000 * 60 * 60 * 24))
-  return diffDays <= 7 && diffDays >= 0
-}
 
 // SEO
 useHead({

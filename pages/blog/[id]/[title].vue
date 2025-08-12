@@ -54,7 +54,7 @@
               </span>
               <span class="hidden sm:inline">•</span>
               <span>
-                {{ $t('blogID.publishedOn') }} <span class="font-bold text-secondary">{{ formatDate(blogPost?.createdAt)
+                {{ $t('blogID.publishedOn') }} <span class="font-bold text-secondary">{{ formatShotDate(blogPost?.createdAt, locale)
                 }}</span>
               </span>
               <span class="hidden sm:inline">•</span>
@@ -103,6 +103,7 @@ import Loader from '~/components/Load/LBlogId.vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#imports'
 import { useIframeMode } from '~/composables/useIframeMode.js'
+import { formatShotDate } from '@/utils/date.js';
 
 // Variables
 const { t, locale } = useI18n()
@@ -170,21 +171,6 @@ const linkStyle = (content) => {
   return content
     .replace(/style="[^"]*"/g, '')
     .replace(/<a([^>]*)>/g, '<a$1 class="text-primary hover:underline no-underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-800" rel="noopener noreferrer">')
-}
-
-const formatDate = (dateString) => {
-  if (!dateString) return ''
-  try {
-    const date = new Date(dateString)
-    return new Intl.DateTimeFormat(locale.value, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }).format(date)
-  } catch (e) {
-    console.error("Error formatting date:", e);
-    return dateString;
-  }
 }
 
 const readingTime = computed(() => {

@@ -33,7 +33,7 @@
                 </button>
 
                 <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center lg:justify-start">
-                  <a href="https://web.SuitOps.com" target="_blank"
+                  <a :href="externalLinks.web" target="_blank"
                     class="inline-flex items-center justify-center text-center px-6 py-2 sm:px-8 sm:py-3 rounded-lg bg-primary text-WtB hover:bg-secondary transition-colors text-base sm:text-lg">
                     {{ t('indexPage.startFreeButton') }}
                     <IconArrowRight class="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
@@ -202,7 +202,7 @@
           <p class="text-base md:text-xl text-WtBAct mb-8 md:mb-12 max-w-2xl mx-auto"> {{ t('indexPage.ctaSubtitle') }}</p>
 
          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://web.SuitOps.com" target="_blank"
+            <a :href="externalLinks.web" target="_blank"
               class="inline-flex items-center justify-center text-center px-6 py-3 sm:px-8 sm:py-4 rounded-lg bg-WtB text-primary hover:bg-WtBAct transition-colors text-base sm:text-lg font-medium">
               <span>{{ t('indexPage.ctaStartNow') }}</span>
               <IconArrowRight class="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
