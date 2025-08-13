@@ -1,0 +1,16 @@
+# URL de l'API SuitOps
+SUITOPS_API_URL=https://api.pgs.ctrlengine.com/api/v1 
+
+# API PGSS
+#PGS_API_URL=https://api-progestionsoft.onrender.com/api/v1 # PRO
+PGS_API_URL=http://localhost:1337/api/v1
+
+# Mode BETA
+NUXT_BETA_MODE=false
+# NUXT_BETA_MODE=false # DEV
+
+# Mot de passe pour pages /beta/register
+BETA_REGISTER_PASS=monpasssecret
+
+# Balise gogle TAG
+GTAG_ID=G-PZGPXME136
