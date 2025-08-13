@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 export const usePreferences = () => {
   const config = useRuntimeConfig()
-  const NEW_PGS_URL = config.public.newPgsBaseAPI
+  const NEW_PGS_URL = config.public.pgsBaseAPI
 
   // Données utilisateur
   const email = ref('')

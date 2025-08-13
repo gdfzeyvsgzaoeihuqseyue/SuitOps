@@ -2,7 +2,7 @@ import { useFetch, useRuntimeConfig } from 'nuxt/app';
 
 const fetchData = async (endpoint, method = 'GET', data = null) => {
   const config = useRuntimeConfig();
-  const PGS_URL = config.public.PgsBaseAPI;
+  const PGS_URL = config.public.pgsBaseAPI;
 
   const options = {
     method,
@@ -28,7 +28,7 @@ export const PGSServices = {
   getAllBetaRegistrations: (page = 1, limit = 10) => fetchData(`/suitops/beta/registration?page=${page}&limit=${limit}`),
   getBetaRegistrationById: (id) => fetchData(`/suitops/beta/registration/${id}`),
 
- // Sgnalement
+  // Sgnalement
   reportCompany: (reportData) => fetchData('/suitops/company/report', 'POST', reportData),
   reportOffer: (reportData) => fetchData('/suitops/offer/report', 'POST', reportData),
 
