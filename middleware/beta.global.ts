@@ -2,8 +2,7 @@ export default defineNuxtRouteMiddleware((to) => {
   const config = useRuntimeConfig();
 
   // --- Vérification du mode BETA ---
-  // const betaMode = process.env.NODE_ENV === 'production' || process.env.NUXT_BETA_MODE === 'true';
-  const betaMode = process.env.NUXT_BETA_MODE === 'true';
+  const betaMode = config.public.betaMode;
 
   // Pages publiques hors restriction beta
   const publicPaths = [
