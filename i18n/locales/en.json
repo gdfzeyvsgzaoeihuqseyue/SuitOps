@@ -194,7 +194,13 @@
     "showLess": "Show less"
   },
   "indexPage": {
-    "heroTitle": "Business management <span class=\"text-primary\">simplified</span>",
+    "heroTitle": "Business management",
+    "heroDynamicWords": {
+      "word1": "simplified",
+      "word2": "optimized",
+      "word3": "fast",
+      "word4": "smart"
+    },
     "heroSubtitle": "A complete solution to optimize your processes and boost your productivity",
     "demoButton": "See a demo",
     "startFreeButton": "Start for free",
@@ -259,7 +265,7 @@
     "termsOfUse": "terms of use",
     "osUnavailableTitle": "{osName} version unavailable",
     "osUnavailableText": "We are currently working on the {osName} version.<br>Be informed of its release by subscribing to our newsletter.",
-     "manualDownloadLink": "Click here if the download doesn’t start automatically.",
+    "manualDownloadLink": "Click here if the download doesn’t start automatically.",
     "fetchError": "Error fetching download stats:",
     "incrementError": "Error incrementing download count for {osName}:",
     "downloadStarting": "Your download will begin in {count} seconds...",
@@ -599,9 +605,6 @@
     "submitButton": "Submit",
     "contactQuestion": "For any questions, contact us at",
     "title": "Support",
-
-
-
     "invalidFileType": "Invalid file type. Only PDF, DOC(X), XLS(X), and PPT(X) are accepted.",
     "dragDropFile": "Drag and drop your files here",
     "or": "or",

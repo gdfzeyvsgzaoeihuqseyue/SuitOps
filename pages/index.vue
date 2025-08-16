@@ -5,8 +5,8 @@
       class="relative min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 md:py-32">
       <!-- Arriere plan -->
       <div class="absolute inset-0">
-        <img src="https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/index.png" alt="Background"
-          class="w-full h-full object-cover">
+        <img src="https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/index.png"
+          alt="Background" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-bgClr opacity-80"></div>
         <div class="absolute inset-0 backdrop-blur-sm"></div>
       </div>
@@ -18,8 +18,14 @@
             <!-- Texte -->
             <div class="text-center lg:text-left" v-motion :initial="{ opacity: 0, y: 50 }"
               :visibleOnce="{ opacity: 1, y: 0, transition: { delay: 100 } }">
-              <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 font-heading"
-                v-html="t('indexPage.heroTitle')"></h1>
+              <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 font-heading">
+                {{ t('indexPage.heroTitle') }}
+                <Transition name="dynamic-text-fade" mode="out-in">
+                  <span :key="currentIndex" class="dynamic-text text-primary">
+                    {{ dynamicText }}
+                  </span>
+                </Transition>
+              </h1>
               <p class="text-lg md:text-xl lg:text-2xl mb-6 lg:mb-8">
                 {{ t('indexPage.heroSubtitle') }}
               </p>
@@ -130,8 +136,8 @@
     <!-- Testimonials Section -->
     <section class="py-8 md:py-24 bg-bgClr">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
-        <div class="max-w-3xl mx-0 md:ml-auto text-center lg:text-right mb-8" v-motion
-          :initial="{ opacity: 0, y: 50 }" :visibleOnce="{ opacity: 1, y: 0 }">
+        <div class="max-w-3xl mx-0 md:ml-auto text-center lg:text-right mb-8" v-motion :initial="{ opacity: 0, y: 50 }"
+          :visibleOnce="{ opacity: 1, y: 0 }">
           <h2 class="text-2xl md:text-4xl font-bold"> {{ t('indexPage.testimonialsTitle') }}</h2>
           <p class="text-base md:text-lg">{{ t('indexPage.testimonialsSubtitle') }}</p>
         </div>
@@ -198,10 +204,12 @@
 
       <div class="container mx-auto px-6 relative">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-WtB mb-4 md:mb-6">{{ t('indexPage.ctaTitle') }}</h2>
-          <p class="text-base md:text-xl text-WtBAct mb-8 md:mb-12 max-w-2xl mx-auto"> {{ t('indexPage.ctaSubtitle') }}</p>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-WtB mb-4 md:mb-6">{{ t('indexPage.ctaTitle') }}
+          </h2>
+          <p class="text-base md:text-xl text-WtBAct mb-8 md:mb-12 max-w-2xl mx-auto"> {{ t('indexPage.ctaSubtitle') }}
+          </p>
 
-         <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a :href="externalLinks.web" target="_blank"
               class="inline-flex items-center justify-center text-center px-6 py-3 sm:px-8 sm:py-4 rounded-lg bg-WtB text-primary hover:bg-WtBAct transition-colors text-base sm:text-lg font-medium">
               <span>{{ t('indexPage.ctaStartNow') }}</span>
@@ -230,6 +238,25 @@ import { useFeatures } from '~/composables/useFeatures'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+
+// Tableau des textes dynamiques
+const dynamicWordKeys = [
+  "indexPage.heroDynamicWords.word1",
+  "indexPage.heroDynamicWords.word2",
+  "indexPage.heroDynamicWords.word3",
+  "indexPage.heroDynamicWords.word4"
+]
+
+const currentIndex = ref(0)
+const dynamicText = ref(t(dynamicWordKeys[currentIndex.value]))
+
+// Animation du texte
+onMounted(() => {
+  setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % dynamicWordKeys.length;
+    dynamicText.value = t(dynamicWordKeys[currentIndex.value]);
+  }, 3000);
+})
 
 const { getRandomFeatures } = useFeatures()
 const randomFeatures = ref(getRandomFeatures(4))
@@ -263,6 +290,22 @@ useHead({
 </script>
 
 <style>
+/* Texte dynamique */
+.dynamic-text-fade-enter-active,
+.dynamic-text-fade-leave-active {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.dynamic-text-fade-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.dynamic-text-fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 .swiper {
   padding-bottom: 2rem !important;
 }

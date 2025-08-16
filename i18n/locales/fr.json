@@ -194,7 +194,13 @@
     "showLess": "Afficher moins"
   },
   "indexPage": {
-    "heroTitle": "La gestion d'entreprise <span class=\"text-primary\">simplifiée</span>",
+    "heroTitle": "La gestion d'entreprise",
+    "heroDynamicWords": {
+      "word1": "simplifiée",
+      "word2": "optimisée",
+      "word3": "rapide",
+      "word4": "intelligente"
+    },
     "heroSubtitle": "Une solution complète pour optimiser vos processus et booster votre productivité",
     "demoButton": "Voir une démo",
     "startFreeButton": "Démarrer gratuitement",
@@ -599,9 +605,6 @@
     "submitButton": "Soumettre",
     "contactQuestion": "Pour toute question, contactez-nous à",
     "title": "Soutien",
-
-
-    
     "invalidFileType": "Type de fichier invalide. Seuls les PDF, DOC(X), XLS(X) et PPT(X) sont acceptés.",
     "dragDropFile": "Glissez et déposez vos fichiers ici",
     "or": "ou",
@@ -619,6 +622,6 @@
     "errorDuplicateFile": "Le fichier '{fileName}' est déjà ajouté.",
     "fileErrors": "Erreurs de fichier",
     "fillAllRequiredFields": "Veuillez remplir tous les champs obligatoires correctement.",
-    "formSubmittedSuccessfully": "Votre formulaire a été soumis avec succès!" 
-}
+    "formSubmittedSuccessfully": "Votre formulaire a été soumis avec succès!"
+  }
 }
