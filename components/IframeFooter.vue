@@ -2,7 +2,7 @@
   <footer
     class="fixed bottom-0 left-0 w-full z-50 bg-WtB backdrop-blur border-t text-xs sm:text-sm px-4 py-2 sm:px-6 sm:py-3 flex items-center justify-between flex-wrap gap-2 shadow-t">
     <div class="flex items-center gap-2">
-      <img src="/img/logoMobCol.png" alt="Logo SuitOps" class="h-6 w-auto">
+      <img :src="sharedFiles.paths.logo.mc" alt="Logo SuitOps" class="h-6 w-auto">
       <span>
         <span class="font-semibold text-primary">SuitOps</span> —
         <span>par <span class="font-medium">PGS</span></span>
@@ -24,6 +24,9 @@ import { useRoute } from 'vue-router';
 import { IconArrowRight } from '@tabler/icons-vue';
 import { useI18n } from 'vue-i18n'; 
 import { useLocalePath } from '#imports';
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
 
 const route = useRoute()
 const props = defineProps({

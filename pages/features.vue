@@ -2,7 +2,7 @@
   <main>
     <!-- Header -->
     <header class="relative py-24 bg-cover bg-center"
-      style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/features.png')">
+      :style="{ backgroundImage: `url('${sharedFiles.paths.hero.features}')` }">
       <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
       <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -19,7 +19,7 @@
 
     <!-- Fonctionnalité princiale -->
     <section class="p-6 sm:p-8 md:p-16 flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8 bg-WtBAct">
-      <img src="https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Others/HeroImg.png"
+      <img :src="sharedFiles.paths.general.heroImg"
         :alt="t('featuresPage.alt')" class="w-full md:w-1/3 rounded-xl drop-shadow-xl max-w-md mx-auto" />
 
       <div
@@ -120,7 +120,9 @@ import { useFeatures } from '~/composables/useFeatures'
 import { useI18n } from 'vue-i18n'
 import usePagination from '~/components/usePagination.vue'
 import { IconChevronDown } from '@tabler/icons-vue'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t } = useI18n()
 
 useHead({

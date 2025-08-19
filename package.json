@@ -15,11 +15,13 @@
     "@nuxtjs/i18n": "^10.0.3",
     "@nuxtjs/robots": "^5.4.0",
     "@nuxtjs/sitemap": "^7.4.3",
+    "@pinia/nuxt": "^0.11.2",
     "@tabler/icons-vue": "^3.31.0",
     "@vueuse/core": "^10.9.0",
     "@vueuse/motion": "^2.1.0",
     "@vueuse/nuxt": "^10.9.0",
     "nuxt": "^3.13.0",
+    "pinia": "^3.0.3",
     "swiper": "^11.0.7"
   },
   "devDependencies": {

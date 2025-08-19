@@ -5,8 +5,7 @@
       class="relative min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 md:py-32">
       <!-- Arriere plan -->
       <div class="absolute inset-0">
-        <img src="https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/index.png"
-          alt="Background" class="w-full h-full object-cover">
+        <img :src="sharedFiles.paths.hero.index" alt="Background" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-bgClr opacity-80"></div>
         <div class="absolute inset-0 backdrop-blur-sm"></div>
       </div>
@@ -57,8 +56,7 @@
             <!-- Image gauche -->
             <div class="relative mt-8 lg:mt-0" v-motion :initial="{ opacity: 0, x: -50 }"
               :visibleOnce="{ opacity: 1, x: 0, transition: { delay: 200 } }">
-              <img src="https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Others/HeroImg.png"
-                :alt="t('indexPage.dashboardStatus')" class="rounded-lg">
+              <img :src="sharedFiles.paths.general.heroImg" :alt="t('indexPage.dashboardStatus')" class="rounded-lg">
               <div class="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-WtB p-3 sm:p-4 rounded-lg shadow-lg">
                 <div class="flex items-center gap-2">
                   <div class="w-2 h-2 sm:w-3 sm:h-3 bg-primary rounded-full animate-pulse"></div>
@@ -161,8 +159,7 @@
 
             <div class="relative hidden lg:block" v-motion :initial="{ opacity: 0, x: -50 }"
               :visibleOnce="{ opacity: 1, x: 0, transition: { delay: 200 } }">
-              <img src="https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Others/faq.png"
-                :alt="t('faqPage.heroTitle')" class="rounded-lg">
+              <img :src="sharedFiles.paths.general.faq" :alt="t('faqPage.heroTitle')" class="rounded-lg">
             </div>
           </div>
         </div>
@@ -235,7 +232,9 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { useFeatures } from '~/composables/useFeatures'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t } = useI18n()
 const localePath = useLocalePath()
 

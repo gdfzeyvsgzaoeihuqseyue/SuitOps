@@ -2,7 +2,7 @@
   <main>
     <!-- Hero section -->
     <header class="relative py-24 bg-cover bg-center"
-      style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/support.png')">
+      :style="{ backgroundImage: `url('${sharedFiles.paths.hero.support}')` }">
       <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
       <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -253,6 +253,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { IconUser, IconCircleX, IconMail, IconPhone, IconBuilding, IconLink, IconBubbleText } from '@tabler/icons-vue'
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
 
 const formData = ref({
   supportType: '',

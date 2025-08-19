@@ -54,7 +54,7 @@
               </span>
               <span class="hidden sm:inline">•</span>
               <span>
-                {{ $t('blogID.publishedOn') }} <span class="font-bold text-secondary">{{ formatShotDate(blogPost?.createdAt, locale)
+                {{ $t('blogID.publishedOn') }} <span class="font-bold text-secondary">{{ formatShortDate(blogPost?.createdAt, locale)
                 }}</span>
               </span>
               <span class="hidden sm:inline">•</span>
@@ -103,7 +103,7 @@ import Loader from '~/components/Load/LBlogId.vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#imports'
 import { useIframeMode } from '~/composables/useIframeMode.js'
-import { formatShotDate } from '@/utils/date.js';
+import { formatShortDate } from '@/utils/date.js';
 
 // Variables
 const { t, locale } = useI18n()

@@ -1,7 +1,7 @@
 <template>
   <!-- Hero section -->
   <header class="relative py-24 bg-cover bg-center"
-    style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/blog.png')">
+    :style="{ backgroundImage: `url('${sharedFiles.paths.hero.blog}')` }">
     <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
     <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -117,7 +117,7 @@
               <span class="hidden sm:block">•</span>
               <span class="flex items-center gap-1 sm:gap-2">
                 <IconCalendarFilled class="w-3 h-3 sm:w-4 sm:h-4" />
-                {{ formatShotDate(post.createdAt, locale) }}
+                {{ formatShortDate(post.createdAt, locale) }}
               </span>
             </div>
 
@@ -155,8 +155,10 @@ import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconUserEdit, IconCalendarFilled, IconArrowRight, IconArticleOff, IconSearch, IconRefresh } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LBlog.vue'
 import { useI18n } from 'vue-i18n'
-import { formatShotDate } from '@/utils/date.js';
+import { formatShortDate } from '@/utils/date.js';
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t, locale } = useI18n();
 const localePath = useLocalePath()
 

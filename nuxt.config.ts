@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     }],
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
+    '@pinia/nuxt',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
     '@vueuse/motion/nuxt',
@@ -22,6 +23,7 @@ export default defineNuxtConfig({
     public: {
       suitOpsBaseAPI: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,
+      pgsSharedFiles: process.env.PGS_SHARED_FILES,
       betaMode: process.env.NUXT_BETA_MODE === 'true',
       betaRegisterPass: process.env.BETA_REGISTER_PASS
     }

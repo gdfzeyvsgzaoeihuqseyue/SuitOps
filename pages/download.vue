@@ -2,7 +2,7 @@
   <main>
     <!-- Hero section -->
     <header class="relative py-24 bg-cover bg-center"
-      style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/download.png')">
+      :style="{ backgroundImage: `url('${sharedFiles.paths.hero.download}')` }">
       <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
       <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -267,7 +267,9 @@ import { useFaqs } from '~/composables/useFaqs'
 import Loader from '~/components/Load/LFaqPage.vue'
 import { useI18n } from 'vue-i18n'
 import { PGSServices } from '~/stores/PGSServices.js'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
@@ -303,7 +305,7 @@ const systemRequirementsConfig = [
 const osOptions = ref<OSOption[]>([
   {
     name: 'Windows',
-    logo: 'https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Logos/Windows.png',
+    logo: sharedFiles.paths.downloadPage.windows,
     available: true,
     version: '0.1.0.0',
     status: t('downloadPage.windowsState'),
@@ -322,7 +324,7 @@ const osOptions = ref<OSOption[]>([
   },
   {
     name: 'macOS',
-    logo: 'https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Logos/MacOs.png',
+    logo: sharedFiles.paths.downloadPage.macOs,
     available: false,
     version: '#',
     status: t('downloadPage.macOsState'),
@@ -341,7 +343,7 @@ const osOptions = ref<OSOption[]>([
   },
   {
     name: 'Linux',
-    logo: 'https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Logos/Ubuntu.png',
+    logo: sharedFiles.paths.downloadPage.linux,
     available: false,
     version: '#',
     status: t('downloadPage.linuxState'),

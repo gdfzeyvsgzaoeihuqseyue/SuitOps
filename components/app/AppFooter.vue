@@ -45,7 +45,7 @@
                 {{ t('footer.madeBy') }}
                 <span
                   class="mx-1 sm:mx-2 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-textClr hover:bg-ash hover:text-primary transition-all">
-                  <a href="https://progestionsoft.org" target="_blank" class="px-1">PRO GESTION SOFT</a>
+                  <a :href="footerData?.brandUrl" target="_blank">{{ footerData?.brand }}</a>
                 </span>
               </p>
             </div>
@@ -60,10 +60,20 @@
 import { NuxtLink } from '#components'
 import { useI18n } from 'vue-i18n'
 import { useIframeMode } from '~/composables/useIframeMode.js'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { isIframeMode } = useIframeMode()
+
+// Récupérer les données du footer depuis le store
+type FooterData = { brand: string; brandUrl: string }
+const { data: footerData, pending, error } = await useAsyncData<FooterData>(
+  'footerData',
+  () => sharedFiles.getFooterData()
+)
+
 
 // Sections de navigation 
 const navSections: any[] = [

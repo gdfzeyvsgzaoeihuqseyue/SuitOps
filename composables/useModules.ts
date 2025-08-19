@@ -1,8 +1,10 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n' 
+import { useSharedFiles } from '~/stores/sharedFiles';
 
 export const useModules = () => {
   const { t } = useI18n() 
+  const sharedFiles = useSharedFiles();
 
   const badgeStyles = {
     manage: {
@@ -37,7 +39,7 @@ export const useModules = () => {
         t('modules.emailModuleFeature2'),
         t('modules.emailModuleFeature3')
       ],
-      image: "https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Modules/mail.png",
+      image: sharedFiles.paths.modules.email,
       badge: badgeStyles.tool
     },
     {
@@ -49,7 +51,7 @@ export const useModules = () => {
         t('modules.hrModuleFeature2'),
         t('modules.hrModuleFeature3')
       ],
-      image: "https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Modules/grh.png",
+      image: sharedFiles.paths.modules.grh,
       badge: badgeStyles.manage
     },
     {
@@ -61,7 +63,7 @@ export const useModules = () => {
         t('modules.documentModuleFeature2'),
         t('modules.documentModuleFeature3')
       ],
-      image: "https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Modules/docs.png",
+      image: sharedFiles.paths.modules.docs,
       badge: badgeStyles.cloud
     },
     {
@@ -73,7 +75,7 @@ export const useModules = () => {
         t('modules.recruitmentModuleFeature2'),
         t('modules.recruitmentModuleFeature3')
       ],
-      image: "https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Modules/offers.png",
+      image: sharedFiles.paths.modules.offers,
       badge: badgeStyles.manage
     },
     {
@@ -85,7 +87,7 @@ export const useModules = () => {
         t('modules.planningModuleFeature2'),
         t('modules.planningModuleFeature3')
       ],
-      image: "https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Modules/tool.png",
+      image: sharedFiles.paths.modules.tool,
       badge: badgeStyles.tool
     },
     {
@@ -97,7 +99,7 @@ export const useModules = () => {
         t('modules.billingModuleFeature2'),
         t('modules.billingModuleFeature3')
       ],
-      image: "https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Modules/pgi.png",
+      image: sharedFiles.paths.modules.pgi,
       badge: badgeStyles.finance
     }
   ])

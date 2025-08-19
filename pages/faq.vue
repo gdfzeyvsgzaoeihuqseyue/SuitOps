@@ -2,7 +2,7 @@
   <main>
     <!-- Hero section -->
     <header class="relative py-24 bg-cover bg-center"
-      style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/faq.png')">
+      :style="{ backgroundImage: `url('${sharedFiles.paths.hero.faq}')` }">
       <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
       <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -147,7 +147,9 @@ import { IconMoodCry, IconLibraryMinus, IconLibraryPlus, IconChevronDown, IconTh
 import { useFaqs } from '~/composables/useFaqs'
 import Loader from '~/components/Load/LFaq.vue'
 import { useI18n } from 'vue-i18n'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t } = useI18n()
 
 useHead({

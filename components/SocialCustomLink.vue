@@ -24,5 +24,7 @@ import { useSocialLinksDisplay } from '@/composables/useSocialLinks';
 const router = useRouter()
 
 // Réseaux sociaux
-const { displayedLinks, loading, error } = useSocialLinksDisplay(); 
+const { displayedLinks, loading, error } = useSocialLinksDisplay({
+  filterMedia: ['linkedin', 'facebook', 'x', 'tiktok'],
+}); 
 </script>

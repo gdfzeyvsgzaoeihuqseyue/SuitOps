@@ -35,8 +35,8 @@
 
             <NuxtLink :to="localePath('/')"
               class="flex-shrink-0 items-center justify-center mx-4 hidden lg:block hover:scale-105 hover:opacity-80 transition-transform duration-300">
-              <img src="/img/logoDeskCol.png" alt="Logo" class="h-12 w-auto dark:hidden" />
-              <img src="/img/logoDeskWhite.png" alt="Logo" class="h-12 w-auto hidden dark:block" />
+              <img :src="sharedFiles.paths.logo.dc" alt="Logo" class="h-12 w-auto dark:hidden" />
+              <img :src="sharedFiles.paths.logo.dw" alt="Logo" class="h-12 w-auto hidden dark:block" />
             </NuxtLink>
 
             <div class="flex gap-8 items-center">
@@ -74,8 +74,8 @@
           <div class="flex items-center sm:hidden w-full justify-between">
             <NuxtLink :to="localePath('/')"
               class="flex-shrink-0 flex items-center mx-4 hover:scale-105 hover:opacity-80 transition-transform duration-300">
-              <img src="/img/logoMobCol.png" alt="Logo" class="h-12 w-auto dark:hidden" />
-              <img src="/img/logoMobWhite.png" alt="Logo" class="h-12 w-auto hidden dark:block" />
+              <img :src="sharedFiles.paths.logo.mc" alt="Logo" class="h-12 w-auto dark:hidden" />
+              <img :src="sharedFiles.paths.logo.mw" alt="Logo" class="h-12 w-auto hidden dark:block" />
             </NuxtLink>
 
             <div class="flex items-center space-x-2">
@@ -139,7 +139,9 @@ import { IconChevronDown, IconMenuDeep, IconX } from '@tabler/icons-vue'
 import { useI18n } from 'vue-i18n'
 import { useIframeMode } from '~/composables/useIframeMode.ts'
 import { internalLinks, externalLinks } from '@/utils/links.js';
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()

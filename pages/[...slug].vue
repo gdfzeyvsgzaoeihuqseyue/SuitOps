@@ -1,4 +1,4 @@
-<template> 
+<template>
   <div class="min-h-screen flex flex-col items-center justify-center bg-WtBAct text-textClr p-4">
     <!-- Préférences -->
     <div class="mb-6">
@@ -12,14 +12,14 @@
       <div class="md:w-1/2 text-center md:text-left space-y-6">
         <!-- Logos Desktop -->
         <div class="flex-shrink-0 items-center justify-center mx-4 hidden lg:block">
-          <img src="/img/logoDeskCol.png" alt="SuitOps" class="h-14 mx-auto md:mx-0 dark:hidden" />
-          <img src="/img/logoDeskWhite.png" alt="SuitOps" class="h-14 mx-auto md:mx-0 hidden dark:block" />
+          <img :src="sharedFiles.paths.logo.dc" alt="SuitOps" class="h-14 mx-auto md:mx-0 dark:hidden" />
+          <img :src="sharedFiles.paths.logo.dw" alt="SuitOps" class="h-14 mx-auto md:mx-0 hidden dark:block" />
         </div>
 
         <!-- Logos Mobiles -->
         <div class="sm:hidden flex-shrink-0 flex items-center mx-4 justify-center">
-          <img src="/img/logoMobCol.png" alt="Logo" class="h-12 w-auto dark:hidden" />
-          <img src="/img/logoMobWhite.png" alt="Logo" class="h-12 w-auto hidden dark:block" />
+          <img :src="sharedFiles.paths.logo.mc" alt="Logo" class="h-12 w-auto dark:hidden" />
+          <img :src="sharedFiles.paths.logo.mw" alt="Logo" class="h-12 w-auto hidden dark:block" />
         </div>
 
         <!-- Titre -->
@@ -88,8 +88,7 @@
 
       <!-- Colonne image -->
       <div class="md:w-1/2 flex justify-center">
-        <img src="https://www.disneyclips.com/images5/images/sadness5.png" alt="Illustration erreur"
-          class="w-full max-w-sm h-auto object-contain" />
+        <img :src="sharedFiles.paths.general.error404" alt="Erreur 404" class="w-full max-w-sm h-auto object-contain" />
       </div>
     </div>
   </div>
@@ -99,14 +98,14 @@
     <div class="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto w-full gap-4 px-4">
       <!-- Logos Desktop -->
       <div class="flex-shrink-0 items-center justify-center mx-4 hidden lg:block">
-        <img src="/img/logoDeskCol.png" alt="Logo" class="h-12 w-auto dark:hidden" />
-        <img src="/img/logoDeskWhite.png" alt="Logo" class="h-12 w-auto hidden dark:block" />
+        <img :src="sharedFiles.paths.logo.dc" alt="Logo" class="h-12 w-auto dark:hidden" />
+        <img :src="sharedFiles.paths.logo.dw" alt="Logo" class="h-12 w-auto hidden dark:block" />
       </div>
 
       <!-- Logos Mobiles -->
       <div class="sm:hidden flex-shrink-0 flex items-center mx-4">
-        <img src="/img/logoMobCol.png" alt="Logo" class="h-12 w-auto dark:hidden" />
-        <img src="/img/logoMobWhite.png" alt="Logo" class="h-12 w-auto hidden dark:block" />
+        <img :src="sharedFiles.paths.logo.mc" alt="Logo" class="h-12 w-auto dark:hidden" />
+        <img :src="sharedFiles.paths.logo.mw" alt="Logo" class="h-12 w-auto hidden dark:block" />
       </div>
 
       <div>
@@ -115,7 +114,7 @@
 
       <div class="flex space-x-6">
         <ul role="list" class="space-x-4 flex">
-          <SocialLink />
+          <SocialCustomLink />
         </ul>
       </div>
     </div>
@@ -125,7 +124,9 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { IconHome, IconArrowLeft, IconArrowRight } from '@tabler/icons-vue'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const router = useRouter()
 const { t } = useI18n()
 const localePath = useLocalePath()

@@ -3,8 +3,8 @@
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
       <!-- Logos -->
       <div class="flex items-center space-x-4">
-        <img src="/img/logoDeskCol.png" alt="SuitOps" class="h-10 w-auto hidden sm:block" />
-        <img src="/img/logoMobCol.png" alt="SuitOps" class="h-10 w-auto sm:hidden" />
+        <img :src="sharedFiles.paths.logo.dc" alt="SuitOps" class="h-10 w-auto hidden sm:block" />
+        <img :src="sharedFiles.paths.logo.mc" alt="SuitOps" class="h-10 w-auto sm:hidden" />
       </div>
 
       <!-- Navigation -->
@@ -259,6 +259,9 @@
 <script setup>
 import { IconLogin2, IconWallet, IconBug, IconEmpathize, IconDeviceDesktop, IconLink, IconExternalLink, IconFileText, IconFileCertificate, IconBook, IconBrandWhatsapp } from '@tabler/icons-vue';
 import { internalLinks, externalLinks } from '@/utils/links.js';
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
 
 definePageMeta({
   layout: false

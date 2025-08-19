@@ -5,8 +5,8 @@
       <div class="container mx-auto px-4 py-4 flex items-center justify-between">
         <!-- Logos -->
         <div class="flex items-center space-x-4">
-          <img src="/img/logoDeskCol.png" alt="SuitOps" class="h-10 w-auto hidden sm:block" />
-          <img src="/img/logoMobCol.png" alt="SuitOps" class="h-10 w-auto sm:hidden" />
+          <img :src="sharedFiles.paths.logo.dc" alt="SuitOps" class="h-10 w-auto hidden sm:block" />
+          <img :src="sharedFiles.paths.logo.mc" alt="SuitOps" class="h-10 w-auto sm:hidden" />
         </div>
 
         <!-- Navigation -->
@@ -279,7 +279,9 @@
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { PGSServices } from '~/stores/PGSServices'
 import { IconCheck, IconArrowRight, IconLoader, IconRefresh, IconBrandTwitter, IconBrandFacebook, IconBrandLinkedin, IconAlertCircle, IconChartPie, IconUsers, IconCalendar, IconClockBolt, IconFiles, IconBriefcase, IconX } from '@tabler/icons-vue';
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 
 // Notification
 const notification = reactive({

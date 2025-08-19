@@ -2,7 +2,7 @@
   <main>
     <!-- Hero section -->
     <header class="relative py-24 bg-cover bg-center"
-      style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/offer.png')">
+      :style="{ backgroundImage: `url('${sharedFiles.paths.hero.offer}')` }">
       <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
       <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -179,6 +179,9 @@ import { IconSearch, IconBriefcaseOff, IconArrowRight, IconRefresh } from '@tabl
 import { useI18n } from 'vue-i18n'
 import { internalLinks, externalLinks } from '@/utils/links.js';
 import { isClosingSoon, formatDateTime } from '@/utils/date.js';
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath()

@@ -1,7 +1,7 @@
 <template>
   <!-- Hero section -->
   <header class="relative py-24 bg-cover bg-center"
-    style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/forum.png');">
+    :style="{ backgroundImage: `url('${sharedFiles.paths.hero.forum}')` }">
     <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-secondary/90"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
       <h1 class="text-5xl md:text-6xl font-bold mb-6" v-motion :initial="{ opacity: 0, y: 50 }"
@@ -181,6 +181,9 @@ import { ref, computed } from 'vue'
 import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
 import { IconMoodCry, IconAppsOff, IconEditOff } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LForum.vue'
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
 
 useHead({
   title: 'Forum'

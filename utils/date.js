@@ -6,7 +6,7 @@ export const formatDate = (timestamp, locale = 'fr-FR', options = {}) => {
 };
 
 
-export const formatShotDate = (dateString, locale) => {
+export const formatShortDate = (dateString, locale) => {
   const date = new Date(dateString)
   return new Intl.DateTimeFormat(locale, {
     year: 'numeric',

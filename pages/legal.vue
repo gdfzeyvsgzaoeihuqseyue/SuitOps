@@ -2,7 +2,7 @@
   <main>
     <!-- Hero section -->
     <header class="relative py-24 bg-cover bg-center"
-      style="background-image: url('https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/legal.png')">
+      :style="{ backgroundImage: `url('${sharedFiles.paths.hero.legal}')` }">
       <div class="absolute inset-0 bg-gradient-to-r from-ash to-ashAct opacity-80"></div>
       <div class="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -98,7 +98,9 @@ import { IconMoodCry, IconChevronDown, IconChevronUp } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LLegalPage.vue'
 import { useI18n } from 'vue-i18n'
 import { formatLongDate } from '@/utils/date.js';
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const { t, locale } = useI18n()
 
 // SEO
