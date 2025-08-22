@@ -7,55 +7,56 @@ type FooterData = {
 
 export const useSharedFiles = defineStore('sharedFiles', () => {
   const runtimeConfig = useRuntimeConfig();
-  const BASE_URL = runtimeConfig.public.pgsSharedFiles;
+  const SHARED_URL = runtimeConfig.public.pgsSharedFiles;
 
   // Chemins des fichiers
   const paths = {
     // IMAGES
     logo: {
-      dc: `${BASE_URL}/Logos/SuitOps-DC.png`,
-      dw: `${BASE_URL}/Logos/SuitOps-DW.png`,
-      mc: `${BASE_URL}/Logos/SuitOps-MC.png`,
-      mw: `${BASE_URL}/Logos/SuitOps-MW.png`,
+      dc: `${SHARED_URL}/Logos/SuitOps-DC.png`,
+      dw: `${SHARED_URL}/Logos/SuitOps-DW.png`,
+      mc: `${SHARED_URL}/Logos/SuitOps-MC.png`,
+      mw: `${SHARED_URL}/Logos/SuitOps-MW.png`,
     },
     hero: {
-      about: `${BASE_URL}/SuitOps_Landing/Hero/about.png`,
-      blog: `${BASE_URL}/SuitOps_Landing/Hero/blog.png`,
-      forum: `${BASE_URL}/SuitOps_Landing/Hero/forum.png`,
-      compare: `${BASE_URL}/SuitOps_Landing/Hero/compare.png`,
-      download: `${BASE_URL}/SuitOps_Landing/Hero/download.png`,
-      faq: `${BASE_URL}/SuitOps_Landing/Hero/faq.png`,
-      features: `${BASE_URL}/SuitOps_Landing/Hero/features.png`,
-      index: `${BASE_URL}/SuitOps_Landing/Hero/index.png`,
-      legal: `${BASE_URL}/SuitOps_Landing/Hero/legal.png`,
-      offer: `${BASE_URL}/SuitOps_Landing/Hero/offer.png`,
-      pricings: `${BASE_URL}/SuitOps_Landing/Hero/pricings.png`,
-      privacy: `${BASE_URL}/SuitOps_Landing/Hero/privacy.png`,
-      support: `${BASE_URL}/SuitOps_Landing/Hero/support.png`,
-      terms: `${BASE_URL}/SuitOps_Landing/Hero/terms.png`,
+      about: `${SHARED_URL}/SuitOps_Landing/Hero/about.png`,
+      blog: `${SHARED_URL}/SuitOps_Landing/Hero/blog.png`,
+      forum: `${SHARED_URL}/SuitOps_Landing/Hero/forum.png`,
+      compare: `${SHARED_URL}/SuitOps_Landing/Hero/compare.png`,
+      download: `${SHARED_URL}/SuitOps_Landing/Hero/download.png`,
+      faq: `${SHARED_URL}/SuitOps_Landing/Hero/faq.png`,
+      features: `${SHARED_URL}/SuitOps_Landing/Hero/features.png`,
+      index: `${SHARED_URL}/SuitOps_Landing/Hero/index.png`,
+      legal: `${SHARED_URL}/SuitOps_Landing/Hero/legal.png`,
+      offer: `${SHARED_URL}/SuitOps_Landing/Hero/offer.png`,
+      pricings: `${SHARED_URL}/SuitOps_Landing/Hero/pricings.png`,
+      privacy: `${SHARED_URL}/SuitOps_Landing/Hero/privacy.png`,
+      support: `${SHARED_URL}/SuitOps_Landing/Hero/support.png`,
+      terms: `${SHARED_URL}/SuitOps_Landing/Hero/terms.png`,
     },
     modules: {
-      email: `${BASE_URL}/SuitOps_Landing/Modules/email.png`,
-      grh: `${BASE_URL}/SuitOps_Landing/Modules/grh.png`,
-      docs: `${BASE_URL}/SuitOps_Landing/Modules/docs.png`,
-      offers: `${BASE_URL}/SuitOps_Landing/Modules/offers.png`,
-      tool: `${BASE_URL}/SuitOps_Landing/Modules/tool.png`,
-      pgi: `${BASE_URL}/SuitOps_Landing/Modules/pgi.png`,
+      email: `${SHARED_URL}/SuitOps_Landing/Modules/email.png`,
+      grh: `${SHARED_URL}/SuitOps_Landing/Modules/grh.png`,
+      docs: `${SHARED_URL}/SuitOps_Landing/Modules/docs.png`,
+      offers: `${SHARED_URL}/SuitOps_Landing/Modules/offers.png`,
+      tool: `${SHARED_URL}/SuitOps_Landing/Modules/tool.png`,
+      pgi: `${SHARED_URL}/SuitOps_Landing/Modules/pgi.png`,
     },
     downloadPage: {
-      windows: `${BASE_URL}/SuitOps_Landing/Logos/Windows.png`,
-      macOs: `${BASE_URL}/SuitOps_Landing/Logos/MacOs.png`,
-      linux: `${BASE_URL}/SuitOps_Landing/Logos/Linux.png`,
+      windows: `${SHARED_URL}/SuitOps_Landing/Logos/Windows.png`,
+      macOs: `${SHARED_URL}/SuitOps_Landing/Logos/MacOs.png`,
+      linux: `${SHARED_URL}/SuitOps_Landing/Logos/Linux.png`,
     },
     general: {
-      error404: `${BASE_URL}/General/404Error.png`,
-      heroImg: `${BASE_URL}/SuitOps_Landing/Others/HeroImg.png`,
-      faq: `${BASE_URL}/SuitOps_Landing/Others/faq.png`,
+      error404: `${SHARED_URL}/General/404Error.png`,
+      heroImg: `${SHARED_URL}/SuitOps_Landing/Others/HeroImg.png`,
+      faq: `${SHARED_URL}/SuitOps_Landing/Others/faq.png`,
     },
 
     //JSON
     data: {
-      footer: `${BASE_URL}/JSON/custum.json`
+      footer: `${SHARED_URL}/JSON/pgs.json`,
+      custom: `${SHARED_URL}/JSON/custom.json`
     }
   };
 
@@ -66,13 +67,23 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
     } catch (err) {
       return {
         brand: 'PGS SARL',
-        brandUrl: 'https://progestionsoft.org'
+        brandUrl: '#'
       };
+    }
+  }
+
+  async function getBaseUrl() {
+    try {
+      const data = await $fetch<{ pgs: { url: string } }>(paths.data.custom);
+      return data?.pgs?.url || '/';
+    } catch {
+      return '/';
     }
   }
 
   return {
     paths,
-    getFooterData
+    getFooterData,
+    getBaseUrl
   };
 });

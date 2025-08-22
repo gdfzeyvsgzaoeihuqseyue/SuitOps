@@ -77,27 +77,8 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          key: 'description',
-          name: 'description',
-          content: 'Plateforme complète de gestion d\'entreprise.'
-        },
         { name: 'author', content: 'Pro Gestion Soft' },
         { name: 'keywords', content: 'gestion entreprise, PME, Afrique, Bénin, SaaS, SuitOps, PGS, Pro Gestion Soft' },
-
-        // Open Graph (Facebook, LinkedIn)
-        { property: 'og:title', content: 'SuitOps - Solution de gestion d\'entreprise' },
-        { property: 'og:description', content: 'Simplifiez votre gestion d\'entreprise avec une solution tout-en-un.' },
-        { property: 'og:image', content: 'https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/index.png' },
-        { property: 'og:url', content: 'https://suitops.com' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:locale', content: 'fr_FR' },
-
-        // Twitter Card
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'SuitOps - Solution de gestion d\'entreprise' },
-        { name: 'twitter:description', content: 'Simplifiez votre gestion d\'entreprise avec une solution tout-en-un.' },
-        { name: 'twitter:image', content: 'https://raw.githubusercontent.com/ProGestionSoft/Files/main/SuitOps_Landing/Hero/index.png' },
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.ico' },
