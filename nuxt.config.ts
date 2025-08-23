@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   modules: [
     ['nuxt-gtag', {
-      id: process.env.GTAG_ID || 'G-PZGPXME136', 
+      id: process.env.GTAG_ID || 'G-PZGPXME136',
       enabled: process.env.NODE_ENV === 'production'
     }],
     '@nuxtjs/tailwindcss',
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     fallback: 'light',
     storageKey: 'nuxt-color-mode'
   },
-  
+
   i18n: {
     locales: [
       { code: 'fr', lang: 'fr-FR', name: 'Français', file: 'fr.json' },
@@ -49,7 +49,7 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
       alwaysRedirect: false,
-      fallbackLocale: 'system'
+      fallbackLocale: 'system' as any,
     },
     compilation: {
       strictMessage: false
@@ -79,6 +79,10 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'author', content: 'Pro Gestion Soft' },
         { name: 'keywords', content: 'gestion entreprise, PME, Afrique, Bénin, SaaS, SuitOps, PGS, Pro Gestion Soft' },
+        {
+          name: 'google-site-verification',
+          content: 'OdKxHpVkBSxk0mj4vD4OTmZPdVi5pWzyCu4QPIMHy9A'
+        }
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.ico' },
