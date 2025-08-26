@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   ],
 
   site: {
-    url: 'https://suitops.netlify.app',
+    url: 'https://newtes.netlify.app',
     name: 'SuitOps'
   },
 
