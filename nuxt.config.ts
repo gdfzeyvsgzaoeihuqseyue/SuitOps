@@ -21,7 +21,9 @@ export default defineNuxtConfig({
 
   site: {
     url: 'https://newtes.netlify.app',
-    name: 'SuitOps'
+    name: 'SuitOps',
+    gzip: true,
+    xsl: false,
   },
 
   runtimeConfig: {
