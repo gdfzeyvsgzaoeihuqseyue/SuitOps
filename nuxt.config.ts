@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
 
   modules: [
     ['nuxt-gtag', {
@@ -18,6 +18,11 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
   ],
+
+  site: {
+    url: 'https://suitops.netlify.app',
+    name: 'SuitOps'
+  },
 
   runtimeConfig: {
     public: {
