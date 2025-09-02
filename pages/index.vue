@@ -19,11 +19,9 @@
               :visibleOnce="{ opacity: 1, y: 0, transition: { delay: 100 } }">
               <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 font-heading">
                 {{ t('indexPage.heroTitle') }}
-                <Transition name="dynamic-text-fade" mode="out-in">
-                  <span :key="currentIndex" class="dynamic-text text-primary">
-                    {{ dynamicText }}
-                  </span>
-                </Transition>
+                <span class="dynamic-text text-primary">
+                  {{ typingText }}<span class="typing-cursor">|</span>
+                </span>
               </h1>
               <p class="text-lg md:text-xl lg:text-2xl mb-6 lg:mb-8">
                 {{ t('indexPage.heroSubtitle') }}
@@ -113,7 +111,7 @@
       </div>
     </section>
 
-    <!-- Partners Section -->
+    <!-- Partenaires Section -->
     <section class="py-8 md:py-24 bg-bgClr">
       <div class="max-w-3xl mx-auto text-center mb-8 px-4" v-motion :initial="{ opacity: 0, y: 50 }"
         :visibleOnce="{ opacity: 1, y: 0 }">
@@ -226,7 +224,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { IconArrowRight, IconDownload, IconBrandParsinta, IconX, IconMessage } from '@tabler/icons-vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -246,15 +244,44 @@ const dynamicWordKeys = [
   "indexPage.heroDynamicWords.word4"
 ]
 
-const currentIndex = ref(0)
-const dynamicText = ref(t(dynamicWordKeys[currentIndex.value]))
+const words = ref<string[]>([])
+const typingText = ref('')
+const currentWordIndex = ref(0)
+const isDeleting = ref(false)
+const typingSpeed = 100
+const deletingSpeed = 50
 
-// Animation du texte
+const typeEffect = () => {
+  if (words.value.length === 0) return;
+
+  const currentWord = words.value[currentWordIndex.value]
+
+  if (isDeleting.value) {
+    // Phase d'effacement
+    typingText.value = currentWord.substring(0, typingText.value.length - 1)
+    if (typingText.value === '') {
+      isDeleting.value = false
+      currentWordIndex.value = (currentWordIndex.value + 1) % words.value.length
+      setTimeout(typeEffect, 500)
+    } else {
+      setTimeout(typeEffect, deletingSpeed)
+    }
+  } else {
+    // Phase de frappe
+    typingText.value = currentWord.substring(0, typingText.value.length + 1)
+    if (typingText.value === currentWord) {
+      setTimeout(() => { isDeleting.value = true; typeEffect(); }, 2000)
+    } else {
+      setTimeout(typeEffect, typingSpeed)
+    }
+  }
+}
+
 onMounted(() => {
-  setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % dynamicWordKeys.length;
-    dynamicText.value = t(dynamicWordKeys[currentIndex.value]);
-  }, 3000);
+  words.value = dynamicWordKeys.map(key => t(key));
+  if (words.value.length > 0) {
+    typeEffect();
+  }
 })
 
 const { getRandomFeatures } = useFeatures()
@@ -290,21 +317,26 @@ useHead({
 
 <style>
 /* Texte dynamique */
-.dynamic-text-fade-enter-active,
-.dynamic-text-fade-leave-active {
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+.typing-cursor {
+  font-weight: 300;
+  animation: blink 1s step-end infinite;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.dynamic-text-fade-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
+@keyframes blink {
+
+  from,
+  to {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
-.dynamic-text-fade-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
+/* Votre style existant pour les swipers, animations, etc. */
 .swiper {
   padding-bottom: 2rem !important;
 }
