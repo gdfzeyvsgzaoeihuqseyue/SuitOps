@@ -34,6 +34,7 @@
         Sondage de Feedback Bêta
       </h1>
 
+      <!-- <div v-if="!userId || !userDataLoaded" -->
       <div v-if="!userId"
         class="text-center p-6 bg-gray-50 border border-red-200 text-gray-700 rounded-lg shadow-md">
         <p class="text-lg font-semibold mb-2">Impossible de charger le sondage.</p>
