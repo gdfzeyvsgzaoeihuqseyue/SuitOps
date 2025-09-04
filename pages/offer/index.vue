@@ -235,8 +235,8 @@ const contractTypes = ['CDI', 'CDD', 'STAGE']
 const filteredJobs = computed(() => {
   let jobs = jobOffers.value || []
 
-  // Filtrer uniquement les offres de 'Kaarò Group'
-  jobs = jobs.filter(job => job.company.name === 'Kaarò Group')
+  // Filtrer uniquement les offres de 'PRO GESTON SOFT'
+  jobs = jobs.filter(job => job.company.name === 'PRO GESTON SOFT')
 
   // Filtre de recherche
   if (searchQuery.value) {

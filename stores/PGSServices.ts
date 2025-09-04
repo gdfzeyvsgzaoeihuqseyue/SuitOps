@@ -1,7 +1,7 @@
 import { useFetch, useRuntimeConfig } from 'nuxt/app';
-import type { 
-  SuitopsBetaRegistrationData, 
-  GetBetaRegistrationResponse, 
+import type {
+  SuitopsBetaRegistrationData,
+  GetBetaRegistrationResponse,
   GetAllBetaRegistrationsResponse,
   GenericApiResponse,
   OsDownloadStats
@@ -11,10 +11,11 @@ const fetchData = async <T>(endpoint: string, method: string = 'GET', data: any 
   const config = useRuntimeConfig();
   const PGS_URL = config.public.pgsBaseAPI;
 
-  const options: any = { 
+  const options: any = {
+    method,
     headers: { 'Content-Type': 'application/json' },
-    body: data ? JSON.stringify(data) : undefined, 
-    server: false,
+    body: data ? JSON.stringify(data) : undefined,
+    server: false
   };
 
   const { data: fetchedDataRef, error: fetchError } = await useFetch<T>(`${PGS_URL}${endpoint}`, options);
@@ -25,7 +26,7 @@ const fetchData = async <T>(endpoint: string, method: string = 'GET', data: any 
   }
 
   if (fetchedDataRef.value === null || fetchedDataRef.value === undefined) {
-    throw new Error(`API returned no data or invalid data for ${endpoint}.`);
+    throw new Error(`Impossible d'obtenir les informations sur ${endpoint}.`);
   }
 
   return fetchedDataRef.value as T;
@@ -43,6 +44,6 @@ export const PGSServices = {
 
   // Nombre de téléchargements
   incrementOsDownload: (osName: string) => fetchData<GenericApiResponse>('/suitops/os/download', 'POST', { os: osName }),
-  getAllOsDownloads: () => fetchData<GenericApiResponse & { data: OsDownloadStats[] }>('/suitops/os/download', 'GET'), 
-  getOsDownload: (osName: string) => fetchData<GenericApiResponse & { data: OsDownloadStats }>('/suitops/os/download', 'GET'), 
+  getAllOsDownloads: () => fetchData<GenericApiResponse & { data: OsDownloadStats[] }>('/suitops/os/download', 'GET'),
+  getOsDownload: (osName: string) => fetchData<GenericApiResponse & { data: OsDownloadStats }>('/suitops/os/download', 'GET'),
 };
