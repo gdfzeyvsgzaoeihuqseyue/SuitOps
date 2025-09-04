@@ -266,7 +266,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { useFaqs } from '~/composables/useFaqs'
 import Loader from '~/components/Load/LFaqPage.vue'
 import { useI18n } from 'vue-i18n'
-import { PGSServices } from '~/stores/PGSServices.js'
+import { PGSServices } from '~/stores/PGSServices'
 import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();

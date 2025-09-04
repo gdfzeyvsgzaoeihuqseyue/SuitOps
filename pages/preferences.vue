@@ -232,7 +232,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { usePreferences } from '@/stores/preferences.js';
+import { usePreferences } from '@/stores/preferences';
 import {
   IconMail, IconShieldCheck, IconSettings, IconSend, IconCheck, IconArrowLeft, IconLoader, IconDeviceFloppy, IconAlertCircle, IconInfoCircle, IconX
 } from '@tabler/icons-vue';

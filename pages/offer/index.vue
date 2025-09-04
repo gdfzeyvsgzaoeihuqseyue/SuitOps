@@ -173,7 +173,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { IconMoodCry } from '@tabler/icons-vue'
-import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices'
 import Loader from '~/components/Load/LOffer.vue'
 import { IconSearch, IconBriefcaseOff, IconArrowRight, IconRefresh } from '@tabler/icons-vue'
 import { useI18n } from 'vue-i18n'

@@ -151,7 +151,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { SuitOpsServices } from '~/stores/SuitOpsServices.js'
+import { SuitOpsServices } from '~/stores/SuitOpsServices'
 import { IconMoodCry, IconUserEdit, IconCalendarFilled, IconArrowRight, IconArticleOff, IconSearch, IconRefresh } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LBlog.vue'
 import { useI18n } from 'vue-i18n'

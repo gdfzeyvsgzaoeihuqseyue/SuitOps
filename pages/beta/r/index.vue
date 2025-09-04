@@ -126,7 +126,7 @@
 </template>
 
 <script setup>
-import { PGSServices } from '~/stores/PGSServices.js'
+import { PGSServices } from '~/stores/PGSServices'
 import { ref, computed, onMounted, watch } from 'vue'
 
 const registrations = ref([])

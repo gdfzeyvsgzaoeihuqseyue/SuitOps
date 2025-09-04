@@ -19,7 +19,7 @@
               :visibleOnce="{ opacity: 1, y: 0, transition: { delay: 100 } }">
               <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 font-heading">
                 {{ t('indexPage.heroTitle') }}
-                <span class="dynamic-text text-primary">
+                <span class="dynamic-text text-primary block">
                   {{ typingText }}<span class="typing-cursor">|</span>
                 </span>
               </h1>
