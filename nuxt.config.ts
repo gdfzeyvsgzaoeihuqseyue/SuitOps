@@ -32,7 +32,8 @@ export default defineNuxtConfig({
       pgsBaseAPI: process.env.PGS_API_URL,
       pgsSharedFiles: process.env.PGS_SHARED_FILES,
       betaMode: process.env.NUXT_BETA_MODE === 'true',
-      betaRegisterPass: process.env.BETA_REGISTER_PASS
+      betaRegisterPass: process.env.BETA_REGISTER_PASS,
+      siteIdentifier: process.env.NUXT_PUBLIC_SITE_IDENTIFIER || 'suitops',
     }
   },
 

@@ -48,7 +48,9 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
       linux: `${SHARED_URL}/SuitOps_Landing/Logos/Linux.png`,
     },
     general: {
-      error404: `${SHARED_URL}/General/404Error.png`,
+      error403: `${SHARED_URL}/General/Error403.png`,
+      error404: `${SHARED_URL}/General/error404.png`,
+      error500: `${SHARED_URL}/General/Error500.png`,
       heroImg: `${SHARED_URL}/SuitOps_Landing/Others/HeroImg.png`,
       faq: `${SHARED_URL}/SuitOps_Landing/Others/faq.png`,
     },
