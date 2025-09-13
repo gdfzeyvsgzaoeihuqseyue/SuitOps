@@ -3,7 +3,7 @@
     <Loader v-if="loading" />
 
     <p v-else-if="error" class="text-red-600 text-sm">
-      {{ t('common.loadError', { object: t('common.socialLinks') }) }}
+       {{ t('common.loadError', { object: t('common.socialLinks') }) }}
     </p>
     <ul v-else class="flex flex-wrap gap-4 justify-center md:justify-start">
       <li v-for="link in displayedLinks" :key="link.name">
@@ -15,34 +15,23 @@
         </a>
       </li>
     </ul>
+    <p v-if="!loading && !error && displayedLinks.length === 0" class="text-gray-600 text-sm">
+      {{ t('common.socialEmpty') }}
+  </p>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import { useSocialLinksDisplay } from '@/composables/useSocialLinks';
 import Loader from '~/components/Load/LSocialLink.vue';
-import { ref, onMounted } from 'vue'; 
+import { useI18n } from '#imports';
 
 const { t } = useI18n();
-
-const loading = ref(true);
-const error = ref(null);
-const displayedLinks = ref([]);
+const router = useRouter()
 
 // Réseaux sociaux
-onMounted(async () => {
-  try {
-    const { displayedLinks: links, error: fetchError } = await useSocialLinksDisplay({
-      filterMedia: ['linkedin', 'facebook', 'x', 'tiktok'],
-    });
-
-    displayedLinks.value = links.value;
-    error.value = fetchError.value;
-  } catch (err) {
-    error.value = err;
-  } finally {
-    loading.value = false;
-  }
-});
+const { displayedLinks, loading, error } = useSocialLinksDisplay({
+  filterMedia: ['linkedin', 'facebook', 'x', 'youtube', 'tiktok' ],
+}); 
 </script>

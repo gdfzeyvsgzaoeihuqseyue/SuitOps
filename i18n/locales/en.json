@@ -165,6 +165,7 @@
   },
   "common": {
     "loadError": "Unable to load {object}.",
+    "socialEmpty": "No social links to display at the moment.",
     "partners": "partners",
     "testimonies": "testimonies",
     "socialLinks": "social links",

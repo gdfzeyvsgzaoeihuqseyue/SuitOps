@@ -165,6 +165,7 @@
   },
   "common": {
     "loadError": "Impossible de charger les {object}.",
+    "socialEmpty": "Aucun lien social à afficher pour le moment.",
     "partners": "partennaires",
     "testimonies": "témoignages",
     "socialLinks": "liens sociaux",
