@@ -1,7 +1,10 @@
 <template>
   <div class="space-x-4 flex justify-center sm:justify-start">
-    <p v-if="loading" class="text-gray-600 text-sm">Chargement des liens sociaux...</p>
-    <p v-else-if="error" class="text-red-600 text-sm">Impossible de charger les liens sociaux</p>
+    <Loader v-if="loading" />
+
+    <p v-else-if="error" class="text-red-600 text-sm">
+      {{ t('common.loadError', { object: t('common.socialLinks') }) }}
+    </p>
     <ul v-else class="flex flex-wrap gap-4 justify-center md:justify-start">
       <li v-for="link in displayedLinks" :key="link.name">
         <a :href="link.href" target="_blank" rel="noopener noreferrer" :title="link.title"
@@ -12,17 +15,31 @@
         </a>
       </li>
     </ul>
-    <p v-if="!loading && !error && displayedLinks.length === 0" class="text-gray-600 text-sm">Aucun lien social à
-      afficher pour le moment.</p>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 import { useSocialLinksDisplay } from '@/composables/useSocialLinks';
+import Loader from '~/components/Load/LSocialLink.vue';
+import { ref, onMounted } from 'vue';
+import { useI18n } from '#imports';
 
-const router = useRouter()
+const { t } = useI18n();
 
-// Réseaux sociaux
-const { displayedLinks, loading, error } = useSocialLinksDisplay(); 
+const loading = ref(true);
+const error = ref(null);
+const displayedLinks = ref([]);
+
+onMounted(async () => {
+  try {
+    const { displayedLinks: links, error: fetchError } = await useSocialLinksDisplay();
+    displayedLinks.value = links.value;
+    error.value = fetchError.value;
+  } catch (err) {
+    error.value = err;
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
