@@ -1,5 +1,4 @@
 <template>
-  <ClientOnly>
     <header v-if="!isIframeMode" class="shadow-sm top-0 left-0 fixed w-full bg-WtB backdrop-blur-sm z-50">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
         <div class="flex justify-between h-16">
@@ -129,7 +128,6 @@
     <div v-if="mobileMenuOpen" class="fixed inset-0 bg-black bg-opacity-20 z-40 sm:hidden" @click="closeMobileMenu"
       @touchstart="closeMobileMenu">
     </div>
-  </ClientOnly>
 </template>
 
 <script setup>

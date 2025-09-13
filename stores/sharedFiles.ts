@@ -17,6 +17,7 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
       dw: `${SHARED_URL}/Logos/SuitOps-DW.png`,
       mc: `${SHARED_URL}/Logos/SuitOps-MC.png`,
       mw: `${SHARED_URL}/Logos/SuitOps-MW.png`,
+      pgs: `${SHARED_URL}/Logos/PGS-MC.png`,
     },
     hero: {
       about: `${SHARED_URL}/SuitOps_Landing/Hero/about.png`,
@@ -26,7 +27,7 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
       download: `${SHARED_URL}/SuitOps_Landing/Hero/download.png`,
       faq: `${SHARED_URL}/SuitOps_Landing/Hero/faq.png`,
       features: `${SHARED_URL}/SuitOps_Landing/Hero/features.png`,
-      index: `${SHARED_URL}/SuitOps_Landing/Hero/index.png`,
+      index: `${SHARED_URL}/SuitOps_Landing/Hero/index.gif`,
       legal: `${SHARED_URL}/SuitOps_Landing/Hero/legal.png`,
       offer: `${SHARED_URL}/SuitOps_Landing/Hero/offer.png`,
       pricings: `${SHARED_URL}/SuitOps_Landing/Hero/pricings.png`,
@@ -49,7 +50,7 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
     },
     general: {
       error403: `${SHARED_URL}/General/Error403.png`,
-      error404: `${SHARED_URL}/General/error404.png`,
+      error404: `${SHARED_URL}/General/Error404.png`,
       error500: `${SHARED_URL}/General/Error500.png`,
       heroImg: `${SHARED_URL}/SuitOps_Landing/Others/HeroImg.png`,
       faq: `${SHARED_URL}/SuitOps_Landing/Others/faq.png`,
