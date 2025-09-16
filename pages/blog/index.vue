@@ -31,7 +31,7 @@
           </label>
         </div>
 
-         <!-- Filtres par date -->
+        <!-- Filtres par date -->
         <div class="flex gap-3 w-full sm:w-auto">
           <div class="relative flex-1">
             <input id="startDate" type="date" v-model="startDate" placeholder=" " class="input-floating px-2 peer" />
@@ -48,7 +48,7 @@
           </div>
         </div>
 
-         <!-- Filtres de selection -->
+        <!-- Filtres de selection -->
         <div class="flex gap-3 w-full sm:w-auto">
           <div class="relative flex-1 sm:w-[180px] md:w-[200px]">
             <select v-model="sortOption" placeholder=" " class="input-floating px-2 peer">
@@ -97,11 +97,18 @@
           class="bg-ash shadow rounded overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
           <div class="relative">
             <img
-              :src="post.image && post.image.url ? post.image.url : 'https://placehold.co/600x400/0284c7/FFFFFF/png?text=' + $t('blogPage.loadingImage')"
+              :src="post.imageUrl ? post.imageUrl : 'https://placehold.co/600x400/0284c7/FFFFFF/png?text=' + $t('blogPage.loadingImage')"
               :alt="$t('blogPage.imageAlt')" class="w-full h-40 sm:h-48 object-cover" />
 
-            <div class="absolute top-0 right-0 bg-BtW bg-opacity-50 text-WtB px-2 py-1 text-xs">
-              {{ post.object }}
+            <div class="absolute top-0 left-0 bg-BtW bg-opacity-50 text-WtB px-2 py-1 text-xs">
+              {{ post.category.name }}
+            </div>
+
+            <div class="absolute top-0 right-0 bg-primary bg-opacity-50 text-WtB px-2 py-1 text-xs">
+              <span class="flex items-center gap-1 sm:gap-2">
+                <IconEye class="w-3 h-3 sm:w-4 sm:h-4" />
+                {{ post?.views }}
+              </span>
             </div>
           </div>
           <div class="p-3 sm:p-4 flex flex-col flex-grow">
@@ -112,7 +119,11 @@
             <div
               class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 justify-center text-xs sm:text-sm mb-3 sm:mb-4 gap-1 sm:gap-0">
               <span class="flex items-center gap-1 sm:gap-2">
-                <IconUserEdit class="w-3 h-3 sm:w-4 sm:h-4" /> {{ post.author }}
+                <IconUserEdit class="w-3 h-3 sm:w-4 sm:h-4" />
+                <NuxtLink :to="`https://progestionsoft.netlify.app/blogs/author/${post.author.slug}`" target="_blank"
+                  class="hover:underline">
+                  {{ post.author.name }}
+                </NuxtLink>
               </span>
               <span class="hidden sm:block">•</span>
               <span class="flex items-center gap-1 sm:gap-2">
@@ -121,9 +132,9 @@
               </span>
             </div>
 
-            <div class="line-clamp-3 text-xs sm:text-sm mb-3 sm:mb-4" v-html="post.content"></div>
+            <div class="line-clamp-3 text-xs sm:text-sm mb-3 sm:mb-4" v-html="post.excerpt"></div>
 
-            <NuxtLink :to="localePath(`/blog/${post.id}/${post.title}`)"
+            <NuxtLink :to="localePath(`/blog/${post.slug}`)"
               class="inline-block text-primary hover:text-secondary transition-colors flex items-center gap-1 sm:gap-2 justify-end text-xs sm:text-sm">
               {{ $t('blogPage.readMore') }}
               <IconArrowRight class="w-3 h-3 sm:w-4 sm:h-4" />
@@ -137,7 +148,7 @@
             <IconArticleOff class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
           </div>
           <p class="text-sm sm:text-base">{{ $t('blogPage.noArticlesFound') }}<span class="font-bold">{{ searchQuery
-              }}</span> </p>
+          }}</span> </p>
         </div>
       </section>
 
@@ -151,8 +162,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { SuitOpsServices } from '~/stores/SuitOpsServices'
-import { IconMoodCry, IconUserEdit, IconCalendarFilled, IconArrowRight, IconArticleOff, IconSearch, IconRefresh } from '@tabler/icons-vue'
+import { PGSServices } from '~/stores/PGSServices'
+import { IconMoodCry, IconUserEdit, IconCalendarFilled, IconEye, IconArrowRight, IconArticleOff, IconSearch, IconRefresh } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LBlog.vue'
 import { useI18n } from 'vue-i18n'
 import { formatShortDate } from '@/utils/date.js';
@@ -188,8 +199,9 @@ const fetchBlogPosts = async () => {
 
   while (attempts < maxAttempts) {
     try {
-      const response = await SuitOpsServices.getAllBlogPosts();
-      blogPosts.value = response.data?.data || response.data || [];
+      const response = await PGSServices.getAllBlogPosts();
+      const filtered = response.data.filter(post => ['SuitOps', 'PGS', 'Général'].includes(post.category.name));
+      blogPosts.value = filtered || [];
       loading.value = false
       return
     } catch (err) {

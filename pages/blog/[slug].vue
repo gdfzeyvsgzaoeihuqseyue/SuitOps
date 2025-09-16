@@ -1,21 +1,17 @@
 <template>
   <section v-if="!isIframeMode" class="mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mt-4 md:mt-8">
-    <!-- Breadcrumb -->
     <useBreadcrumb :items="breadcrumbItems" />
   </section>
 
   <div
     :class="{ 'bg-WtBAct rounded-lg sm:rounded-xl md:rounded-3xl shadow-lg overflow-hidden': !isIframeMode, 'embed-container': isIframeMode }">
-    <!-- En-tête avec image -->
     <header class="h-60 sm:h-72 md:h-80 lg:h-96 bg-cover bg-center bg-no-repeat"
-      :style="{ backgroundImage: `url(${blogPost?.image?.url || 'https://placehold.co/600x400/0284c7/FFFFFF/png?text=' + $t('blogPage.loadingImage')})` }">
+      :style="{ backgroundImage: `url(${blogPost?.imageUrl || 'https://placehold.co/600x400/0284c7/FFFFFF/png?text=' + $t('blogPage.loadingImage')})` }">
     </header>
 
     <main class="container mx-auto p-4 sm:p-8">
-      <!-- Indicateur de chargement -->
       <Loader v-if="loading" />
 
-      <!-- Message d'erreur -->
       <div v-if="error && !isIframeMode" class="text-center py-8">
         <div class="mb-4">
           <IconMoodCry class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
@@ -28,7 +24,6 @@
       </div>
 
       <div v-if="isLoaded">
-        <!-- Bouton partager et Iframe -->
         <div v-if="!isIframeMode" class="flex justify-end gap-2 mb-4">
           <button @click="shareBlog"
             class="flex items-center gap-1 sm:gap-2 bg-primary text-WtB px-3 py-1.5 sm:px-4 sm:py-2 rounded-md hover:bg-secondary transition-colors text-sm sm:text-base">
@@ -50,20 +45,30 @@
             class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
             <div class="flex flex-wrap items-center gap-2 sm:gap-4">
               <span>
-                {{ $t('blogID.by') }} <span class="font-bold text-secondary">{{ blogPost?.author }}</span>
+                {{ $t('blogID.by') }}
+                <NuxtLink :to="`https://progestionsoft.netlify.app/blogs/author/${blogPost.author?.slug}`"
+                  target="_blank" class="font-bold text-secondary hover:underline">
+                  {{ blogPost?.author?.name }}
+                </NuxtLink>
               </span>
               <span class="hidden sm:inline">•</span>
               <span>
-                {{ $t('blogID.publishedOn') }} <span class="font-bold text-secondary">{{ formatShortDate(blogPost?.createdAt, locale)
-                }}</span>
+                {{ $t('blogID.publishedOn') }}
+                <span class="font-bold text-secondary">{{ formatShortDate(blogPost?.createdAt, locale) }}</span>
               </span>
               <span class="hidden sm:inline">•</span>
               <div class="flex items-center gap-1">
                 <IconMessageStar class="w-4 h-4 sm:w-5 sm:h-5" />
-                <span class="font-bold text-secondary">{{ blogPost?.object }}</span>
+                <span class="font-bold text-secondary">{{ blogPost?.category?.name }}</span>
+              </div>
+              <span class="hidden sm:inline">•</span>
+              <div class="flex items-center gap-1">
+                <IconEye class="w-4 h-4 sm:w-5 sm:h-5" />
+                <span class="font-bold text-secondary">
+                  {{ blogPost?.views }} {{ $t('blogID.views', blogPost?.views) }}
+                </span>
               </div>
             </div>
-
             <div>
               {{ $t('blogID.readingTime') }} : <span class="font-bold text-secondary">{{ readingTime }} {{
                 $t('blogID.min') }}</span>
@@ -72,7 +77,6 @@
         </div>
       </div>
 
-      <!-- Contenu de l'article -->
       <article v-if="blogPost"
         class="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-800 dark:text-gray-200"
         v-html="linkStyle(blogPost.content)">
@@ -83,22 +87,31 @@
         </p>
       </div>
 
-      <!-- Notification -->
+      <div v-if="blogPost?.tags && blogPost?.tags.length > 0" class="mt-6 md:mt-8">
+        <h3 class="text-lg sm:text-xl font-semibold mb-2">{{ $t('blogID.tags') }}</h3>
+        <div class="flex flex-wrap gap-2">
+          <span v-for="tag in blogPost.tags" :key="tag"
+            class="bg-ashAct px-3 py-1 rounded-full text-xs sm:text-sm">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+
       <div v-if="showNotification"
         class="fixed bottom-4 right-4 z-50 bg-BtW text-WtB px-4 py-2 rounded shadow-lg transition-all">
         {{ notificationMessage }}
       </div>
     </main>
 
-    <IframeFooter v-if="isIframeMode" :original-path="`blog/${route.params.id}/${route.params.title}`" class="p-10" />
+    <IframeFooter v-if="isIframeMode" :original-path="`blog/${route.params.slug}`" class="p-10" />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { SuitOpsServices } from '~/stores/SuitOpsServices'
-import { IconMoodCry, IconShare, IconMessageStar, IconCode } from '@tabler/icons-vue'
+import { PGSServices } from '~/stores/PGSServices'
+import { IconMoodCry, IconShare, IconMessageStar, IconCode, IconEye } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LBlogId.vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#imports'
@@ -131,9 +144,9 @@ const fetchBlogPost = async () => {
   const maxAttempts = 2
   while (attempts < maxAttempts) {
     try {
-      const id = route.params.id
-      const response = await SuitOpsServices.getOneBlogPost(id)
-      blogPost.value = response.data?.data || response.data || null
+      const slug = route.params.slug
+      const response = await PGSServices.getOneBlogPost(slug)
+      blogPost.value = response.data || null
       loading.value = false
       return
     } catch (err) {
@@ -199,7 +212,7 @@ const triggerNotification = (message) => {
 const shareBlog = async () => {
   const url = window.location.href
   const title = blogPost.value?.title || t('blogID.defaultShareTitle')
-  const text = blogPost.value?.description || t('blogID.defaultShareText')
+  const text = blogPost.value?.excerpt || t('blogID.defaultShareText')
 
   if (navigator.share) {
     try {
@@ -279,8 +292,8 @@ const copyIframe = async () => {
 }
 
 .embed-container main {
-  flex-grow: 1; 
-  overflow-y: auto; 
-  padding-bottom: 70px !important; 
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 70px !important;
 }
 </style>

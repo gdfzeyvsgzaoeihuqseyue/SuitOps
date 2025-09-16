@@ -36,7 +36,7 @@ export const SuitOpsServices = {
 
   // FAQ, Comments, Testimonies & Partners
   getAllFaq: () => fetchData<FaqTopic[]>('/faq/all'),
-  getAllComments: () => fetchData<any[]>('/comment/all'), // Adjust type if comment structure is known
+  getAllComments: () => fetchData<any[]>('/comment/all'), 
   getAllTestimonies: () => fetchData<TestimonyData[]>('/public/testimony/all'),
   getAllPartners: () => fetchData<PartnerData[]>('/public/partner/all'),
 

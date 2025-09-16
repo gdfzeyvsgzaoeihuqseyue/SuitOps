@@ -550,9 +550,11 @@
   "blogID": {
     "by": "By",
     "publishedOn": "Published on",
+    "views": "view | views",
     "thisArticle": "This article",
     "readingTime": "Reading time",
-    "min": "min"
+    "min": "min",
+    "tags": "Tags"
   },
   "legalsPage": {
     "lastUpdate": "Last updated:",

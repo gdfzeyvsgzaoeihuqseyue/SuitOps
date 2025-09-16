@@ -1,11 +1,5 @@
 import { useFetch, useRuntimeConfig } from 'nuxt/app';
-import type {
-  SuitopsBetaRegistrationData,
-  GetBetaRegistrationResponse,
-  GetAllBetaRegistrationsResponse,
-  GenericApiResponse,
-  OsDownloadStats
-} from '@/types';
+import type { SuitopsBetaRegistrationData, GetBetaRegistrationResponse, GetAllBetaRegistrationsResponse, GenericApiResponse, OsDownloadStats, BlogPostData, ApiResponse } from '@/types';
 
 const fetchData = async <T>(endpoint: string, method: string = 'GET', data: any = null): Promise<T> => {
   const config = useRuntimeConfig();
@@ -33,6 +27,10 @@ const fetchData = async <T>(endpoint: string, method: string = 'GET', data: any 
 };
 
 export const PGSServices = {
+  // Blog
+  getAllBlogPosts: () => fetchData<ApiResponse<BlogPostData[]>>('/blog/article'),
+  getOneBlogPost: (slug: string) => fetchData<ApiResponse<BlogPostData>>(`/blog/article/${slug}`),
+
   // Bêta
   betaRegistration: (betaData: any) => fetchData<GenericApiResponse>('/suitops/beta/registration', 'POST', betaData),
   getAllBetaRegistrations: (page: number = 1, limit: number = 10) => fetchData<GetAllBetaRegistrationsResponse>(`/suitops/beta/registration?page=${page}&limit=${limit}`),
