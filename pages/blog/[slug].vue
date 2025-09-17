@@ -5,8 +5,11 @@
 
   <div
     :class="{ 'bg-WtBAct rounded-lg sm:rounded-xl md:rounded-3xl shadow-lg overflow-hidden': !isIframeMode, 'embed-container': isIframeMode }">
-    <header class="h-60 sm:h-72 md:h-80 lg:h-96 bg-cover bg-center bg-no-repeat"
-      :style="{ backgroundImage: `url(${blogPost?.imageUrl || 'https://placehold.co/600x400/0284c7/FFFFFF/png?text=' + $t('blogPage.loadingImage')})` }">
+    <header class="h-60 sm:h-72 md:h-80 lg:h-96 relative overflow-hidden">
+      <img :src="blogPost?.imageUrl" :alt="blogPost?.title || t('blogID.thisArticle')" @error="handleImageError"
+        class="w-full h-full object-cover transition-transform duration-500" />
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        :style="{ backgroundImage: `url(${fallbackImageUrl})` }" v-if="!blogPost?.imageUrl"></div>
     </header>
 
     <main class="container mx-auto p-4 sm:p-8">
@@ -90,8 +93,7 @@
       <div v-if="blogPost?.tags && blogPost?.tags.length > 0" class="mt-6 md:mt-8">
         <h3 class="text-lg sm:text-xl font-semibold mb-2">{{ $t('blogID.tags') }}</h3>
         <div class="flex flex-wrap gap-2">
-          <span v-for="tag in blogPost.tags" :key="tag"
-            class="bg-ashAct px-3 py-1 rounded-full text-xs sm:text-sm">
+          <span v-for="tag in blogPost.tags" :key="tag" class="bg-ashAct px-3 py-1 rounded-full text-xs sm:text-sm">
             {{ tag }}
           </span>
         </div>
@@ -134,7 +136,18 @@ const breadcrumbItems = computed(() => [
   { label: blogPost.value?.title || t('blogID.thisArticle') }
 ])
 
-// Vrifier que la page est chargée
+// Fallback image
+const fallbackImageUrl = computed(() => {
+  const title = blogPost.value?.title || t('blogID.thisArticle');
+  return `https://placehold.co/600x400/0284c7/FFFFFF/png?text=${encodeURIComponent(title)}`;
+});
+
+const handleImageError = (event) => {
+  const target = event.target;
+  target.src = fallbackImageUrl.value;
+};
+
+// Vérifier que la page est chargée
 const isLoaded = computed(() => !loading.value && !error.value && blogPost.value)
 
 const fetchBlogPost = async () => {

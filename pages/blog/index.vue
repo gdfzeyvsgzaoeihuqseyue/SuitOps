@@ -96,9 +96,8 @@
         <article v-for="post in paginatedJobs" :key="post.id"
           class="bg-ash shadow rounded overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
           <div class="relative">
-            <img
-              :src="post.imageUrl ? post.imageUrl : 'https://placehold.co/600x400/0284c7/FFFFFF/png?text=' + $t('blogPage.loadingImage')"
-              :alt="$t('blogPage.imageAlt')" class="w-full h-40 sm:h-48 object-cover" />
+            <img :src="post.imageUrl" :alt="post.title" @error="handleImageError"
+              class="w-full h-40 sm:h-48 object-cover" :data-title="post.title" />
 
             <div class="absolute top-0 left-0 bg-BtW bg-opacity-50 text-WtB px-2 py-1 text-xs">
               {{ post.category.name }}
@@ -218,6 +217,15 @@ const fetchBlogPosts = async () => {
 }
 
 fetchBlogPosts()
+
+// Falback sur image
+const handleImageError = (event) => {
+  const target = event.target;
+  const articleTitle = target.getAttribute('data-title');
+  if (articleTitle) {
+    target.src = `https://placehold.co/600x400/0284c7/FFFFFF/png?text=${encodeURIComponent(articleTitle)}`;
+  }
+};
 
 // Aplication des filtres et tri
 const filteredPosts = computed(() => {
