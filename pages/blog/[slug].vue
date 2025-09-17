@@ -1,18 +1,18 @@
 <template>
-  <section v-if="!isIframeMode" class="mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mt-4 md:mt-8">
+  <section v-if="!isIframeMode" class="mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 mt-4 md:mt-8">
     <useBreadcrumb :items="breadcrumbItems" />
   </section>
 
   <div
-    :class="{ 'bg-WtBAct rounded-lg sm:rounded-xl md:rounded-3xl shadow-lg overflow-hidden': !isIframeMode, 'embed-container': isIframeMode }">
-    <header class="h-60 sm:h-72 md:h-80 lg:h-96 relative overflow-hidden">
-      <img :src="blogPost?.imageUrl" :alt="blogPost?.title || t('blogID.thisArticle')" @error="handleImageError"
-        class="w-full h-full object-cover transition-transform duration-500" />
-      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        :style="{ backgroundImage: `url(${fallbackImageUrl})` }" v-if="!blogPost?.imageUrl"></div>
-    </header>
+    :class="{ 'my-4 overflow-hidden': !isIframeMode, 'embed-container': isIframeMode }">
+    <main class="container mx-auto p-4 sm:p-8 max-w-6xl bg-WtBAct rounded-lg sm:rounded-xl md:rounded-3xl shadow-lg">
+      <header class="h-60 sm:h-72 md:h-80 lg:h-96 relative overflow-hidden">
+        <img :src="blogPost?.imageUrl" :alt="blogPost?.title || t('blogID.thisArticle')" @error="handleImageError"
+          class="w-full h-full object-cover transition-transform duration-500" />
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          :style="{ backgroundImage: `url(${fallbackImageUrl})` }" v-if="!blogPost?.imageUrl"></div>
+      </header>
 
-    <main class="container mx-auto p-4 sm:p-8">
       <Loader v-if="loading" />
 
       <div v-if="error && !isIframeMode" class="text-center py-8">
@@ -27,7 +27,7 @@
       </div>
 
       <div v-if="isLoaded">
-        <div v-if="!isIframeMode" class="flex justify-end gap-2 mb-4">
+        <div v-if="!isIframeMode" class="flex justify-end gap-2 m-4">
           <button @click="shareBlog"
             class="flex items-center gap-1 sm:gap-2 bg-primary text-WtB px-3 py-1.5 sm:px-4 sm:py-2 rounded-md hover:bg-secondary transition-colors text-sm sm:text-base">
             <IconShare class="w-4 h-4 sm:w-5 sm:h-5" />
