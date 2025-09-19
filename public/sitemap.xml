@@ -1,267 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
-		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-	<loc>https://newtes.netlify.app/</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>yearly</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/download</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/features</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/contact</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/href</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/aaD</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/aaD</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/aaG</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/aaG</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/faq</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/faq</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/about</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/about</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/legal</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/legal</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/terms</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/terms</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/compare</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/compare</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/contact</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/privacy</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/privacy</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/support</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/support</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/download</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/features</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/pricings</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/pricings</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/beta/soon</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/beta/soon</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/beta/learn</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/beta/learn</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/blog</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/blog</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/forum</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/forum</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/offer</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/offer</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/preferences</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/preferences</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/beta/r</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/en/beta/r</loc>
-	<lastmod>2025-08-25T22:25:30+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://newtes.netlify.app/beta/soon/</loc>
-	<lastmod>2025-08-25T22:25:41+01:00</lastmod>
-	<changefreq>always</changefreq>
-	<priority>0.6</priority>
-</url>
+<!-- Créer avec www.eqt.com - PRO GESTION SOFT -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml"
+	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+	<url>
+		<loc>
+			https://suitops.netlify.app/
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/features
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/offer
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/pricings
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/about
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/contact
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/download
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/faq
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/legal
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/terms
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/privacy
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
+	<url>
+		<loc>
+			https://suitops.netlify.app/blog
+		</loc>
+		<changefreq>
+			weekly
+		</changefreq>
+		<priority>
+			0.8
+		</priority>
+	</url>
 </urlset>

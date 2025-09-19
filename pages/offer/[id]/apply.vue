@@ -598,7 +598,7 @@ import Loader from '~/components/Load/LJobForm.vue'
 const breadcrumbItems = computed(() => [
   { label: 'Offres', href: '/offer' },
   { label: job.value?.data?.post || "Détails de l'offre", href: `/offer/${route.params.id}/${job.value?.data?.slug}` },
-  { label: job.value?.data?.post ? `Postuler à ${job.value.data.post}` : 'Formulaire de candidature' }
+  { label: job.value?.data?.post ? "Postuler" : 'Formulaire de candidature' }
 ])
 
 // Variables

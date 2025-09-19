@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   ],
 
   site: {
-    url: 'https://newtes.netlify.app',
+    url: 'https://suitops.netlify.app',
     name: 'SuitOps',
     gzip: true,
     xsl: false,
@@ -94,7 +94,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://suitops.com' }
+        { rel: 'canonical', href: 'https://suitops.netlify.app' }
       ]
     }
   },

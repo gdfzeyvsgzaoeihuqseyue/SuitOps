@@ -15,7 +15,7 @@ const heroImagePath = `${sharedFilesUrl}/SuitOps_Landing/Hero/index.png`;
 const baseUrl = "https://suitops.netlify.app";
 
 useHead({
-  titleTemplate: '%s | SuitOps',
+  titleTemplate: '%s | SUITOPS',
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
