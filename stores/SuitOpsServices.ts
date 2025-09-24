@@ -38,7 +38,7 @@ export const SuitOpsServices = {
   getAllFaq: () => fetchData<FaqTopic[]>('/faq/all'),
   getAllComments: () => fetchData<any[]>('/comment/all'), 
   getAllTestimonies: () => fetchData<TestimonyData[]>('/public/testimony/all'),
-  getAllPartners: () => fetchData<PartnerData[]>('/public/partner/all'),
+  // getAllPartners: () => fetchData<PartnerData[]>('/public/partner/all'),
 
   // Footer
   getAllFooterLinks: () => fetchData<any[]>('/public/website/footer/links'),

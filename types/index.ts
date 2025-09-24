@@ -195,10 +195,15 @@ export interface TestimonyData {
 export interface PartnerData {
   id: string;
   name: string;
+  website: string;
   logo?: string;
-  link: string;
   createdAt: number;
   updatedAt: number;
+  platforms: Array<{ 
+    id: string;
+    name: string;
+    slug: string;
+  }>;
 }
 
 export interface LegalContent {

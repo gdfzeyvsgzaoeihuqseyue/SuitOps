@@ -1,5 +1,5 @@
 import { useFetch, useRuntimeConfig } from 'nuxt/app';
-import type { SuitopsBetaRegistrationData, GetBetaRegistrationResponse, GetAllBetaRegistrationsResponse, GenericApiResponse, OsDownloadStats, BlogPostData, ApiResponse } from '@/types';
+import type { SuitopsBetaRegistrationData, GetBetaRegistrationResponse, GetAllBetaRegistrationsResponse, GenericApiResponse, OsDownloadStats, BlogPostData, ApiResponse, PartnerData } from '@/types';
 
 const fetchData = async <T>(endpoint: string, method: string = 'GET', data: any = null): Promise<T> => {
   const config = useRuntimeConfig();
@@ -44,4 +44,7 @@ export const PGSServices = {
   incrementOsDownload: (osName: string) => fetchData<GenericApiResponse>('/suitops/os/download', 'POST', { os: osName }),
   getAllOsDownloads: () => fetchData<GenericApiResponse & { data: OsDownloadStats[] }>('/suitops/os/download', 'GET'),
   getOsDownload: (osName: string) => fetchData<GenericApiResponse & { data: OsDownloadStats }>('/suitops/os/download', 'GET'),
+
+  //Partenaires
+  getAllSolutionPartners: () => fetchData<ApiResponse<PartnerData[]>>('/solution/partner?limit=100'),
 };

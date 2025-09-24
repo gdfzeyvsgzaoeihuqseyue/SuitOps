@@ -28,9 +28,9 @@
           @touchend="isPaused = false" @mouseenter="isPaused = true" @mouseleave="isPaused = false">
           <div class="scroll-track flex space-x-6 sm:space-x-12">
             <template v-for="n in 2">
-              <div v-for="partner in partners" :key="n + '-' + partner.id" class="flex-none relative"
+              <div v-for="partner in filteredPartners" :key="n + '-' + partner.id" class="flex-none relative"
                 :title="partner.name" @mouseenter="activePartner = partner" @mouseleave="activePartner = null">
-                <a :href="partner.link" target="_blank" rel="noopener noreferrer"
+                <a :href="partner.website" target="_blank" rel="noopener noreferrer"
                   class="block w-32 h-16 sm:w-48 sm:h-24 p-3 sm:p-4 m-2 sm:m-4 rounded-lg bg-ash transition-all duration-300 hover:shadow-xl">
                   <img :src="partner.logo || 'https://via.placeholder.com/150?text=Logo'" :alt="partner.name || 'Logo'"
                     class="w-full h-full object-contain transition-opacity duration-300 filter grayscale hover:grayscale-0"
@@ -46,23 +46,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { SuitOpsServices } from '~/stores/SuitOpsServices'
+import { ref, onMounted, computed } from 'vue'
+import { PGSServices } from '~/stores/PGSServices'
 import { IconMoodCry } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LPartners.vue'
 import { useI18n } from 'vue-i18n'
+import type { PartnerData } from '@/types';
 
 const { t } = useI18n()
-const partners = ref<any[]>([])
+const allPartners = ref<PartnerData[]>([])
 const error = ref<string | null>(null)
 const loading = ref(true)
 const isPaused = ref(false)
-const activePartner = ref<any>(null)
+const activePartner = ref<PartnerData | null>(null)
+const scrollContainer = ref<HTMLElement | null>(null)
 
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement
   const name = target.alt || 'Logo'
   target.src = `https://api.dicebear.com/7.x/initials/svg?seed=${name}`
+}
+
+const scroll = (direction: 'left' | 'right') => {
+  if (!scrollContainer.value) return
+
+  const containerWidth = scrollContainer.value.offsetWidth
+  const scrollAmount = containerWidth * 0.8
+  const currentScroll = scrollContainer.value.scrollLeft
+  const newScroll = direction === 'left'
+    ? Math.max(0, currentScroll - scrollAmount)
+    : currentScroll + scrollAmount
+
+  scrollContainer.value.scrollTo({
+    left: newScroll,
+    behavior: 'smooth'
+  })
 }
 
 const fetchPartners = async () => {
@@ -73,8 +91,8 @@ const fetchPartners = async () => {
 
   while (attempts < maxAttempts) {
     try {
-      const response = await SuitOpsServices.getAllPartners() as { data: any };
-      partners.value = response.data?.data || response.data || [];
+      const response = await PGSServices.getAllSolutionPartners();
+      allPartners.value = response.data || [];
       loading.value = false
       return
     } catch (err) {
@@ -89,6 +107,12 @@ const fetchPartners = async () => {
     }
   }
 }
+
+const filteredPartners = computed(() => {
+  return allPartners.value.filter(partner =>
+    partner.platforms && partner.platforms.some((platform: { slug: string }) => platform.slug === 'hire')
+  );
+});
 
 onMounted(() => {
   fetchPartners()
@@ -109,18 +133,25 @@ onMounted(() => {
 .partner-scroll {
   overflow: hidden;
   padding: 0.5rem 0;
-  /* Espacement vertical réduit sur mobile */
 }
 
 .scroll-track {
   display: flex;
   animation: scroll 25s linear infinite;
-  /* Vitesse légèrement réduite */
   will-change: transform;
-  /* Optimisation des performances */
 }
 
 .partner-scroll-pause .scroll-track {
   animation-play-state: paused;
+}
+
+.testimonials-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-padding: 0 1rem;
+}
+
+.testimonials-container::-webkit-scrollbar {
+  display: none;
 }
 </style>
