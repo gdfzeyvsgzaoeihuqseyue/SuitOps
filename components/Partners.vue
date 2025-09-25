@@ -110,7 +110,7 @@ const fetchPartners = async () => {
 
 const filteredPartners = computed(() => {
   return allPartners.value.filter(partner =>
-    partner.platforms && partner.platforms.some((platform: { slug: string }) => platform.slug === 'hire')
+    partner.platforms && partner.platforms.some((platform: { slug: string }) => platform.slug === 'easyquicktrack')
   );
 });
 

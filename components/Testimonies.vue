@@ -17,8 +17,8 @@
       <!-- Etat de chargement -->
       <Loader v-if="loading" class="relative" />
 
-      <!-- Card partenaire -->
-      <div v-if="!error" class="relative">
+      <!-- Card témoignage -->
+      <div v-else-if="filteredTestimonials.length > 0" class="relative">
         <!-- Masques dégradés -->
         <div class="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-bgClr to-transparent z-10"></div>
         <div class="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-bgClr to-transparent z-10"></div>
@@ -26,26 +26,30 @@
         <!-- Testimonials slider -->
         <div class="flex gap-4 sm:gap-8 overflow-x-auto pb-6 sm:pb-8 scroll-smooth testimonials-container snap-x snap-mandatory"
           ref="scrollContainer">
-          <div v-for="testimony in testimonials" :key="testimony.id"
+          <div v-for="testimony in filteredTestimonials" :key="testimony.id"
             class="flex-none w-[calc(100vw-3rem)] sm:w-[400px] bg-ash rounded-xl shadow-lg p-4 sm:p-6 hover:shadow-xl transition-shadow duration-300 snap-start"
             v-motion :initial="{ opacity: 0, y: 50 }" :enter="{ opacity: 1, y: 0 }">
             <div class="flex items-center mb-4 sm:mb-6">
               <img
-                :src="testimony.photo?.url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + testimony.lastname"
-                :alt="testimony.lastname" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-2 sm:border-4 border-primary"
+                :src="testimony.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${testimony.author}`"
+                :alt="testimony.author" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-2 sm:border-4 border-primary"
                 @error="handleImageError">
               <div class="ml-3 sm:ml-4">
                 <h3 class="text-base sm:text-lg font-semibold">
-                  {{ testimony.lastname }}
+                  {{ testimony.author }}
                 </h3>
-                <p class="text-xs sm:text-sm text-primary">
-                  {{ testimony.firstname }}
+                <p v-if="testimony.role || testimony.company" class="text-xs sm:text-sm text-primary">
+                  {{ testimony.role }} <span v-if="testimony.role && testimony.company">à</span> {{ testimony.company }}
                 </p>
+                <div v-if="testimony.note" class="flex items-center mt-1">
+                  <IconStarFilled v-for="n in testimony.note" :key="n" class="w-4 h-4 text-yellow-400" />
+                  <IconStar v-for="n in (5 - testimony.note)" :key="n + 'empty'" class="w-4 h-4 text-gray-300" />
+                </div>
               </div>
             </div>
 
             <blockquote class="italic text-sm sm:text-base leading-relaxed">
-              "{{ testimony.message }}"
+              "{{ testimony.content }}"
             </blockquote>
           </div>
         </div>
@@ -64,26 +68,30 @@
           </button>
         </div>
       </div>
+      <div v-else class="text-center p-4 sm:p-8">
+        <p class="text-gray-500">{{ t('common.loadError', { object: t('common.testimonies') }) }}</p>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { IconMoodCry, IconChevronLeft, IconChevronRight } from '@tabler/icons-vue'
-import { SuitOpsServices } from '~/stores/SuitOpsServices'
+import { ref, onMounted, computed } from 'vue'
+import { IconMoodCry, IconChevronLeft, IconChevronRight, IconStarFilled, IconStar } from '@tabler/icons-vue' // Ajout de IconStarFilled, IconStar
+import { PGSServices } from '~/stores/PGSServices' // CHANGEMENT ICI : Import de PGSServices
 import Loader from '~/components/Load/LTestimonies.vue'
 import { useI18n } from 'vue-i18n'
+import type { TestimonyData } from '@/types'; // Import de l'interface TestimonyData
 
 const { t } = useI18n()
-const testimonials = ref<any[]>([])
+const allTestimonials = ref<TestimonyData[]>([]) // Renommé pour stocker tous les témoignages
 const error = ref<string | null>(null)
 const loading = ref(true)
 const scrollContainer = ref<HTMLElement | null>(null)
 
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement
-  const name = target.alt || 'Logo'
+  const name = target.alt || 'Avatar'
   target.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`
 }
 
@@ -91,7 +99,7 @@ const scroll = (direction: 'left' | 'right') => {
   if (!scrollContainer.value) return
 
   const containerWidth = scrollContainer.value.offsetWidth
-  const scrollAmount = containerWidth * 0.8 // Scroll de 80% de la largeur visible
+  const scrollAmount = containerWidth * 0.8
   const currentScroll = scrollContainer.value.scrollLeft
   const newScroll = direction === 'left'
     ? Math.max(0, currentScroll - scrollAmount)
@@ -111,8 +119,8 @@ const fetchTestimonials = async () => {
 
   while (attempts < maxAttempts) {
     try {
-      const response = await SuitOpsServices.getAllTestimonies() as { data: any };
-      testimonials.value = response.data?.data || response.data || [];
+      const response = await PGSServices.getAllSolutionTestimonies();
+      allTestimonials.value = response.data || []; 
       loading.value = false
       return
     } catch (err) {
@@ -128,6 +136,22 @@ const fetchTestimonials = async () => {
   }
 }
 
+// Propriété calculée pour filtrer les témoignages
+const filteredTestimonias = computed(() => {
+  return allTestimonials.value.filter(testimony =>
+    testimony.isPublished &&
+    testimony.platform && testimony.platform.some((platform: { slug: string }) => platform.slug === 'easyquicktrack') 
+  );
+});
+
+const filteredTestimonials = computed(() => {
+  return allTestimonials.value.filter(testimony =>
+    testimony.isPublished &&
+    Array.isArray(testimony.platform) && // Added a check to ensure it's an array
+    testimony.platform.some((platform: { slug: string }) => platform.slug === 'easyquicktrack')
+  );
+});
+
 onMounted(() => {
   fetchTestimonials()
 })
@@ -137,7 +161,7 @@ onMounted(() => {
 .testimonials-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scroll-padding: 0 1rem; /* Espace pour le snap sur mobile */
+  scroll-padding: 0 1rem;
 }
 
 .testimonials-container::-webkit-scrollbar {

@@ -132,10 +132,14 @@ export interface SocialLink {
 // SUITOPS SERVICES
 // ===============================================
 export interface ApiResponse<T = any> {
-  status: boolean;
+  status?: boolean;
+  success?: boolean;
   message?: string;
-  data: T;
   nb?: number; 
+  nbOnPage?: number;
+  currentPage?: number;
+  totalPages?: number;
+  data: T;
 }
 
 export interface CompanyData {
@@ -200,6 +204,25 @@ export interface PartnerData {
   createdAt: number;
   updatedAt: number;
   platforms: Array<{ 
+    id: string;
+    name: string;
+    slug: string;
+  }>;
+}
+
+export interface TestimonyData {
+  id: string;
+  author: string;
+  company?: string | null;
+  role?: string | null;
+  content: string;
+  note?: number | null;
+  avatar?: string | null;
+  isPublished: boolean;
+  isFeatured: boolean;
+  createdAt: number;
+  updatedAt: number;
+  platform: Array<{
     id: string;
     name: string;
     slug: string;
