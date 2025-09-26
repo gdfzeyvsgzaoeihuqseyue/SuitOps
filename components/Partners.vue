@@ -2,20 +2,20 @@
   <section class="overflow-hidden">
     <div class="container mx-auto px-4">
       <!-- Gestion de l'erreur -->
-      <div v-if="error" class="text-center p-4 sm:p-8">
+      <div v-if="partnersStore.error" class="text-center p-4 sm:p-8">
         <div class="mb-3 sm:mb-4">
           <IconMoodCry class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
-          <p class="text-danger text-sm sm:text-base">{{ error }}</p>
+          <p class="text-danger text-sm sm:text-base">{{ partnersStore.error }}</p>
         </div>
 
-        <button @click="fetchPartners"
+        <button @click="partnersStore.fetchPartners"
           class="bg-primary text-WtB px-3 py-1.5 sm:px-4 sm:py-2 rounded-md hover:bg-secondary transition-colors text-sm sm:text-base">
           {{ t('common.retryButton') }}
         </button>
       </div>
 
       <!-- Indicateur de chargement -->
-      <Loader v-else-if="loading" class="relative" />
+      <Loader v-else-if="partnersStore.loading" class="relative" />
 
       <!-- Contenu principal -->
       <div v-else class="relative">
@@ -28,7 +28,7 @@
           @touchend="isPaused = false" @mouseenter="isPaused = true" @mouseleave="isPaused = false">
           <div class="scroll-track flex space-x-6 sm:space-x-12">
             <template v-for="n in 2">
-              <div v-for="partner in filteredPartners" :key="n + '-' + partner.id" class="flex-none relative"
+              <div v-for="partner in partnersStore.suitopsPartners" :key="n + '-' + partner.id" class="flex-none relative"
                 :title="partner.name" @mouseenter="activePartner = partner" @mouseleave="activePartner = null">
                 <a :href="partner.website" target="_blank" rel="noopener noreferrer"
                   class="block w-32 h-16 sm:w-48 sm:h-24 p-3 sm:p-4 m-2 sm:m-4 rounded-lg bg-ash transition-all duration-300 hover:shadow-xl">
@@ -46,17 +46,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { PGSServices } from '~/stores/PGSServices'
+import { ref, onMounted } from 'vue'
 import { IconMoodCry } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LPartners.vue'
 import { useI18n } from 'vue-i18n'
 import type { PartnerData } from '@/types';
+import { usePartnersStore } from '~/stores/partners';
 
 const { t } = useI18n()
-const allPartners = ref<PartnerData[]>([])
-const error = ref<string | null>(null)
-const loading = ref(true)
+const partnersStore = usePartnersStore();
+
 const isPaused = ref(false)
 const activePartner = ref<PartnerData | null>(null)
 const scrollContainer = ref<HTMLElement | null>(null)
@@ -83,39 +82,8 @@ const scroll = (direction: 'left' | 'right') => {
   })
 }
 
-const fetchPartners = async () => {
-  error.value = null
-  loading.value = true
-  let attempts = 0
-  const maxAttempts = 2
-
-  while (attempts < maxAttempts) {
-    try {
-      const response = await PGSServices.getAllSolutionPartners();
-      allPartners.value = response.data || [];
-      loading.value = false
-      return
-    } catch (err) {
-      attempts++
-      console.error(`Erreur lors de la récupération des partenaires, tentative ${attempts}:`, err)
-      if (attempts < maxAttempts) {
-        await new Promise(resolve => setTimeout(resolve, 500))
-      } else {
-        error.value = t('common.loadError', { object: t('common.partners') });
-        loading.value = false
-      }
-    }
-  }
-}
-
-const filteredPartners = computed(() => {
-  return allPartners.value.filter(partner =>
-    partner.platforms && partner.platforms.some((platform: { slug: string }) => platform.slug === 'easyquicktrack')
-  );
-});
-
 onMounted(() => {
-  fetchPartners()
+  partnersStore.fetchPartners();
 })
 </script>
 

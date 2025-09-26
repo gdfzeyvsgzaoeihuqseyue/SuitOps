@@ -2,23 +2,23 @@
   <section>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Etat d'erreur -->
-      <div v-if="error" class="text-center p-4 sm:p-8">
+      <div v-if="testimoniesStore.error" class="text-center p-4 sm:p-8">
         <div class="mb-3 sm:mb-4">
           <IconMoodCry class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
-          <p class="text-danger text-sm sm:text-base">{{ error }}</p>
+          <p class="text-danger text-sm sm:text-base">{{ testimoniesStore.error }}</p>
         </div>
 
-        <button @click="fetchTestimonials"
+        <button @click="testimoniesStore.fetchTestimonies"
           class="bg-primary text-WtB px-3 py-1.5 sm:px-4 sm:py-2 rounded-md hover:bg-secondary transition-colors text-sm sm:text-base">
           {{ t('common.retryButton') }}
         </button>
       </div>
 
       <!-- Etat de chargement -->
-      <Loader v-if="loading" class="relative" />
+      <Loader v-else-if="testimoniesStore.loading" class="relative" />
 
       <!-- Card témoignage -->
-      <div v-else-if="filteredTestimonials.length > 0" class="relative">
+      <div v-else-if="testimoniesStore.suitopsTestimonies.length > 0" class="relative">
         <!-- Masques dégradés -->
         <div class="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-bgClr to-transparent z-10"></div>
         <div class="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-bgClr to-transparent z-10"></div>
@@ -26,7 +26,7 @@
         <!-- Testimonials slider -->
         <div class="flex gap-4 sm:gap-8 overflow-x-auto pb-6 sm:pb-8 scroll-smooth testimonials-container snap-x snap-mandatory"
           ref="scrollContainer">
-          <div v-for="testimony in filteredTestimonials" :key="testimony.id"
+          <div v-for="testimony in testimoniesStore.suitopsTestimonies" :key="testimony.id"
             class="flex-none w-[calc(100vw-3rem)] sm:w-[400px] bg-ash rounded-xl shadow-lg p-4 sm:p-6 hover:shadow-xl transition-shadow duration-300 snap-start"
             v-motion :initial="{ opacity: 0, y: 50 }" :enter="{ opacity: 1, y: 0 }">
             <div class="flex items-center mb-4 sm:mb-6">
@@ -76,17 +76,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { IconMoodCry, IconChevronLeft, IconChevronRight, IconStarFilled, IconStar } from '@tabler/icons-vue' // Ajout de IconStarFilled, IconStar
-import { PGSServices } from '~/stores/PGSServices' // CHANGEMENT ICI : Import de PGSServices
+import { ref, onMounted } from 'vue'
+import { IconMoodCry, IconChevronLeft, IconChevronRight, IconStarFilled, IconStar } from '@tabler/icons-vue'
 import Loader from '~/components/Load/LTestimonies.vue'
 import { useI18n } from 'vue-i18n'
-import type { TestimonyData } from '@/types'; // Import de l'interface TestimonyData
+import { useTestimoniesStore } from '~/stores/testimonies';
 
 const { t } = useI18n()
-const allTestimonials = ref<TestimonyData[]>([]) // Renommé pour stocker tous les témoignages
-const error = ref<string | null>(null)
-const loading = ref(true)
+const testimoniesStore = useTestimoniesStore();
+
 const scrollContainer = ref<HTMLElement | null>(null)
 
 const handleImageError = (event: Event) => {
@@ -111,49 +109,8 @@ const scroll = (direction: 'left' | 'right') => {
   })
 }
 
-const fetchTestimonials = async () => {
-  error.value = null
-  loading.value = true
-  let attempts = 0
-  const maxAttempts = 2
-
-  while (attempts < maxAttempts) {
-    try {
-      const response = await PGSServices.getAllSolutionTestimonies();
-      allTestimonials.value = response.data || []; 
-      loading.value = false
-      return
-    } catch (err) {
-      attempts++
-      console.error(`Erreur lors de la récupération des témoignages, tentative ${attempts}:`, err)
-      if (attempts < maxAttempts) {
-        await new Promise(resolve => setTimeout(resolve, 500))
-      } else {
-        error.value = t('common.loadError', { object: t('common.testimonies') });
-        loading.value = false
-      }
-    }
-  }
-}
-
-// Propriété calculée pour filtrer les témoignages
-const filteredTestimonias = computed(() => {
-  return allTestimonials.value.filter(testimony =>
-    testimony.isPublished &&
-    testimony.platform && testimony.platform.some((platform: { slug: string }) => platform.slug === 'easyquicktrack') 
-  );
-});
-
-const filteredTestimonials = computed(() => {
-  return allTestimonials.value.filter(testimony =>
-    testimony.isPublished &&
-    Array.isArray(testimony.platform) && // Added a check to ensure it's an array
-    testimony.platform.some((platform: { slug: string }) => platform.slug === 'easyquicktrack')
-  );
-});
-
 onMounted(() => {
-  fetchTestimonials()
+  testimoniesStore.fetchTestimonies();
 })
 </script>
 
