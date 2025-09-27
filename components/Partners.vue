@@ -5,7 +5,7 @@
       <div v-if="partnersStore.error" class="text-center p-4 sm:p-8">
         <div class="mb-3 sm:mb-4">
           <IconMoodCry class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
-          <p class="text-danger text-sm sm:text-base">{{ partnersStore.error }}</p>
+          <p class="text-danger text-sm sm:text-base">{{ t('common.loadError', { object: t('common.partners') }) }}</p>
         </div>
 
         <button @click="partnersStore.fetchPartners"
@@ -28,8 +28,9 @@
           @touchend="isPaused = false" @mouseenter="isPaused = true" @mouseleave="isPaused = false">
           <div class="scroll-track flex space-x-6 sm:space-x-12">
             <template v-for="n in 2">
-              <div v-for="partner in partnersStore.suitopsPartners" :key="n + '-' + partner.id" class="flex-none relative"
-                :title="partner.name" @mouseenter="activePartner = partner" @mouseleave="activePartner = null">
+              <div v-for="partner in partnersStore.suitopsPartners" :key="n + '-' + partner.id"
+                class="flex-none relative" :title="partner.name" @mouseenter="activePartner = partner"
+                @mouseleave="activePartner = null">
                 <a :href="partner.website" target="_blank" rel="noopener noreferrer"
                   class="block w-32 h-16 sm:w-48 sm:h-24 p-3 sm:p-4 m-2 sm:m-4 rounded-lg bg-ash transition-all duration-300 hover:shadow-xl">
                   <img :src="partner.logo || 'https://via.placeholder.com/150?text=Logo'" :alt="partner.name || 'Logo'"

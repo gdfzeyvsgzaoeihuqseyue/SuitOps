@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { useFetch, useRuntimeConfig } from 'nuxt/app';
+import { useRuntimeConfig } from 'nuxt/app';
 import type { ApiResponse, PartnerData } from '@/types';
 
 export const usePartnersStore = defineStore('partners', () => {
@@ -15,24 +15,21 @@ export const usePartnersStore = defineStore('partners', () => {
     loading.value = true;
     error.value = null;
     let attempts = 0;
-    const maxAttempts = 2; 
+    const maxAttempts = 2;
 
     while (attempts < maxAttempts) {
       try {
-        const { data: response, error: fetchError } = await useFetch<ApiResponse<PartnerData[]>>(`${PGS_URL}/solution/partner`, {
+        const response: ApiResponse<PartnerData[]> = await $fetch<ApiResponse<PartnerData[]>>(`${PGS_URL}/solution/partner`, {
           method: 'GET',
           query: { limit: 100 },
-          server: false,
         });
 
-        if (fetchError.value) {
-          throw fetchError.value;
-        }
-        if (!response.value || !response.value.success) {
-          throw new Error(response.value?.message || 'Invalid API response for partners.');
+        if (!response || !response.success) {
+          throw new Error(response?.message || 'Invalid API response for partners.');
         }
 
-        partners.value = response.value.data || [];
+        console.log('Partners API Response:', response);
+        partners.value = response.data || [];
         return;
       } catch (err: any) {
         attempts++;
@@ -49,9 +46,24 @@ export const usePartnersStore = defineStore('partners', () => {
   };
 
   const suitopsPartners = computed(() => {
-    return partners.value.filter(partner =>
-      partner.platforms && partner.platforms.some(platform => platform.slug === 'suitops')
-    );
+    console.log('Computing suitopsPartners, total partners:', partners.value.length);
+
+    const filtered = partners.value.filter(partner => {
+      const hasValidPlatform = partner.platform &&
+        typeof partner.platform === 'object' &&
+        partner.platform.slug === 'suitops';
+
+      console.log(`Partner ${partner.id}:`, {
+        platform: partner.platform,
+        hasValidPlatform,
+        slug: partner.platform?.slug
+      });
+
+      return hasValidPlatform;
+    });
+
+    console.log('Filtered suitops partners:', filtered.length);
+    return filtered;
   });
 
   return {

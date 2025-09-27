@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { useFetch, useRuntimeConfig } from 'nuxt/app';
+import { useRuntimeConfig } from 'nuxt/app';
 import type { ApiResponse, TestimonyData } from '@/types';
 
 export const useTestimoniesStore = defineStore('testimonies', () => {
@@ -19,24 +19,20 @@ export const useTestimoniesStore = defineStore('testimonies', () => {
 
     while (attempts < maxAttempts) {
       try {
-        const { data: response, error: fetchError } = await useFetch<ApiResponse<TestimonyData[]>>(`${PGS_URL}/solution/testimony`, {
+        const response: ApiResponse<TestimonyData[]> = await $fetch<ApiResponse<TestimonyData[]>>(`${PGS_URL}/solution/testimony`, {
           method: 'GET',
           query: {
             limit: 100,
             isPublished: true,
-            isFeatured: false,
           },
-          server: false,
         });
 
-        if (fetchError.value) {
-          throw fetchError.value;
-        }
-        if (!response.value || !response.value.success) {
-          throw new Error(response.value?.message || 'Invalid API response for testimonies.');
+        if (!response || !response.success) {
+          throw new Error(response?.message || 'Invalid API response for testimonies.');
         }
 
-        testimonies.value = response.value.data || [];
+        console.log('Testimonies API Response:', response); // Debug log
+        testimonies.value = response.data || [];
         return;
       } catch (err: any) {
         attempts++;
@@ -53,9 +49,31 @@ export const useTestimoniesStore = defineStore('testimonies', () => {
   };
 
   const suitopsTestimonies = computed(() => {
-    return testimonies.value.filter(testimony =>
-      testimony.platform && testimony.platform.some(p => p.slug === 'suitops')
-    );
+    console.log('Computing suitopsTestimonies, total testimonies:', testimonies.value.length); // Debug
+    
+    const filtered = testimonies.value.filter(testimony => {
+      // ✅ CORRECTION: platform est un objet unique, pas un array
+      const hasValidPlatform = testimony.platform && 
+                               typeof testimony.platform === 'object' && 
+                               testimony.platform.slug === 'suitops';
+      
+      console.log(`Testimony ${testimony.id}:`, {
+        platform: testimony.platform,
+        hasValidPlatform,
+        slug: testimony.platform?.slug
+      }); // Debug
+      
+      return hasValidPlatform;
+    });
+
+    console.log('Filtered suitops testimonies:', filtered.length); // Debug
+
+    // Sort: featured first, then by creation date (newest first)
+    return filtered.sort((a, b) => {
+      if (a.isFeatured && !b.isFeatured) return -1;
+      if (!a.isFeatured && b.isFeatured) return 1;
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(); // Fix: convert to Date objects
+    });
   });
 
   return {

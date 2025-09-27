@@ -134,7 +134,7 @@
 
     <!-- Section complémentaire -->
     <section class="my-6 sm:my-8 md:my-12 text-center px-4">
-      <p class="text-sm sm:text-base">{{ t('faqPage.noMatch') }} <NuxtLink href="/forum"
+      <p class="text-sm sm:text-base">{{ t('faqPage.noMatch') }} <NuxtLink :to="localePath('/forum')"
           class="text-primary hover:text-secondary">{{ t('faqPage.communityLink') }}</NuxtLink>.</p>
     </section>
   </main>
@@ -148,9 +148,11 @@ import { useFaqs } from '~/composables/useFaqs'
 import Loader from '~/components/Load/LFaq.vue'
 import { useI18n } from 'vue-i18n'
 import { useSharedFiles } from '~/stores/sharedFiles';
+import { useLocalePath } from '#imports';
 
 const sharedFiles = useSharedFiles();
 const { t } = useI18n()
+const localePath = useLocalePath();
 
 useHead({
   title: t('faqPage.heroTitle')

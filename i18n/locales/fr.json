@@ -1,8 +1,6 @@
 {
   "meta": {
-    "title": "SuitOps - Solution complète de gestion d'entreprise",
-    "description": "Plateforme complète de gestion d'entreprise. Simplifiez votre gestion quotidienne avec nos solutions innovantes.",
-    "indexPage": "Acceuil"
+    "indexPage": "SuitOps - Solution complète de gestion d'entreprise"
   },
   "prefSettings": {
     "preferences": "Préférences",
@@ -74,6 +72,14 @@
     "contactSuffix": "si le problème persiste.",
     "faqLink": "Consulter notre FAQ",
     "faqSuffix": "pour les questions fréquentes."
+  },
+  "feedback": {
+    "title": "Besoin d'aide ou de nous contacter ?",
+    "testimony": "Donner un avis / Témoignage",
+    "legal": "Mentions Légales",
+    "terms": "Conditions Générales d'Utilisation",
+    "forum": "Forum / Aide",
+    "docs": "Documentation / Guide"
   },
   "modules": {
     "badgeManage": "Gestion",

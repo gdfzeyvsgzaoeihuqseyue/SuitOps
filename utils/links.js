@@ -2,6 +2,7 @@ export const externalLinks = {
   web: 'https://web.pgs.ctrlengine.com',
   doc: 'https://pgsdocs.netlify.app',
   hire: 'https://hire-suitops.netlify.app',
+  pgs: 'https://progestionsoft.netlify.app',
 };
 
 export const internalLinks = {

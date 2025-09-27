@@ -1,8 +1,6 @@
 {
   "meta": {
-    "title": "SuitOps - Complete business management solution",
-    "description": "Complete business management platform. Simplify your daily management with our innovative solutions.",
-    "indexPage": "Home"
+    "indexPage": "SuitOps - Complete business management solution"
   },
   "prefSettings": {
     "preferences": "Settings",
@@ -74,6 +72,14 @@
     "contactSuffix": "if the problem persists.",
     "faqLink": "Check our FAQ",
     "faqSuffix": "for frequently asked questions."
+  },
+  "feedback": {
+    "title": "Need help or want to contact us?",
+    "testimony": "Give a review / Testimony",
+    "legal": "Legal Notice",
+    "terms": "Terms of Use",
+    "forum": "Forum / Help",
+    "docs": "Documentation / Guide"
   },
   "modules": {
     "badgeManage": "Management",

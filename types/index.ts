@@ -203,11 +203,11 @@ export interface PartnerData {
   logo?: string;
   createdAt: number;
   updatedAt: number;
-  platforms: Array<{ 
+  platform: { 
     id: string;
     name: string;
     slug: string;
-  }>;
+  };
 }
 
 export interface TestimonyData {
@@ -222,11 +222,11 @@ export interface TestimonyData {
   isFeatured: boolean;
   createdAt: number;
   updatedAt: number;
-  platform: Array<{
+  platform: {
     id: string;
     name: string;
     slug: string;
-  }>;
+  };
 }
 
 export interface LegalContent {
