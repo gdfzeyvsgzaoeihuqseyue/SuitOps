@@ -13,11 +13,11 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
   const paths = {
     // IMAGES
     logo: {
-      dc: `${SHARED_URL}/Logos/SuitOps-DC.png`,
-      dw: `${SHARED_URL}/Logos/SuitOps-DW.png`,
-      mc: `${SHARED_URL}/Logos/SuitOps-MC.png`,
-      mw: `${SHARED_URL}/Logos/SuitOps-MW.png`,
-      pgs: `${SHARED_URL}/Logos/PGS-MC.png`,
+      dc: `${SHARED_URL}/_General/Logos/SuitOps-DC.png`,
+      dw: `${SHARED_URL}/_General/Logos/SuitOps-DW.png`,
+      mc: `${SHARED_URL}/_General/Logos/SuitOps-MC.png`,
+      mw: `${SHARED_URL}/_General/Logos/SuitOps-MW.png`,
+      pgs: `${SHARED_URL}/_General/Logos/PGS-MC.png`,
     },
     hero: {
       about: `${SHARED_URL}/SuitOps_Landing/Hero/about.png`,
@@ -44,22 +44,22 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
       pgi: `${SHARED_URL}/SuitOps_Landing/Modules/pgi.png`,
     },
     downloadPage: {
-      windows: `${SHARED_URL}/SuitOps_Landing/Logos/Windows.png`,
-      macOs: `${SHARED_URL}/SuitOps_Landing/Logos/MacOs.png`,
-      linux: `${SHARED_URL}/SuitOps_Landing/Logos/Linux.png`,
+      windows: `${SHARED_URL}/SuitOps_Landing/_General/Logos/Windows.png`,
+      macOs: `${SHARED_URL}/SuitOps_Landing/_General/Logos/MacOs.png`,
+      linux: `${SHARED_URL}/SuitOps_Landing/_General/Logos/Linux.png`,
     },
     general: {
-      error403: `${SHARED_URL}/General/Error403.png`,
-      error404: `${SHARED_URL}/General/Error404.png`,
-      error500: `${SHARED_URL}/General/Error500.png`,
+      error403: `${SHARED_URL}/_General/Error/403.png`,
+      error404: `${SHARED_URL}/_General/Error/404.png`,
+      error500: `${SHARED_URL}/_General/Error/500.png`,
       heroImg: `${SHARED_URL}/SuitOps_Landing/Others/HeroImg.png`,
       faq: `${SHARED_URL}/SuitOps_Landing/Others/faq.png`,
     },
 
     //JSON
     data: {
-      footer: `${SHARED_URL}/JSON/pgs.json`,
-      custom: `${SHARED_URL}/JSON/custom.json`
+      footer: `${SHARED_URL}/_Docs/JSON/pgs.json`,
+      custom: `${SHARED_URL}/_Docs/JSON/custom.json`
     }
   };
 

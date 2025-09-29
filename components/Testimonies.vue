@@ -50,7 +50,7 @@
                   <IconStarHalfFilled v-if="hasHalfStar(testimony.note)" :key="'half'"
                     class="w-4 h-4 text-yellow-400" />
                   <IconStar v-for="n in getEmptyStars(testimony.note)" :key="n + 'empty'"
-                    class="w-4 h-4 text-gray-300" />
+                    class="w-4 h-4 text-yellow-400" />
                 </div>
               </div>
             </div>
