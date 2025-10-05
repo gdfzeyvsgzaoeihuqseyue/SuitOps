@@ -94,7 +94,7 @@
 
       <div v-else>
         <!-- Compteur d'articles -->
-        <div class="mt-8 text-sm text-gray-600">
+        <div class="mt-8 text-sm">
           <p class="text-xs sm:text-sm mb-4">
             {{ totalArticles }} {{ t('blogPage.articlesFound', { count: totalArticles }) }}
           </p>
