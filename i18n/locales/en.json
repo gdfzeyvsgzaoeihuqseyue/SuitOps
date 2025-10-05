@@ -548,6 +548,7 @@
     "sortAlphaAsc": "Alphabetical (A-Z)",
     "sortAlphaDesc": "Alphabetical (Z-A)",
     "imageAlt": "Article image",
+    "articlesFound": "article found | articles founs",
     "noArticlesFound": "No blog articles match ",
     "readMore": "Read more",
     "itemLabel": "posts"

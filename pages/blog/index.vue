@@ -25,8 +25,9 @@
         <div class="relative flex-1 w-full">
           <IconSearch
             class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 peer-focus:text-primary transition-colors" />
-          <input v-model="searchQuery" type="search" id="jobSearch" placeholder=" " class="input-floating px-10 peer" />
-          <label for="jobSearch" class="label-floating left-6 sm:left-8">
+          <input v-model="searchQuery" type="search" id="blogSearch" placeholder=" "
+            class="input-floating px-10 peer" />
+          <label for="blogSearch" class="label-floating left-6 sm:left-8">
             {{ $t('blogPage.searchPlaceholder') }}
           </label>
         </div>
@@ -91,65 +92,73 @@
         </button>
       </div>
 
-      <!-- Affichage des articles de blog -->
-      <section v-else class="grid gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <article v-for="post in paginatedJobs" :key="post.id"
-          class="bg-ash shadow rounded overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
-          <div class="relative">
-            <img :src="post.imageUrl" :alt="post.title" @error="handleImageError"
-              class="w-full h-40 sm:h-48 object-cover" :data-title="post.title" />
-
-            <div class="absolute top-0 left-0 bg-BtW bg-opacity-50 text-WtB px-2 py-1 text-xs">
-              {{ post.category.name }}
-            </div>
-
-            <div class="absolute top-0 right-0 bg-primary bg-opacity-50 text-WtB px-2 py-1 text-xs">
-              <span class="flex items-center gap-1 sm:gap-2">
-                <IconEye class="w-3 h-3 sm:w-4 sm:h-4" />
-                {{ post?.views }}
-              </span>
-            </div>
-          </div>
-          <div class="p-3 sm:p-4 flex flex-col flex-grow">
-            <h2 class="text-lg sm:text-xl text-primary font-medium border-b border-primary mb-2 sm:mb-4">
-              {{ post.title }}
-            </h2>
-
-            <div
-              class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 justify-center text-xs sm:text-sm mb-3 sm:mb-4 gap-1 sm:gap-0">
-              <span class="flex items-center gap-1 sm:gap-2">
-                <IconUserEdit class="w-3 h-3 sm:w-4 sm:h-4" />
-                <NuxtLink :to="`https://progestionsoft.netlify.app/blogs/author/${post.author.slug}`" target="_blank"
-                  class="hover:underline">
-                  {{ post.author.name }}
-                </NuxtLink>
-              </span>
-              <span class="hidden sm:block">•</span>
-              <span class="flex items-center gap-1 sm:gap-2">
-                <IconCalendarFilled class="w-3 h-3 sm:w-4 sm:h-4" />
-                {{ formatShortDate(post.createdAt, locale) }}
-              </span>
-            </div>
-
-            <div class="line-clamp-3 text-xs sm:text-sm mb-3 sm:mb-4" v-html="post.excerpt"></div>
-
-            <NuxtLink :to="localePath(`/blog/${post.slug}`)"
-              class="inline-block text-primary hover:text-secondary transition-colors flex items-center gap-1 sm:gap-2 justify-end text-xs sm:text-sm">
-              {{ $t('blogPage.readMore') }}
-              <IconArrowRight class="w-3 h-3 sm:w-4 sm:h-4" />
-            </NuxtLink>
-          </div>
-        </article>
-
-        <!-- Absence d'articles après filtrage -->
-        <div v-if="filteredPosts.length === 0" class="text-center col-span-full py-8 sm:py-12">
-          <div>
-            <IconArticleOff class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
-          </div>
-          <p class="text-sm sm:text-base">{{ $t('blogPage.noArticlesFound') }}<span class="font-bold">{{ searchQuery
-          }}</span> </p>
+      <div v-else>
+        <!-- Compteur d'articles -->
+        <div class="mt-8 text-sm text-gray-600">
+          <p class="text-xs sm:text-sm mb-4">
+            {{ totalArticles }} {{ t('blogPage.articlesFound', { count: totalArticles }) }}
+          </p>
         </div>
-      </section>
+
+        <!-- Affichage des articles de blog -->
+        <section class="grid gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <article v-for="post in paginatedJobs" :key="post.id"
+            class="bg-ash shadow rounded overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
+            <div class="relative">
+              <img :src="post.imageUrl" :alt="post.title" @error="handleImageError"
+                class="w-full h-40 sm:h-48 object-cover" :data-title="post.title" />
+
+              <div class="absolute top-0 left-0 bg-BtW bg-opacity-50 text-WtB px-2 py-1 text-xs">
+                {{ post.category.name }}
+              </div>
+
+              <div class="absolute top-0 right-0 bg-primary bg-opacity-50 text-WtB px-2 py-1 text-xs">
+                <span class="flex items-center gap-1 sm:gap-2">
+                  <IconEye class="w-3 h-3 sm:w-4 sm:h-4" />
+                  {{ post?.views }}
+                </span>
+              </div>
+            </div>
+            <div class="p-3 sm:p-4 flex flex-col flex-grow">
+              <h2 class="text-lg sm:text-xl text-primary font-medium border-b border-primary mb-2 sm:mb-4">
+                {{ post.title }}
+              </h2>
+
+              <div
+                class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 justify-center text-xs sm:text-sm mb-3 sm:mb-4 gap-1 sm:gap-0">
+                <span class="flex items-center gap-1 sm:gap-2">
+                  <IconUserEdit class="w-3 h-3 sm:w-4 sm:h-4" />
+                  <a :href="getAuthorUrl(post.author.slug)" target="_blank" class="hover:underline">
+                    {{ post.author.name }}
+                  </a>
+                </span>
+                <span class="hidden sm:block">•</span>
+                <span class="flex items-center gap-1 sm:gap-2">
+                  <IconCalendarFilled class="w-3 h-3 sm:w-4 sm:h-4" />
+                  {{ formatShortDate(post.createdAt, locale) }}
+                </span>
+              </div>
+
+              <div class="line-clamp-3 text-xs sm:text-sm mb-3 sm:mb-4" v-html="post.excerpt"></div>
+
+              <NuxtLink :to="localePath(`/blog/${post.slug}`)"
+                class="inline-block text-primary hover:text-secondary transition-colors flex items-center gap-1 sm:gap-2 justify-end text-xs sm:text-sm">
+                {{ $t('blogPage.readMore') }}
+                <IconArrowRight class="w-3 h-3 sm:w-4 sm:h-4" />
+              </NuxtLink>
+            </div>
+          </article>
+
+          <!-- Absence d'articles après filtrage -->
+          <div v-if="filteredPosts.length === 0" class="text-center col-span-full py-8 sm:py-12">
+            <div>
+              <IconArticleOff class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
+            </div>
+            <p class="text-sm sm:text-base">{{ $t('blogPage.noArticlesFound') }}<span class="font-bold">{{ searchQuery
+            }}</span> </p>
+          </div>
+        </section>
+      </div>
 
       <!-- Pagination -->
       <usePagination :totalItems="filteredPosts.length" :itemsPerPage="itemsPerPage" :currentPage="currentPage"
@@ -167,10 +176,13 @@ import Loader from '~/components/Load/LBlog.vue'
 import { useI18n } from 'vue-i18n'
 import { formatShortDate } from '@/utils/date.js';
 import { useSharedFiles } from '~/stores/sharedFiles';
+import { externalLinks } from '@/utils/links.js'
 
 const sharedFiles = useSharedFiles();
 const { t, locale } = useI18n();
 const localePath = useLocalePath()
+
+const totalArticles = computed(() => filteredPosts.value.length)
 
 useHead({
   title: t('blogPage.heroTitle')
@@ -199,7 +211,7 @@ const fetchBlogPosts = async () => {
   while (attempts < maxAttempts) {
     try {
       const response = await PGSServices.getAllBlogPosts();
-      const filtered = response.data.filter(post => ['SuitOps', 'PGS', 'Général'].includes(post.category.name));
+      const filtered = response.data.filter(post => ['SuitOps', 'Employabilité', 'Général'].includes(post.category.name));
       blogPosts.value = filtered || [];
       loading.value = false
       return
@@ -268,6 +280,8 @@ const filteredPosts = computed(() => {
 
   return posts
 })
+
+const getAuthorUrl = (slug) => `${externalLinks.pgs}/blog/author/${slug}`
 
 // Pagination
 const paginatedJobs = computed(() => {

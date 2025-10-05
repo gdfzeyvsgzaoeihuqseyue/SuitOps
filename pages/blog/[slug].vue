@@ -3,8 +3,7 @@
     <useBreadcrumb :items="breadcrumbItems" />
   </section>
 
-  <div
-    :class="{ 'my-4 overflow-hidden': !isIframeMode, 'embed-container': isIframeMode }">
+  <div :class="{ 'my-4 overflow-hidden': !isIframeMode, 'embed-container': isIframeMode }">
     <main class="container mx-auto p-4 sm:p-8 max-w-6xl bg-WtBAct rounded-lg sm:rounded-xl md:rounded-3xl shadow-lg">
       <header class="h-60 sm:h-72 md:h-80 lg:h-96 relative overflow-hidden">
         <img :src="blogPost?.imageUrl" :alt="blogPost?.title || t('blogID.thisArticle')" @error="handleImageError"
@@ -49,10 +48,10 @@
             <div class="flex flex-wrap items-center gap-2 sm:gap-4">
               <span>
                 {{ $t('blogID.by') }}
-                <NuxtLink :to="`https://progestionsoft.netlify.app/blogs/author/${blogPost.author?.slug}`"
-                  target="_blank" class="font-bold text-secondary hover:underline">
+                <a :href="`${externalLinks.pgs}/blog/author/${blogPost.author?.slug}`" target="_blank"
+                  class="font-bold text-secondary hover:underline">
                   {{ blogPost?.author?.name }}
-                </NuxtLink>
+              </a>
               </span>
               <span class="hidden sm:inline">•</span>
               <span>
@@ -119,6 +118,7 @@ import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#imports'
 import { useIframeMode } from '~/composables/useIframeMode.js'
 import { formatShortDate } from '@/utils/date.js';
+import { externalLinks } from '@/utils/links.js'
 
 // Variables
 const { t, locale } = useI18n()
