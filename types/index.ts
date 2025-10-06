@@ -1,5 +1,5 @@
 export * from './pgsServices'
 export * from './preferences'
 export * from './siteInfo'
-export * from './sociallinks'
+export * from './socialLinks'
 export * from './suitopsServices'
