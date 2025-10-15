@@ -1,7 +1,6 @@
 export interface ChatSuggestion {
   text: string;
-  category: 'general' | 'product' | 'billing'
-    | 'integration' | 'security' | 'support' | 'developer';
+  category: 'general' | 'product' | 'billing' | 'integration' | 'security' | 'support' | 'developer';
 }
 
 export const chatSuggestions: ChatSuggestion[] = [
