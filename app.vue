@@ -4,6 +4,7 @@
       <NuxtPage />
       <BetaPasswordModal />
     </NuxtLayout>
+    <NOAHChatModal />
   </div>
 </template>
 

@@ -74,10 +74,10 @@
     "faqSuffix": "pour les questions fréquentes."
   },
   "feedback": {
-    "title": "Besoin d'aide ou de nous contacter ?",
+    "title": "Menu d'aide et de contact",
+    "noahAi": "Discuter avec NOAH AI",
+    "chatgpt": "Demander à ChatGPT",
     "testimony": "Donner un avis / Témoignage",
-    "legal": "Mentions Légales",
-    "terms": "Conditions Générales d'Utilisation",
     "forum": "Forum / Aide",
     "docs": "Documentation / Guide"
   },
