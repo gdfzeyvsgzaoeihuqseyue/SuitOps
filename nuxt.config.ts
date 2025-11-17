@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     name: 'SuitOps',
   },
 
-   sitemap: {
+  sitemap: {
     xslColumns: [
       { label: 'URL', width: '50%' },
       { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
@@ -35,16 +35,16 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    mistralApiKey: process.env.MISTRAL_API_KEY,
-    geminiApiKey: process.env.GEMINI_API_KEY,
-    
+    mistralApiKey: process.env.NOAH_MISTRAL_KEY,
+    geminiApiKey: process.env.NOAH_GEMINI_KEY,
+
     public: {
       suitOpsBaseAPI: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,
       pgsSharedFiles: process.env.PGS_SHARED_FILES,
-      betaMode: process.env.NUXT_BETA_MODE === 'true',
+      betaMode: process.env.BETA_MODE === 'true',
       betaRegisterPass: process.env.BETA_REGISTER_PASS,
-      siteIdentifier: process.env.NUXT_PUBLIC_SITE_IDENTIFIER || 'suitops',
+      siteIdentifier: process.env.SITE_IDENTIFIER || 'suitops',
     }
   },
 

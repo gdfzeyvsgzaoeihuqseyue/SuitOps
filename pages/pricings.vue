@@ -43,7 +43,7 @@
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold">{{ $t('pricingsPage.featuresTitle') }}</h2>
           </div>
 
-          <!-- Sélecteur de devise avec indicateur de mise à jour -->
+          <!-- Sélecteur de devise et indicateur de mise à jour -->
           <div class="flex flex-col items-center gap-4 mb-6">
             <div class="flex items-center justify-center gap-4">
               <span class="text-sm sm:text-base font-medium">{{ $t('pricingsPage.currency') }}</span>
@@ -57,6 +57,14 @@
                 </button>
               </div>
             </div>
+
+            <!-- Information de conversion -->
+              <div v-if="selectedCurrency !== 'XOF'" class="text-xs text-center mt-1">
+                <p>
+                  1 XOF ≈ {{ formatConversion(1, 'XOF', selectedCurrency) }}
+                  ({{ formatConversion(1, selectedCurrency, 'XOF') }})
+                </p>
+              </div>
 
             <!-- Indicateur de statut des taux de change -->
             <div class="flex items-center gap-2 text-xs">
@@ -128,14 +136,9 @@
                   {{ showAnnual ? $t('pricingsPage.pricePerYear') : $t('pricingsPage.pricePerMonth') }}
                 </span>
               </div>
-              <!-- Affichage du prix original et Information de conversion si devise différente -->
+              <!-- Affichage du prix original si devise différente -->
               <div v-if="selectedCurrency !== 'XOF'" class="text-xs text-center mt-1">
                 {{ formatPrice(showAnnual ? plan.priceAnnual : plan.priceMonthly, 'XOF') }}
-
-                <p>
-                  1 XOF ≈ {{ formatConversion(1, 'XOF', selectedCurrency) }}
-                  ({{ formatConversion(1, selectedCurrency, 'XOF') }})
-                </p>
               </div>
             </div>
 

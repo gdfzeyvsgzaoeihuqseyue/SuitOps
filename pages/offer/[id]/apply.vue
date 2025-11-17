@@ -630,7 +630,7 @@ const {
     try {
       return await $fetch(`https://api.pgs.ctrlengine.com/api/v1/joboffer/${route.params.id}`)
     } catch (error) {
-      jobError.value = "Impossible de récuprer les détails de l'offre."
+      jobError.value = "Impossible de récupérer les détails de l'offre."
       throw error
     } finally {
       isLoadingJob.value = false

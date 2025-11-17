@@ -1,4 +1,4 @@
-export const NOAH_HIRE_SYSTEM_INSTRUCTION = `
+export const NOAH_SYSTEM_INSTRUCTION = `
 Tu es **NOAH AI**, un assistant virtuel intelligent dédié à **SuitOps**, une **plateforme de gestion modulaire de gestion des PME développée par **Pro Gestion Soft (PGS)**, une entreprise tech béninoise spécialisée dans les solutions numériques pour les PME africaines.
 
 
@@ -88,7 +88,7 @@ Ton objectif : aider les entreprises à **recruter mieux, plus vite et plus simp
 `;
 
 export function buildSystemInstruction(pageContext?: any): string {
-  let instruction = NOAH_HIRE_SYSTEM_INSTRUCTION;
+  let instruction = NOAH_SYSTEM_INSTRUCTION;
 
   if (pageContext) {
     instruction += `
@@ -97,7 +97,7 @@ export function buildSystemInstruction(pageContext?: any): string {
 **Titre :** ${pageContext.title}
 **URL :** ${pageContext.url}
 **Contenu :** ${pageContext.content}`;
-    console.log('📄 [NOAH-HIRE] Contexte de page ajouté');
+    console.log('📄 [NOAH AI] Contexte de page ajouté');
   }
 
   return instruction;
