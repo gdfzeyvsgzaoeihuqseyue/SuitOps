@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import ErrorPage from '~/components/ErrorPage.vue'
+import { SocialCustomLink, ErrorPage } from '@/components/utils';
 import { useRouter } from 'vue-router'
 import { useSharedFiles } from '~/stores/sharedFiles'
 
