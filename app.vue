@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import { NOAHChatModal } from '@/components/noahBot'
 
+const { t } = useI18n();
 const runtimeConfig = useRuntimeConfig();
 const sharedFilesUrl = runtimeConfig.public.pgsSharedFiles;
 
@@ -23,12 +24,12 @@ useHead({
     {
       key: 'description',
       name: 'description',
-      content: 'Plateforme complète de gestion d\'entreprise.'
+      content: computed(() => t('meta.indexPage.description'))
     },
     
     // Open Graph (Facebook, LinkedIn)
     { property: 'og:title', content: 'SuitOps - Solution de gestion d\'entreprise' },
-    { property: 'og:description', content: 'Simplifiez votre gestion d\'entreprise avec une solution tout-en-un.' },
+    { property: 'og:description', content: computed(() => t('meta.indexPage.description')) },
     { property: 'og:image', content: heroImagePath },
     { property: 'og:url', content: baseUrl },
     { property: 'og:type', content: 'website' },
@@ -37,7 +38,7 @@ useHead({
     // Twitter Card
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'SuitOps - Solution de gestion d\'entreprise' },
-    { name: 'twitter:description', content: 'Simplifiez votre gestion d\'entreprise avec une solution tout-en-un.' },
+    { name: 'twitter:description', content: computed(() => t('meta.indexPage.description')) },
     { name: 'twitter:image', content: heroImagePath },
   ],
   link: [
