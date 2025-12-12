@@ -50,19 +50,18 @@ export const useTestimoniesStore = defineStore('testimonies', () => {
 
   const suitopsTestimonies = computed(() => {
     console.log('Computing suitopsTestimonies, total testimonies:', testimonies.value.length); // Debug
-    
+
     const filtered = testimonies.value.filter(testimony => {
-      // ✅ CORRECTION: platform est un objet unique, pas un array
-      const hasValidPlatform = testimony.platform && 
-                               typeof testimony.platform === 'object' && 
-                               testimony.platform.slug === 'suitops';
-      
+      const hasValidPlatform = testimony.platform &&
+        typeof testimony.platform === 'object' &&
+        testimony.platform.slug === 'suitops';
+
       console.log(`Testimony ${testimony.id}:`, {
         platform: testimony.platform,
         hasValidPlatform,
         slug: testimony.platform?.slug
       }); // Debug
-      
+
       return hasValidPlatform;
     });
 
