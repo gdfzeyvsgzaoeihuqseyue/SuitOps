@@ -86,7 +86,7 @@
         <h3 class="text-xl font-semibold mb-2 text-gray-700">Instructions pour Google Chrome (mobile) :</h3>
         <ol class="list-decimal list-inside space-y-2">
           <li>Ouvrez Chrome sur votre smartphone ou tablette.</li>
-          <li>Accédez à la page de <a href="https://web.pgs.ctrlengine.com" target="_blank" rel="noopener noreferrer"
+          <li>Accédez à la page de <a :href="webUrl" target="_blank" rel="noopener noreferrer"
               class="text-blue-600 hover:underline">SuitOps</a>.</li>
           <li>Appuyez sur les <strong>trois points verticaux</strong> (menu) en haut à droite de l'écran.</li>
           <li>Dans le menu déroulant, cochez la case "<strong>Site pour ordinateur</strong>" ou "<strong>Version pour

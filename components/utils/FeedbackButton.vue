@@ -87,6 +87,7 @@ const chatbotStore = useChatbotStore();
 
 const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
 const docUrl = computed(() => customData.value?.doc?.url);
+const pgsUrl = computed(() => customData.value?.pgs?.url);
 
 // Fermeture au clic extérieur
 const handleOutsideClick = (event: MouseEvent) => {
@@ -124,11 +125,10 @@ const openNoahAI = () => {
 
 // Avis
 const testimonyUrl = computed(() => {
-  const pgsUrl = "https://progestionsoft.netlify.app/submit-testimony";
   const params = new URLSearchParams({
     platform: 'suitops',
   });
-  return `${pgsUrl}?${params.toString()}`;
+  return `${pgsUrl.value}/submit-testimony?${params.toString()}`;
 });
 </script>
 
