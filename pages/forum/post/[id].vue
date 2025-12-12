@@ -69,7 +69,8 @@
 
         <!-- Barre de recherche et tri -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
-          <input v-model="searchTerm" type="text" placeholder="Rechercher dans les réponses..." class="p-2 border rounded w-full md:w-1/2">
+          <input v-model="searchTerm" type="text" placeholder="Rechercher dans les réponses..."
+            class="p-2 border rounded w-full md:w-1/2">
           <select v-model="sortOption" class="p-2 border rounded md:w-1/4">
             <option value="recent">Récent</option>
             <option value="oldest">Ancien</option>
@@ -102,7 +103,8 @@
                   {{ response.isSolution ? 'Démarquer' : 'Marquer comme meilleure solution' }}
                 </button>
                 <!-- Bouton de suppression (disponible pour tous les utilisateurs connectés) -->
-                <button v-if="token" @click="deleteResponse(response.id)" class="px-2 py-1 bg-red-100 text-red-800 rounded">
+                <button v-if="token" @click="deleteResponse(response.id)"
+                  class="px-2 py-1 bg-red-100 text-red-800 rounded">
                   Supprimer
                 </button>
               </div>
@@ -127,11 +129,13 @@
 
         <!-- Pagination -->
         <div v-if="totalPages > 1" class="flex justify-center items-center mt-6 gap-2">
-          <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" class="px-3 py-1 border rounded hover:bg-gray-200">
+          <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1"
+            class="px-3 py-1 border rounded hover:bg-gray-200">
             Précédent
           </button>
           <span>Page {{ currentPage }} / {{ totalPages }}</span>
-          <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages" class="px-3 py-1 border rounded hover:bg-gray-200">
+          <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages"
+            class="px-3 py-1 border rounded hover:bg-gray-200">
             Suivant
           </button>
         </div>
@@ -148,8 +152,10 @@
             </div>
             <h3 class="text-lg font-bold mb-4">Ajouter une réponse</h3>
             <form @submit.prevent="submitReply">
-              <textarea v-model="replyContent" rows="4" placeholder="Votre réponse..." class="w-full p-2 border rounded mb-4" required></textarea>
-              <button type="submit" class="bg-primary text-WtB px-4 py-2 rounded-md hover:bg-secondary transition-colors">
+              <textarea v-model="replyContent" rows="4" placeholder="Votre réponse..."
+                class="w-full p-2 border rounded mb-4" required></textarea>
+              <button type="submit"
+                class="bg-primary text-WtB px-4 py-2 rounded-md hover:bg-secondary transition-colors">
                 Envoyer
               </button>
             </form>
@@ -157,7 +163,8 @@
           <!-- Si l'utilisateur n'est pas connecté -->
           <div v-else class="text-center">
             <p class="mb-4">Vous devez être connecté pour ajouter une réponse.</p>
-            <button @click="toggleLoginForm" class="bg-primary text-WtB px-4 py-2 rounded-md hover:bg-secondary transition-colors">
+            <button @click="toggleLoginForm"
+              class="bg-primary text-WtB px-4 py-2 rounded-md hover:bg-secondary transition-colors">
               Se connecter
             </button>
             <div v-if="showLoginForm" class="mt-6 max-w-md mx-auto bg-gray-100 p-4 rounded">
@@ -165,13 +172,16 @@
               <form @submit.prevent="loginUser">
                 <div class="mb-4">
                   <label class="block text-sm font-medium mb-1">Login</label>
-                  <input v-model="login" type="text" placeholder="Votre login" class="w-full p-2 border rounded" required>
+                  <input v-model="login" type="text" placeholder="Votre login" class="w-full p-2 border rounded"
+                    required>
                 </div>
                 <div class="mb-4">
                   <label class="block text-sm font-medium mb-1">Mot de passe</label>
-                  <input v-model="password" type="password" placeholder="Votre mot de passe" class="w-full p-2 border rounded" required>
+                  <input v-model="password" type="password" placeholder="Votre mot de passe"
+                    class="w-full p-2 border rounded" required>
                 </div>
-                <button type="submit" class="w-full px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors">
+                <button type="submit"
+                  class="w-full px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors">
                   Se connecter
                 </button>
               </form>
@@ -213,9 +223,9 @@ const decodeHTMLEntities = (text) => {
 // Formatage des dates
 const formatDate = (timestamp) => {
   const date = new Date(Number(timestamp))
-  return date.toLocaleDateString('fr-FR', { 
-    year: 'numeric', 
-    month: 'long', 
+  return date.toLocaleDateString('fr-FR', {
+    year: 'numeric',
+    month: 'long',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
@@ -443,6 +453,7 @@ onMounted(() => {
 .badge-success {
   @apply px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm;
 }
+
 .file-link {
   @apply flex items-center px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 transition-colors text-sm;
 }

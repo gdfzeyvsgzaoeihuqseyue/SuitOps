@@ -308,7 +308,7 @@ const { t, locale } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
-const id = route.params.id
+const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id
 
 // États du composant
 const loading = ref(true)
