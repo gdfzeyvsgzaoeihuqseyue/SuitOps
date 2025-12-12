@@ -1,0 +1,210 @@
+{
+  "success": true,
+  "message": "Liste des FAQs récupérée avec succès.",
+  "nb": 13,
+  "nbOnPage": 10,
+  "currentPage": 1,
+  "totalPages": 2,
+  "data": [
+    {
+      "id": "693adab0cd9e7975c325b0d7",
+      "question": "Comment obtenir de l'aide sur une commande ?",
+      "answer": "Envoyez /help suivi du nom de la commande pour obtenir une explication détaillée.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464752755,
+      "updatedAt": 1765464752755,
+      "topic": {
+        "id": "693acb44cd9e7975c325b0ca",
+        "name": "Utilisation du bot",
+        "slug": "utilisation-du-bot"
+      },
+      "platform": {
+        "id": "68b7b5d178b720043547fcc4",
+        "name": "PGS Helper",
+        "slug": "pgs-helper"
+      }
+    },
+    {
+      "id": "693ada74cd9e7975c325b0d6",
+      "question": "Puis-je utiliser le bot sur mobile et desktop ?",
+      "answer": "Oui, PGS Helper fonctionne sur Telegram pour mobile et desktop sans configuration supplémentaire.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464692033,
+      "updatedAt": 1765464692033,
+      "topic": {
+        "id": "693acb44cd9e7975c325b0ca",
+        "name": "Utilisation du bot",
+        "slug": "utilisation-du-bot"
+      },
+      "platform": {
+        "id": "68b7b5d178b720043547fcc4",
+        "name": "PGS Helper",
+        "slug": "pgs-helper"
+      }
+    },
+    {
+      "id": "693ada67cd9e7975c325b0d5",
+      "question": "Comment configurer les notifications ?",
+      "answer": "Envoyez la commande /settings et choisissez les types d'alertes que vous souhaitez recevoir.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464679746,
+      "updatedAt": 1765464679746,
+      "topic": {
+        "id": "693acb44cd9e7975c325b0ca",
+        "name": "Utilisation du bot",
+        "slug": "utilisation-du-bot"
+      },
+      "platform": {
+        "id": "68b7b5d178b720043547fcc4",
+        "name": "PGS Helper",
+        "slug": "pgs-helper"
+      }
+    },
+    {
+      "id": "693ada5dcd9e7975c325b0d4",
+      "question": "Comment configurer les notifications ?",
+      "answer": "Envoyez la commande /settings et choisissez les types d'alertes que vous souhaitez recevoir.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464669551,
+      "updatedAt": 1765464669551,
+      "topic": {
+        "id": "693acb44cd9e7975c325b0ca",
+        "name": "Utilisation du bot",
+        "slug": "utilisation-du-bot"
+      },
+      "platform": {
+        "id": "68b7b5d178b720043547fcc4",
+        "name": "PGS Helper",
+        "slug": "pgs-helper"
+      }
+    },
+    {
+      "id": "693ada50cd9e7975c325b0d3",
+      "question": "Quelles tâches puis-je exécuter avec le bot ?",
+      "answer": "Vous pouvez consulter les données, recevoir des notifications, générer des rapports et exécuter certaines actions administratives.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464656013,
+      "updatedAt": 1765464656013,
+      "topic": {
+        "id": "693acb44cd9e7975c325b0ca",
+        "name": "Utilisation du bot",
+        "slug": "utilisation-du-bot"
+      },
+      "platform": {
+        "id": "68b7b5d178b720043547fcc4",
+        "name": "PGS Helper",
+        "slug": "pgs-helper"
+      }
+    },
+    {
+      "id": "693ada44cd9e7975c325b0d2",
+      "question": "Comment suivre l'avancement des recrutements ?",
+      "answer": "Chaque candidature possède un statut mis à jour automatiquement pour vous permettre de suivre le processus.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464644195,
+      "updatedAt": 1765464644195,
+      "topic": {
+        "id": "693acb2dcd9e7975c325b0c9",
+        "name": "Gestion du recrutement",
+        "slug": "gestion-du-recrutement"
+      },
+      "platform": {
+        "id": "68b7b4a91abb479583760ff2",
+        "name": "Hire",
+        "slug": "hire"
+      }
+    },
+    {
+      "id": "693ada35cd9e7975c325b0d1",
+      "question": "Puis-je filtrer les candidatures ?",
+      "answer": "Oui, utilisez les filtres par compétences, expérience ou localisation dans le module Gestion des candidatures.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464629689,
+      "updatedAt": 1765464629689,
+      "topic": {
+        "id": "693acb2dcd9e7975c325b0c9",
+        "name": "Gestion du recrutement",
+        "slug": "gestion-du-recrutement"
+      },
+      "platform": {
+        "id": "68b7b4a91abb479583760ff2",
+        "name": "Hire",
+        "slug": "hire"
+      }
+    },
+    {
+      "id": "693ada25cd9e7975c325b0d0",
+      "question": "Comment les candidats postulent-ils ?",
+      "answer": "Ils peuvent postuler directement via la plateforme en envoyant leur CV et lettre de motivation.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464613931,
+      "updatedAt": 1765464613931,
+      "topic": {
+        "id": "693acb2dcd9e7975c325b0c9",
+        "name": "Gestion du recrutement",
+        "slug": "gestion-du-recrutement"
+      },
+      "platform": {
+        "id": "68b7b4a91abb479583760ff2",
+        "name": "Hire",
+        "slug": "hire"
+      }
+    },
+    {
+      "id": "693ada14cd9e7975c325b0cf",
+      "question": "Comment poster une offre d'emploi ?",
+      "answer": "Accédez au tableau de bord recruteur, cliquez sur 'Créer une offre', remplissez le formulaire et publiez.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464596832,
+      "updatedAt": 1765464596832,
+      "topic": {
+        "id": "693acb2dcd9e7975c325b0c9",
+        "name": "Gestion du recrutement",
+        "slug": "gestion-du-recrutement"
+      },
+      "platform": {
+        "id": "68b7b4a91abb479583760ff2",
+        "name": "Hire",
+        "slug": "hire"
+      }
+    },
+    {
+      "id": "693ad8e3cd9e7975c325b0ce",
+      "question": "Est-ce que je peux importer plusieurs URLs en masse ?",
+      "answer": "Oui, utilisez la fonction 'Import CSV' pour ajouter plusieurs liens simultanément.",
+      "status": "active",
+      "isUseful": 0,
+      "isUseless": 0,
+      "createdAt": 1765464291070,
+      "updatedAt": 1765464291070,
+      "topic": {
+        "id": "693acaf4cd9e7975c325b0c8",
+        "name": "Liens et QR Codes",
+        "slug": "liens-et-qr-codes"
+      },
+      "platform": {
+        "id": "68b7b022142347313f601695",
+        "name": "Easy Quick Track",
+        "slug": "easyquicktrack"
+      }
+    }
+  ]
+}

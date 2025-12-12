@@ -20,8 +20,7 @@
           <button @click="openNoahAI"
             class="w-full flex items-center justify-between p-3 border border-hsa rounded-lg hover:bg-ashAct transition-colors text-sm font-medium">
             <div class="flex items-center">
-              <img :src="sharedFiles.paths.logo.noah" alt="NOAH AI"
-                class="h-5 w-5 mr-3 flex-shrink-0" />
+              <img :src="sharedFiles.paths.logo.noah" alt="NOAH AI" class="h-5 w-5 mr-3 flex-shrink-0" />
               <span>{{ t('feedback.noahAi') }}</span>
             </div>
             <IconSparkles class="h-4 w-4 text-gray-400" />
@@ -48,8 +47,7 @@
           </a>
 
           <!-- Documentation -->
-          <a :href="externalLinks.doc + '/docs/intro/'" target="_blank" rel="noopener noreferrer"
-            @click="showModal = false"
+          <a :href="`${docUrl}/docs/intro`" target="_blank" rel="noopener noreferrer" @click="showModal = false"
             class="w-full flex items-center justify-between p-3 border border-hsa rounded-lg hover:bg-ashAct transition-colors text-sm font-medium">
             <div class="flex items-center">
               <IconBook class="h-5 w-5 text-primary mr-3" />
@@ -76,7 +74,6 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useChatbotStore } from '@/stores/NoahBot';
 import { IconSparkles, IconBrandOpenai, IconHelp, IconCircleChevronUp, IconExternalLink, IconStar, IconBook, IconMessages } from '@tabler/icons-vue';
-import { internalLinks, externalLinks } from '@/utils/links.js';
 import { useI18n } from 'vue-i18n';
 import { useLocalePath } from '#imports';
 import { useSharedFiles } from '~/stores/sharedFiles';
@@ -87,6 +84,9 @@ const localePath = useLocalePath();
 const showModal = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
 const chatbotStore = useChatbotStore();
+
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const docUrl = computed(() => customData.value?.doc?.url);
 
 // Fermeture au clic extérieur
 const handleOutsideClick = (event: MouseEvent) => {

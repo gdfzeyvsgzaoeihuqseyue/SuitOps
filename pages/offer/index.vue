@@ -164,7 +164,7 @@
 
     <!-- Section complémentaire -->
     <section class="px-4 my-8 sm:my-12 text-center text-sm sm:text-base">
-      <p>{{ $t('offersPage.dedicatedSiteText') }} <a :href="externalLinks.hire" class="text-primary hover:underline">{{
+      <p>{{ $t('offersPage.dedicatedSiteText') }} <a :href="`${hireUrl}`" class="text-primary hover:underline">{{
         $t('offersPage.dedicatedSiteLink') }}</a>.</p>
     </section>
   </main>
@@ -177,7 +177,6 @@ import { SuitOpsServices } from '~/stores/SuitOpsServices'
 import Loader from '~/components/Load/LOffer.vue'
 import { IconSearch, IconBriefcaseOff, IconArrowRight, IconRefresh } from '@tabler/icons-vue'
 import { useI18n } from 'vue-i18n'
-import { internalLinks, externalLinks } from '@/utils/links.js';
 import { isClosingSoon, formatDateTime } from '@/utils/date.js';
 import { useSharedFiles } from '~/stores/sharedFiles';
 
@@ -223,6 +222,9 @@ const fetchJobs = async () => {
     }
   }
 }
+
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const hireUrl = computed(() => customData.value?.hire?.url);
 
 onMounted(() => {
   fetchJobs()

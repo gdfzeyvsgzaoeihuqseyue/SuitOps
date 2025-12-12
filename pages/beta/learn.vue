@@ -196,7 +196,7 @@
 
         <div class="grid gap-4 sm:grid-cols-2">
           <!--Inscription et test -->
-          <a :href="externalLinks.web" target="_blank" rel="noopener noreferrer"
+          <a :href="`${webUrl}`" target="_blank" rel="noopener noreferrer"
             class="flex items-center space-x-3 p-4 bg-gray-50 hover:bg-gray-100 rounded-xl shadow-sm border transition">
             <IconExternalLink size="22" class="text-blue-500" />
             <span class="text-blue-600 font-medium">Inscription et test de la plateforme</span>
@@ -224,7 +224,7 @@
           </NuxtLink>
 
           <!-- Plateforme d'offres publiques -->
-          <a :href="externalLinks.hire" target="_blank" rel="noopener noreferrer"
+          <a :href="`${hireUrl}`" target="_blank" rel="noopener noreferrer"
             class="flex items-center space-x-3 p-4 bg-gray-50 hover:bg-gray-100 rounded-xl shadow-sm border transition">
             <IconExternalLink size="22" class="text-blue-500" />
             <span class="text-blue-600 font-medium">Plateforme d'offres publiques</span>
@@ -258,10 +258,12 @@
 
 <script setup>
 import { IconLogin2, IconWallet, IconBug, IconEmpathize, IconDeviceDesktop, IconLink, IconExternalLink, IconFileText, IconFileCertificate, IconBook, IconBrandWhatsapp } from '@tabler/icons-vue';
-import { internalLinks, externalLinks } from '@/utils/links.js';
 import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const hireUrl = computed(() => customData.value?.hire?.url);
+const webUrl = computed(() => customData.value?.web?.url);
 
 definePageMeta({
   layout: false

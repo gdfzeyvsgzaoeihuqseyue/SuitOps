@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "message": "Liste des topics récupérée avec succès.",
+  "nb": 3,
+  "nbOnPage": 3,
+  "currentPage": 1,
+  "totalPages": 1,
+  "data": [
+    {
+      "id": "693acaf4cd9e7975c325b0c8",
+      "name": "Liens et QR Codes",
+      "slug": "liens-et-qr-codes",
+      "description": "Fonctions de raccourcissement d'URL et génération de QR.",
+      "order": 1,
+      "status": "active",
+      "createdAt": 1765460724951,
+      "updatedAt": 1765460724951,
+      "platform": {
+        "id": "68b7b022142347313f601695",
+        "name": "Easy Quick Track",
+        "slug": "easyquicktrack"
+      },
+      "faqCount": 4
+    },
+    {
+      "id": "693acb2dcd9e7975c325b0c9",
+      "name": "Gestion du recrutement",
+      "slug": "gestion-du-recrutement",
+      "description": "Création d'offres, gestion des candidatures et suivi RH.",
+      "order": 1,
+      "status": "active",
+      "createdAt": 1765460781855,
+      "updatedAt": 1765460781855,
+      "platform": {
+        "id": "68b7b4a91abb479583760ff2",
+        "name": "Hire",
+        "slug": "hire"
+      },
+      "faqCount": 4
+    },
+    {
+      "id": "693acb44cd9e7975c325b0ca",
+      "name": "Utilisation du bot",
+      "slug": "utilisation-du-bot",
+      "description": "Commandes, notifications et automatisations.",
+      "order": 1,
+      "status": "active",
+      "createdAt": 1765460804944,
+      "updatedAt": 1765460804944,
+      "platform": {
+        "id": "68b7b5d178b720043547fcc4",
+        "name": "PGS Helper",
+        "slug": "pgs-helper"
+      },
+      "faqCount": 5
+    }
+  ]
+}

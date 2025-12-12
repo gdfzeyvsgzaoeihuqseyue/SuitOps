@@ -10,13 +10,22 @@
 
 <script setup lang="ts">
 import { NOAHChatModal } from '@/components/noahBot'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
 const { t } = useI18n();
 const runtimeConfig = useRuntimeConfig();
 const sharedFilesUrl = runtimeConfig.public.pgsSharedFiles;
+const sharedFiles = useSharedFiles();
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+
+onMounted(async () => {
+  if (!customData.value) {
+    await refreshNuxtData('customData');
+  }
+});
 
 const heroImagePath = `${sharedFilesUrl}/SuitOps_Landing/Hero/index.png`;
-const baseUrl = "https://suitops.netlify.app";
+const baseUrl = computed(() => customData.value?.suitops?.url);
 
 useHead({
   titleTemplate: '%s | SUITOPS',
@@ -26,7 +35,7 @@ useHead({
       name: 'description',
       content: computed(() => t('meta.indexPage.description'))
     },
-    
+
     // Open Graph (Facebook, LinkedIn)
     { property: 'og:title', content: 'SuitOps - Solution de gestion d\'entreprise' },
     { property: 'og:description', content: computed(() => t('meta.indexPage.description')) },

@@ -48,10 +48,10 @@
             <div class="flex flex-wrap items-center gap-2 sm:gap-4">
               <span>
                 {{ $t('blogID.by') }}
-                <a :href="`${externalLinks.pgs}/blog/author/${blogPost.author?.slug}`" target="_blank"
+                <a :href="`${pgsUrl}/blog/author/${blogPost.author?.slug}`" target="_blank"
                   class="font-bold text-secondary hover:underline">
                   {{ blogPost?.author?.name }}
-              </a>
+                </a>
               </span>
               <span class="hidden sm:inline">•</span>
               <span>
@@ -118,7 +118,9 @@ import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#imports'
 import { useIframeMode } from '~/composables/useIframeMode.js'
 import { formatShortDate } from '@/utils/date.js';
-import { externalLinks } from '@/utils/links.js'
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
 
 // Variables
 const { t, locale } = useI18n()
@@ -129,6 +131,9 @@ const loading = ref(true)
 const error = ref(null)
 const notificationMessage = ref('')
 const showNotification = ref(false)
+
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const pgsUrl = computed(() => customData.value?.pgs?.url);
 
 // fil d’Ariane
 const breadcrumbItems = computed(() => [

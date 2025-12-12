@@ -155,7 +155,7 @@
               <IconArticleOff class="w-10 h-10 sm:w-12 sm:h-12 mx-auto" />
             </div>
             <p class="text-sm sm:text-base">{{ $t('blogPage.noArticlesFound') }}<span class="font-bold">{{ searchQuery
-            }}</span> </p>
+                }}</span> </p>
           </div>
         </section>
       </div>
@@ -176,7 +176,6 @@ import Loader from '~/components/Load/LBlog.vue'
 import { useI18n } from 'vue-i18n'
 import { formatShortDate } from '@/utils/date.js';
 import { useSharedFiles } from '~/stores/sharedFiles';
-import { externalLinks } from '@/utils/links.js'
 
 const sharedFiles = useSharedFiles();
 const { t, locale } = useI18n();
@@ -200,6 +199,9 @@ const sortOption = ref('date_desc')
 
 const currentPage = ref(1)
 const itemsPerPage = ref(6)
+
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const pgsUrl = computed(() => customData.value?.pgs?.url);
 
 // Récupération
 const fetchBlogPosts = async () => {
@@ -281,7 +283,7 @@ const filteredPosts = computed(() => {
   return posts
 })
 
-const getAuthorUrl = (slug) => `${externalLinks.pgs}/blog/author/${slug}`
+const getAuthorUrl = (slug) => `${pgsUrl}/blog/author/${slug}`
 
 // Pagination
 const paginatedJobs = computed(() => {

@@ -70,7 +70,7 @@
             <thead>
               <tr class="bg-textClr text-WtB">
                 <th class="py-2 sm:py-3 px-3 sm:px-6 text-left text-sm sm:text-base">{{ t('comparePage.table.feature')
-                }}</th>
+                  }}</th>
                 <th class="py-2 sm:py-3 px-3 sm:px-6 text-center text-sm sm:text-base">{{
                   t('comparePage.table.webVersionColumn') }}</th>
                 <th class="py-2 sm:py-3 px-3 sm:px-6 text-center text-sm sm:text-base">{{
@@ -104,7 +104,10 @@ const sharedFiles = useSharedFiles();
 const { t } = useI18n()
 const localePath = useLocalePath()
 
-const versions = [
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const webUrl = computed(() => customData.value?.web?.url);
+
+const versions = computed(() => [
   {
     type: 'web',
     translationKey: 'webVersion',
@@ -120,7 +123,7 @@ const versions = [
       { ok: false, translationKey: 'slowerPerformance' }
     ],
     cta: {
-      href: externalLinks.web,
+      href: `${webUrl.value}`,
       external: true,
       style: 'bg-primary text-WtB hover:bg-secondary'
     }
@@ -145,7 +148,7 @@ const versions = [
       style: 'bg-secondary text-WtB hover:bg-primary'
     }
   }
-]
+])
 
 const comparisonTable = [
   {
@@ -192,7 +195,8 @@ tbody tr:nth-child(even) {
 /* Mobile */
 @media (max-width: 640px) {
   table {
-    min-width: 600px;  /* Défilement horizontal sur petits écrans */
+    min-width: 600px;
+    /* Défilement horizontal sur petits écrans */
   }
 }
 </style>
