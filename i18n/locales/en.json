@@ -1,7 +1,9 @@
 {
   "meta": {
-    "indexPage": "SuitOps - Complete business management solution",
-    "description": "A complete solution to optimize <br> your processes and boost your productivity."
+    "indexPage": {
+      "title": "SuitOps - Complete business management solution",
+      "description": "A complete solution to optimize <br> your processes and boost your productivity."
+    }
   },
   "prefSettings": {
     "preferences": "Settings",

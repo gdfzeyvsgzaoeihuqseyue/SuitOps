@@ -10,7 +10,7 @@ export interface FaqData {
   id: string;
   question: string;
   answer: string;
-  order?: number;
+  createdAt?: number;
   isUseful: number;
   isUseless: number;
   status: 'active' | 'inactive';
@@ -27,7 +27,6 @@ export interface FaqTopicData {
   name: string;
   slug: string;
   description?: string;
-  order: number;
   status: 'active' | 'inactive';
   createdAt?: number;
   updatedAt?: number;

@@ -44,10 +44,10 @@ const props = defineProps({
 })
 
 const { t } = useI18n()
-const localePath = useLocalePath() 
+const localePath = useLocalePath()
 
 const defaultBreadcrumb = {
-  label: t('meta.indexPage'), 
+  label: t('meta.indexPage.title'),
   href: '/',
   icon: IconHome
 }

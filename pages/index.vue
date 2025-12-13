@@ -312,7 +312,7 @@ const closeDemo = () => {
 
 // SEO
 useHead({
-  title: t('meta.indexPage'),
+  title: t('meta.indexPage.title'),
   meta: [{ name: 'description', content: t('indexPage.heroSubtitle') }]
 })
 </script>

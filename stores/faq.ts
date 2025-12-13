@@ -22,7 +22,7 @@ export const useFaqStore = defineStore('faq', () => {
         const response: FaqTopicResponse = await $fetch<FaqTopicResponse>(`${PGS_URL}/solution/get-topics-platform`, {
           method: 'GET',
           query: {
-            platformSlug: 'hire',
+            platformSlug: 'suitops',
             includeFaqs: true,
             status: 'active',
           },
@@ -55,7 +55,7 @@ export const useFaqStore = defineStore('faq', () => {
     const filtered = topics.value.filter(topic => {
       const hasValidPlatform = topic.platform &&
         typeof topic.platform === 'object' &&
-        topic.platform.slug === 'hire';
+        topic.platform.slug === 'suitops';
 
       console.log(`Topic ${topic.id}:`, {
         platform: topic.platform,
@@ -66,10 +66,8 @@ export const useFaqStore = defineStore('faq', () => {
       return hasValidPlatform;
     });
 
-    console.log('Filtered suitops topics:', filtered.length); // Debug
-
-    // Sort by order
-    return filtered.sort((a, b) => a.order - b.order);
+    console.log('Filtered suitops topics:', filtered.length);
+    return filtered.sort((a, b) => (a.createdAt ?? 0) - (b.createdAt ?? 0));
   });
 
   // Get a random topic with N random FAQs
