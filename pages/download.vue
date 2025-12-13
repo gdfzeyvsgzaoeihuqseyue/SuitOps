@@ -211,13 +211,13 @@
                 <DisclosureButton
                   class="flex w-full justify-between items-center rounded-lg bg-WtB px-3 py-3 sm:px-4 sm:py-4 text-left text-base sm:text-lg font-medium border hover:border-primary focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75"
                   :aria-expanded="open" :aria-controls="`faq-content-${index}`">
-                  <span>{{ faq.title }}</span>
+                  <span>{{ faq.question }}</span>
                   <IconChevronDown
                     :class="[open ? 'rotate-180 transform' : '', 'h-5 w-5 text-primary flex-shrink-0']" />
                 </DisclosureButton>
                 <DisclosurePanel :id="`faq-content-${index}`" class="px-5 pt-3 pb-2 text-sm sm:text-base" v-motion
                   :initial="{ opacity: 0, x: -50 }" :visible="{ opacity: 1, x: 0 }">
-                  <useExpText :text="linkStyle(faq.content)" :maxLength="300" />
+                  <useExpText :text="linkStyle(faq.answer)" :maxLength="300" />
                 </DisclosurePanel>
               </Disclosure>
             </div>
@@ -263,7 +263,8 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { IconDownload, IconDeviceDesktop, IconWeight, IconLicense, IconCpu, IconDeviceDesktopAnalytics, IconAlertTriangle, IconRocket, IconWifi, IconDeviceLaptop, IconChevronDown, IconMoodCry, IconX } from '@tabler/icons-vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { useFaqs } from '~/composables/useFaqs'
+import { useFaqStore } from '~/stores/faq'
+import { storeToRefs } from 'pinia'
 import Loader from '~/components/Load/LFaqPage.vue'
 import { useI18n } from 'vue-i18n'
 import { PGSServices } from '~/stores/PGSServices'
@@ -385,7 +386,7 @@ onMounted(async () => {
     selectedOS.value = defaultOS;
   }
   await fetchFaqs();
-  pageTopic.value = topics.value.find((topic) => topic.name === 'LA PLATEFORME') || null;
+  pageTopic.value = suitopsTopics.value.find((topic) => topic.name === 'LA PLATEFORME') || null;
 });
 
 
@@ -542,8 +543,13 @@ const guideInstallation = [
   }
 ]
 
-const { topics, error: faqError, loading: faqLoading, fetchFaqs } = useFaqs()
-const pageTopic = ref<{ topic: any; faqs: any[] } | null>(null)
+const faqStore = useFaqStore()
+const { suitopsTopics, error: faqError, loading: faqLoading } = storeToRefs(faqStore)
+const pageTopic = ref<import('@/types/faq').FaqTopicData | null>(null)
+
+const fetchFaqs = async () => {
+  await faqStore.fetchFaqTopics()
+}
 
 const linkStyle = (content: string) =>
   content

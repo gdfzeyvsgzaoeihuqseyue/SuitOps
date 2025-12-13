@@ -1,0 +1,63 @@
+// curl -X 'GET' \
+//   'http://localhost:1337/api/v1/solution/get-topics-platform?platformSlug=hire&includeFaqs=true&status=active' \
+//   -H 'accept: */*'
+{
+  "success": true,
+  "message": "Topics de la solution récupérés avec succès.",
+  "platform": {
+    "id": "68b7b4a91abb479583760ff2",
+    "name": "Hire",
+    "slug": "hire"
+  },
+  "nb": 1,
+  "data": [
+    {
+      "id": "693acb2dcd9e7975c325b0c9",
+      "name": "Gestion du recrutement",
+      "slug": "gestion-du-recrutement",
+      "description": "Création d'offres, gestion des candidatures et suivi RH.",
+      "order": 1,
+      "status": "active",
+      "platform": {
+        "id": "68b7b4a91abb479583760ff2",
+        "name": "Hire",
+        "slug": "hire"
+      },
+      "faqs": [
+        {
+          "id": "693ada44cd9e7975c325b0d2",
+          "question": "Comment suivre l'avancement des recrutements ?",
+          "answer": "Chaque candidature possède un statut mis à jour automatiquement pour vous permettre de suivre le processus.",
+          "isUseful": 0,
+          "isUseless": 0,
+          "status": "active"
+        },
+        {
+          "id": "693ada35cd9e7975c325b0d1",
+          "question": "Puis-je filtrer les candidatures ?",
+          "answer": "Oui, utilisez les filtres par compétences, expérience ou localisation dans le module Gestion des candidatures.",
+          "isUseful": 0,
+          "isUseless": 0,
+          "status": "active"
+        },
+        {
+          "id": "693ada25cd9e7975c325b0d0",
+          "question": "Comment les candidats postulent-ils ?",
+          "answer": "Ils peuvent postuler directement via la plateforme en envoyant leur CV et lettre de motivation.",
+          "isUseful": 1,
+          "isUseless": 1,
+          "status": "active"
+        },
+        {
+          "id": "693ada14cd9e7975c325b0cf",
+          "question": "Comment poster une offre d'emploi ?",
+          "answer": "Accédez au tableau de bord recruteur, cliquez sur 'Créer une offre', remplissez le formulaire et publiez.",
+          "isUseful": 2,
+          "isUseless": 0,
+          "status": "active"
+        }
+      ],
+      "faqCount": 4
+    }
+  ]
+}

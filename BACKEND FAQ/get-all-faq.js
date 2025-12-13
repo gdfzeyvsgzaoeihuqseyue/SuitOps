@@ -68,7 +68,7 @@ module.exports = {
         .populate('topic')
         .skip(skip)
         .limit(inputs.limit)
-        .sort('order ASC');
+        .sort('createdAt DESC');
 
       // Formatter avec topic et platform
       const formattedFaqs = await Promise.all(faqs.map(async faq => {

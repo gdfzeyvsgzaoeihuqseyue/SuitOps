@@ -38,7 +38,7 @@
           <select v-model="selectedTopic" placeholder=" "
             class="block px-3 pb-2 pt-3 w-full text-sm bg-WtB rounded-lg border appearance-none focus:outline-none focus:ring-0 focus:border-primary peer">
             <option value="all">{{ t('faqPage.all') }}</option>
-            <option v-for="topic in topics" :key="topic.id" :value="topic.id">{{ topic.name }}</option>
+            <option v-for="topic in suitopsTopics" :key="topic.id" :value="topic.id">{{ topic.name }}</option>
           </select>
           <label
             class="absolute text-xs sm:text-sm duration-300 transform -translate-y-4 scale-75 top-3 z-10 origin-[0] bg-WtB px-2 peer-focus:px-2 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-4 left-3">
@@ -103,7 +103,7 @@
                   <DisclosureButton
                     class="flex w-full justify-between rounded-lg bg-gray-50 dark:bg-gray-800 px-2 sm:px-3 py-1 sm:py-2 text-left text-sm sm:text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
                     :class="{ 'text-primary': open, 'text-textClr': !open }">
-                    <span class="pr-2">{{ faq.title }}</span>
+                    <span class="pr-2">{{ faq.question }}</span>
                     <IconChevronDown
                       :class="[open ? 'rotate-180 transform' : '', 'h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0']" />
                   </DisclosureButton>
@@ -111,7 +111,7 @@
                   <DisclosurePanel
                     class="px-2 sm:px-3 pt-1 pb-2 sm:pt-2 sm:pb-2 border-l-2 border-gray-200 dark:border-gray-700"
                     v-motion :initial="{ opacity: 0, y: -50 }" :visible="{ opacity: 1, y: 0 }">
-                    <useExpText :text="linkStyle(faq.content)" :maxLength="1000" class="text-xs sm:text-sm" />
+                    <useExpText :text="linkStyle(faq.answer)" :maxLength="1000" class="text-xs sm:text-sm" />
 
                     <div class="mt-1 sm:mt-2 flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
                       <button @click="faq.isUseful++" class="flex items-center gap-1 hover:text-green-500">
@@ -144,7 +144,8 @@
 import { ref, computed, onMounted } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { IconMoodCry, IconLibraryMinus, IconLibraryPlus, IconChevronDown, IconThumbUp, IconThumbDown, IconSearch, IconRefresh } from '@tabler/icons-vue'
-import { useFaqs } from '~/composables/useFaqs'
+import { useFaqStore } from '~/stores/faq'
+import { storeToRefs } from 'pinia'
 import Loader from '~/components/Load/LFaq.vue'
 import { useI18n } from 'vue-i18n'
 import { useSharedFiles } from '~/stores/sharedFiles';
@@ -158,7 +159,8 @@ useHead({
   title: t('faqPage.heroTitle')
 })
 
-const { error: faqError, loading: faqLoading, fetchFaqs, topics } = useFaqs()
+const faqStore = useFaqStore()
+const { error: faqError, loading: faqLoading, suitopsTopics } = storeToRefs(faqStore)
 
 const searchQuery = ref('')
 const selectedTopic = ref('all')
@@ -169,13 +171,29 @@ const linkStyle = (content: string) => {
     .replace(/<a /g, '<a class="text-primary hover:underline" '); // Applique une classe aux liens
 };
 
+const fetchFaqs = async () => {
+  await faqStore.fetchFaqTopics()
+}
+
 onMounted(fetchFaqs)
 
-const filterFaqs = (faqs: any[]) => {
-  return faqs.filter(faq => faq.title.toLowerCase().includes(searchQuery.value.toLowerCase()))
+const filterFaqs = (faqs?: any[]) => {
+  if (!faqs) return []
+  return faqs.filter(faq => faq.question.toLowerCase().includes(searchQuery.value.toLowerCase()))
 }
 
 const filteredTopics = computed(() => {
-  return selectedTopic.value === 'all' ? topics.value : topics.value.filter(topic => topic.id === selectedTopic.value)
+  const topicsToShow = selectedTopic.value === 'all'
+    ? suitopsTopics.value
+    : suitopsTopics.value.filter(topic => topic.id === selectedTopic.value)
+
+  // Filter topics that have at least one FAQ matching the search
+  if (searchQuery.value) {
+    return topicsToShow.filter(topic =>
+      topic.faqs && filterFaqs(topic.faqs).length > 0
+    )
+  }
+
+  return topicsToShow
 })
 </script>

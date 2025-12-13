@@ -83,7 +83,7 @@ module.exports = {
       const topics = await SolutionFaqTopic.find({
         platform: platform.id,
         status: inputs.status
-      }).sort('order ASC');
+      }).sort('createdAt DESC');
 
       // Formatter avec FAQs si demandé
       const formattedTopics = await Promise.all(topics.map(async topic => {
@@ -94,13 +94,18 @@ module.exports = {
           description: topic.description,
           order: topic.order,
           status: topic.status,
+          platform: {
+            id: platform.id,
+            name: platform.name,
+            slug: platform.slug,
+          },
         };
 
         if (inputs.includeFaqs) {
           const faqs = await SolutionFaqs.find({
             topic: topic.id,
             status: 'active'
-          }).sort('order ASC');
+          }).sort('createdAt DESC');
 
           formatted.faqs = faqs.map(faq => ({
             id: faq.id,

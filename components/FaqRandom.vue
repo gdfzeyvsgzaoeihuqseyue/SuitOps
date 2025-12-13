@@ -57,14 +57,17 @@
 import { ref, onMounted } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { IconMoodCry, IconChevronDown, IconArrowRight } from '@tabler/icons-vue'
-import { useFaqs } from '~/composables/useFaqs'
+import { useFaqStore } from '~/stores/faq'
+import { storeToRefs } from 'pinia'
 import Loader from '~/components/Load/LFaqRandom.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
 
-const { error: faqError, loading: faqLoading, fetchFaqs, getRandomTopic } = useFaqs()
+const faqStore = useFaqStore()
+const { error: faqError, loading: faqLoading } = storeToRefs(faqStore)
+const { getRandomTopic } = faqStore
 const randomTopic = ref<{ topic: any; faqs: any[] } | null>(null)
 
 const linkStyle = (content: string) => {
@@ -74,7 +77,7 @@ const linkStyle = (content: string) => {
 };
 
 const fetchtRandomFaqs = async () => {
-  await fetchFaqs()
+  await faqStore.fetchFaqTopics()
   randomTopic.value = getRandomTopic(4)
 }
 
