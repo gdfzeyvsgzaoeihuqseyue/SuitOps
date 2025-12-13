@@ -294,7 +294,7 @@ const selectedVideo = ref('')
 
 // Liens de vidéos démo
 const videoLinks = [
-  'https://www.youtube.com/embed/76Fy3K-vwbI?autoplay=1',
+  'https://www.youtube.com/embed/eN9I8OiMnCk?autoplay=1',
   'https://www.youtube.com/embed/URURUf28HnA?autoplay=1'
 ]
 
