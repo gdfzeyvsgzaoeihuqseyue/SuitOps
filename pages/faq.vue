@@ -114,11 +114,13 @@
                     <useExpText :text="linkStyle(faq.answer)" :maxLength="1000" class="text-xs sm:text-sm" />
 
                     <div class="mt-1 sm:mt-2 flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
-                      <button @click="faq.isUseful++" class="flex items-center gap-1 hover:text-green-500">
+                      <button @click="handleVoteUseful(faq.id)"
+                        class="flex items-center gap-1 hover:text-green-500 transition-colors">
                         <IconThumbUp class="w-3 h-3 sm:w-4 sm:h-4" />
                         {{ t('faqPage.useful', { count: faq.isUseful }) }}
                       </button>
-                      <button @click="faq.isUseless++" class="flex items-center gap-1 hover:text-danger">
+                      <button @click="handleVoteUseless(faq.id)"
+                        class="flex items-center gap-1 hover:text-danger transition-colors">
                         <IconThumbDown class="w-3 h-3 sm:w-4 sm:h-4" />
                         {{ t('faqPage.notUseful', { count: faq.isUseless }) }}
                       </button>
@@ -196,4 +198,25 @@ const filteredTopics = computed(() => {
 
   return topicsToShow
 })
+
+// Vote handlers
+const handleVoteUseful = async (faqId: string) => {
+  try {
+    await faqStore.voteUseful(faqId)
+    // Optionally show a success toast notification here
+  } catch (error) {
+    console.error('Failed to vote useful:', error)
+    // Optionally show an error toast notification here
+  }
+}
+
+const handleVoteUseless = async (faqId: string) => {
+  try {
+    await faqStore.voteUseless(faqId)
+    // Optionally show a success toast notification here
+  } catch (error) {
+    console.error('Failed to vote useless:', error)
+    // Optionally show an error toast notification here
+  }
+}
 </script>

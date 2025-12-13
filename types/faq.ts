@@ -43,3 +43,14 @@ export interface FaqTopicResponse {
   nb: number;
   data: FaqTopicData[];
 }
+
+export interface FaqVoteResponse {
+  success: boolean;
+  message: string;
+  data: {
+    id: string;
+    isUseful: number;
+    isUseless: number;
+    totalVotes: number;
+  };
+}

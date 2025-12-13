@@ -106,6 +106,56 @@ export const useFaqStore = defineStore('faq', () => {
     };
   };
 
+  // Vote methods
+  const voteUseful = async (faqId: string) => {
+    try {
+      const response = await $fetch<any>(`${PGS_URL}/solution/vote-useful/${faqId}`, {
+        method: 'PATCH',
+      });
+
+      if (response && response.success && response.data) {
+        // Update the local data with the new vote counts
+        updateFaqVotes(faqId, response.data.isUseful, response.data.isUseless);
+      }
+
+      return response;
+    } catch (err: any) {
+      console.error('Error voting useful:', err);
+      throw err;
+    }
+  };
+
+  const voteUseless = async (faqId: string) => {
+    try {
+      const response = await $fetch<any>(`${PGS_URL}/solution/vote-useless/${faqId}`, {
+        method: 'PATCH',
+      });
+
+      if (response && response.success && response.data) {
+        // Update the local data with the new vote counts
+        updateFaqVotes(faqId, response.data.isUseful, response.data.isUseless);
+      }
+
+      return response;
+    } catch (err: any) {
+      console.error('Error voting useless:', err);
+      throw err;
+    }
+  };
+
+  // Helper to update FAQ votes in the topics
+  const updateFaqVotes = (faqId: string, isUseful: number, isUseless: number) => {
+    topics.value.forEach(topic => {
+      if (topic.faqs) {
+        const faq = topic.faqs.find(f => f.id === faqId);
+        if (faq) {
+          faq.isUseful = isUseful;
+          faq.isUseless = isUseless;
+        }
+      }
+    });
+  };
+
   return {
     topics,
     loading,
@@ -113,5 +163,7 @@ export const useFaqStore = defineStore('faq', () => {
     fetchFaqTopics,
     suitopsTopics,
     getRandomTopic,
+    voteUseful,
+    voteUseless,
   };
 });
