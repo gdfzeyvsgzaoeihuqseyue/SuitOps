@@ -30,7 +30,6 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
     },
     hero: {
       about: `${APP_IMG}/Hero/about.png`,
-      blog: `${APP_IMG}/Hero/blog.png`,
       forum: `${APP_IMG}/Hero/forum.png`,
       compare: `${APP_IMG}/Hero/compare.png`,
       download: `${APP_IMG}/Hero/download.png`,

@@ -19,7 +19,7 @@ export const useFaqStore = defineStore('faq', () => {
 
     while (attempts < maxAttempts) {
       try {
-        const response: FaqTopicResponse = await $fetch<FaqTopicResponse>(`${PGS_URL}/solution/get-topics-platform`, {
+        const response: FaqTopicResponse = await $fetch<FaqTopicResponse>(`${PGS_URL}/public/solution/get-topics-platform`, {
           method: 'GET',
           query: {
             platformSlug: 'suitops',
@@ -107,7 +107,7 @@ export const useFaqStore = defineStore('faq', () => {
   // Vote methods
   const voteUseful = async (faqId: string) => {
     try {
-      const response = await $fetch<any>(`${PGS_URL}/solution/vote-useful/${faqId}`, {
+      const response = await $fetch<any>(`${PGS_URL}/public/solution/vote-useful/${faqId}`, {
         method: 'PATCH',
       });
 
@@ -125,7 +125,7 @@ export const useFaqStore = defineStore('faq', () => {
 
   const voteUseless = async (faqId: string) => {
     try {
-      const response = await $fetch<any>(`${PGS_URL}/solution/vote-useless/${faqId}`, {
+      const response = await $fetch<any>(`${PGS_URL}/public/solution/vote-useless/${faqId}`, {
         method: 'PATCH',
       });
 

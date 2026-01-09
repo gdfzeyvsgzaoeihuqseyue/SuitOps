@@ -27,10 +27,6 @@ const fetchData = async <T>(endpoint: string, method: string = 'GET', data: any 
 };
 
 export const PGSServices = {
-  // Blog
-  getAllBlogPosts: () => fetchData<ApiResponse<BlogPostData[]>>('/public/blog/get-article'),
-  getOneBlogPost: (slug: string) => fetchData<ApiResponse<BlogPostData>>(`/public/blog/get-article/${slug}`),
-
   // Bêta
   betaRegistration: (betaData: any) => fetchData<GenericApiResponse>('/suitops/beta/registration', 'POST', betaData),
   getAllBetaRegistrations: (page: number = 1, limit: number = 10) => fetchData<GetAllBetaRegistrationsResponse>(`/suitops/beta/registration?page=${page}&limit=${limit}`),

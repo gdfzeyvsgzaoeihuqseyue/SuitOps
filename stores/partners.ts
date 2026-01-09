@@ -19,7 +19,7 @@ export const usePartnersStore = defineStore('partners', () => {
 
     while (attempts < maxAttempts) {
       try {
-        const response: ApiResponse<PartnerData[]> = await $fetch<ApiResponse<PartnerData[]>>(`${PGS_URL}/solution/partner`, {
+        const response: ApiResponse<PartnerData[]> = await $fetch<ApiResponse<PartnerData[]>>(`${PGS_URL}/public/solution/partner`, {
           method: 'GET',
           query: { limit: 100 },
         });

@@ -19,7 +19,7 @@ export const useTestimoniesStore = defineStore('testimonies', () => {
 
     while (attempts < maxAttempts) {
       try {
-        const response: ApiResponse<TestimonyData[]> = await $fetch<ApiResponse<TestimonyData[]>>(`${PGS_URL}/solution/testimony`, {
+        const response: ApiResponse<TestimonyData[]> = await $fetch<ApiResponse<TestimonyData[]>>(`${PGS_URL}/public/solution/testimony`, {
           method: 'GET',
           query: {
             limit: 100,

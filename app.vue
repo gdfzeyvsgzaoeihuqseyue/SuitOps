@@ -50,9 +50,5 @@ useHead({
     { name: 'twitter:description', content: computed(() => t('meta.indexPage.description')) },
     { name: 'twitter:image', content: heroImagePath },
   ],
-  link: [
-    { rel: 'icon', type: 'image/png', href: '/favicon.ico' },
-    { rel: 'canonical', href: baseUrl }
-  ]
 });
 </script>

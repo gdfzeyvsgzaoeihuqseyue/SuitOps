@@ -147,6 +147,7 @@ const { isIframeMode } = useIframeMode()
 const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
 const docUrl = computed(() => customData.value?.doc?.url);
 const hireUrl = computed(() => customData.value?.hire?.url);
+const pgsUrl = computed(() => customData.value?.pgs?.url);
 const webUrl = computed(() => customData.value?.web?.url);
 
 // Centralisation de la configuration du menu
@@ -170,7 +171,7 @@ const navItems = computed(() => [
     pathsToWatch: ['/blog', '/forum'],
     items: [
       { label: 'navbar.documentation', href: `${docUrl.value}` },
-      { label: 'navbar.blog', path: '/blog' },
+      { label: 'navbar.blog', href: `${pgsUrl.value}/blog?categories=SuitOps,Employabilité,Général` },
       { label: 'navbar.forum', path: '/forum' },
     ],
   },

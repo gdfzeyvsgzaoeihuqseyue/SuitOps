@@ -36,7 +36,7 @@ export const SuitOpsServices = {
 
   // FAQ, Comments, Testimonies & Partners
   getAllFaq: () => fetchData<FaqTopic[]>('/faq/all'),
-  getAllComments: () => fetchData<any[]>('/comment/all'), 
+  getAllComments: () => fetchData<any[]>('/comment/all'),
   getAllTestimonies: () => fetchData<TestimonyData[]>('/public/testimony/all'),
   // getAllPartners: () => fetchData<PartnerData[]>('/public/partner/all'),
 
@@ -46,10 +46,6 @@ export const SuitOpsServices = {
 
   // Pricing
   getAllPricing: () => fetchData<PricingData[]>('/public/pricings/all'),
-
-  // Blog
-  getAllBlogPosts: () => fetchData<BlogPostData[]>('/public/blog/post/all'),
-  getOneBlogPost: (id: string) => fetchData<BlogPostData>(`/public/blog/post/${id}`),
 
   // Jobs
   getAllJobOffers: () => fetchData<JobOfferData[]>('/joboffer/all'),
